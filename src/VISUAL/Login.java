@@ -38,10 +38,15 @@ public class Login extends javax.swing.JFrame {
         txt_usuario = new javax.swing.JTextField();
         psw_pass = new javax.swing.JPasswordField();
         btn_ini = new javax.swing.JButton();
+        lblSoporte = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN RENT CAR");
+        setMaximumSize(new java.awt.Dimension(500, 400));
         setPreferredSize(new java.awt.Dimension(500, 400));
+        setResizable(false);
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(490, 260));
 
         lb_login.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         lb_login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -55,11 +60,32 @@ public class Login extends javax.swing.JFrame {
         lb_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_pass.setText("Contraseña:");
 
+        txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_usuarioKeyPressed(evt);
+            }
+        });
+
         psw_pass.setText("123456789");
         psw_pass.setOpaque(true);
+        psw_pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                psw_passKeyPressed(evt);
+            }
+        });
 
         btn_ini.setText("INICIAR SESIÓN");
         btn_ini.addActionListener(this::btn_iniActionPerformed);
+
+        lblSoporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSoporte.setText("Contactar con Soporte");
+        lblSoporte.setForeground(java.awt.Color.BLUE);
+        lblSoporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSoporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSoporteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,28 +107,32 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_ini, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSoporte, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                .addGap(169, 169, 169))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(44, 44, 44)
                 .addComponent(lb_login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(psw_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSoporte)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,6 +165,22 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_iniActionPerformed
 
+    private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+        psw_pass.requestFocus();
+        }
+    }//GEN-LAST:event_txt_usuarioKeyPressed
+
+    private void psw_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psw_passKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btn_ini.doClick();
+        }
+    }//GEN-LAST:event_psw_passKeyPressed
+
+    private void lblSoporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSoporteMouseClicked
+        javax.swing.JOptionPane.showMessageDialog(this,"Contacta al soporte al número: +1 (809) 123-4567","Soporte Técnico",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_lblSoporteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -166,6 +212,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lb_login;
     private javax.swing.JLabel lb_pass;
     private javax.swing.JLabel lb_usuario;
+    private javax.swing.JLabel lblSoporte;
     private javax.swing.JPasswordField psw_pass;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
