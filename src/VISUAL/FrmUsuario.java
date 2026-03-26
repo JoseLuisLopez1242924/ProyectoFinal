@@ -1,28 +1,60 @@
 package VISUAL;
 
-public class MantUsuario extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MantUsuario.class.getName());
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import java.io.*;
 
-    int id;
-    String nombre;
-    String usuario;
-    String correo;
-    String password;
-    int acceso;
+public class FrmUsuario extends javax.swing.JFrame {
     
-    public MantUsuario(int id, String nombre, String usuario, String correo, String password, int acceso) {
-        initComponents();
-        this.id = id;
-        this.nombre = nombre;
-        this.usuario = usuario;
-        this.correo = correo;
-        this.password = password;
-        this.acceso = acceso;
+ private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmUsuario.class.getName());
+    
+ public FrmUsuario() 
+ {
+    initComponents();
+    cargarTabla(); // opcional pero recomendado
+ }
+ 
+    //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
+    public boolean validar() 
+    {
+    if (txtNombre.getText().isEmpty() ||
+        txtUsuario.getText().isEmpty() ||
+        txtMail.getText().isEmpty() ||
+        jPasswordField1.getText().isEmpty()) {
+
+        JOptionPane.showMessageDialog(null, "Campos obligatorios");
+        return false;
     }
-    public String toString() {
-        return id + "," + nombre + "," + usuario + "," + correo + "," + password + "," + acceso;
+    return true;
     }
+    // LIMPIAR LOS CAMPOS
+    public void limpiar() 
+    {
+    txtNombre.setText("");
+    txtUsuario.setText("");
+    txtMail.setText("");
+    jPasswordField1.setText("");
+    }
+    // METODO DE CARGAR LA TABLA
+    public void cargarTabla() 
+    {
+    try {
+        UsuarioDAO dao = new UsuarioDAO();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        for (Usuario u : dao.listar()) {
+            modelo.addRow(new Object[]{
+                u.id, u.usuario, u.acceso, u.nombre, u.correo
+            });
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,8 +79,10 @@ public class MantUsuario extends javax.swing.JFrame {
         BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
         BtnModificar.setText("MODIFICAR");
+        BtnModificar.addActionListener(this::BtnModificarActionPerformed);
 
         BtnEliminar.setText("ELIMINAR");
+        BtnEliminar.addActionListener(this::BtnEliminarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +114,7 @@ public class MantUsuario extends javax.swing.JFrame {
         txtNombre.setText("Nombre");
 
         jTextField1.setText("Apellido");
+        jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
         txtMail.setText("e-Mail");
 
@@ -145,18 +180,85 @@ public class MantUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        // TODO add your handling code here:
+    try {
+        if (!validar()) return;
+
+        UsuarioDAO dao = new UsuarioDAO();
+
+        Usuario u = new Usuario(
+            new Random().nextInt(1000),
+            txtNombre.getText(),
+            txtUsuario.getText(),
+            txtMail.getText(),
+            jPasswordField1.getText(),
+            CbxAcceso.getSelectedIndex()
+        );
+
+        dao.guardar(u);
+        JOptionPane.showMessageDialog(null, "Guardado");
+
+        cargarTabla();
+        limpiar();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }        // TODO add your handling code here:
         
     }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+
+    try {
+        int fila = jTable1.getSelectedRow();
+        int id = (int) jTable1.getValueAt(fila, 0);
+
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.eliminar(id);
+
+        cargarTabla();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+       try {
+        int fila = jTable1.getSelectedRow();
+        int id = (int) jTable1.getValueAt(fila, 0);
+
+        UsuarioDAO dao = new UsuarioDAO();
+
+        Usuario u = new Usuario(
+            id,
+            txtNombre.getText(),
+            txtUsuario.getText(),
+            txtMail.getText(),
+            jPasswordField1.getText(),
+            CbxAcceso.getSelectedIndex()
+        );
+
+        dao.modificar(u);
+
+        cargarTabla();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }//GEN-LAST:event_BtnModificarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
-     //   java.awt.EventQueue.invokeLater(() -> new MantUsuario().setVisible(true));
+     java.awt.EventQueue.invokeLater(() -> new MantUsuario().setVisible(true));
     }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
