@@ -12,7 +12,7 @@ public class FrmUsuario extends javax.swing.JFrame {
  public FrmUsuario() 
  {
     initComponents();
-    cargarTabla(); // opcional pero recomendado
+    cargarTabla();
  }
  
     //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
@@ -28,6 +28,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
     return true;
     }
+    
     // LIMPIAR LOS CAMPOS
     public void limpiar() 
     {
@@ -178,7 +179,7 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+// BOTON DE GUARDADO
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
     try {
         if (!validar()) return;
@@ -209,7 +210,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+// BOTON DE ELIMINAR
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
 
     try {
@@ -226,7 +227,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
 
     }//GEN-LAST:event_BtnEliminarActionPerformed
-
+// BOTON DE MODIFICAR
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
        try {
         int fila = jTable1.getSelectedRow();
