@@ -1,5 +1,7 @@
 package VISUAL;
 
+import LOGICA.Usuario;
+import LOGICA.UsuarioDAO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
@@ -256,7 +258,7 @@ public class FrmUsuario extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-     java.awt.EventQueue.invokeLater(() -> new MantUsuario().setVisible(true));
+     java.awt.EventQueue.invokeLater(() -> new FrmUsuario().setVisible(true));
     }
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
