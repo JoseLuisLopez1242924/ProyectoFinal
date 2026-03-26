@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ArchivoUsuarios {
 
-    private final String ruta = "C:\\Users\\jlld2\\OneDrive\\Documentos\\NetBeansProjects\\ProyectoFinal\\src\\DOCUMENTOS/usuarios.txt";
+    private final String ruta = "src/DOCUMENTOS/usuarios.txt";
 
     public boolean validarUsuario(String usuario, String clave) {
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
