@@ -17,6 +17,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     cargarTabla();
  }
  
+ 
     //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
     public boolean validar() 
     {
