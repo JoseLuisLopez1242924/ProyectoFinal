@@ -47,24 +47,29 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(490, 260));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lb_login.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         lb_login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_login.setText("LOGIN");
+        jPanel1.add(lb_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 44, 229, 35));
 
         lb_usuario.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
         lb_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_usuario.setText("Usuario:");
+        jPanel1.add(lb_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 112, 97, 33));
 
         lb_pass.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
         lb_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_pass.setText("Contraseña:");
+        jPanel1.add(lb_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 163, 97, 33));
 
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyPressed(evt);
             }
         });
+        jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 116, 220, -1));
 
         psw_pass.setText("123456789");
         psw_pass.setOpaque(true);
@@ -73,9 +78,11 @@ public class Login extends javax.swing.JFrame {
                 psw_passKeyPressed(evt);
             }
         });
+        jPanel1.add(psw_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 167, 220, -1));
 
         btn_ini.setText("INICIAR SESIÓN");
         btn_ini.addActionListener(this::btn_iniActionPerformed);
+        jPanel1.add(btn_ini, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 214, 137, 36));
 
         lblSoporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSoporte.setText("Contactar con Soporte");
@@ -86,54 +93,7 @@ public class Login extends javax.swing.JFrame {
                 lblSoporteMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(lb_login, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lb_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(psw_pass))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_ini, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSoporte, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
-                .addGap(169, 169, 169))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lb_login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(psw_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSoporte)
-                .addContainerGap(8, Short.MAX_VALUE))
-        );
+        jPanel1.add(lblSoporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 256, 137, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
