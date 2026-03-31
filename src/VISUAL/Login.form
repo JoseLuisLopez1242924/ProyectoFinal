@@ -106,7 +106,6 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="psw_pass">
           <Properties>
-            <Property name="text" type="java.lang.String" value="123456789"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>

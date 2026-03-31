@@ -71,7 +71,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 116, 220, -1));
 
-        psw_pass.setText("123456789");
         psw_pass.setOpaque(true);
         psw_pass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
