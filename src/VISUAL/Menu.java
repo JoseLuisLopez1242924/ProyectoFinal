@@ -56,6 +56,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PRINCIPAL");
+        setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
         addWindowStateListener(this::formWindowStateChanged);
 
@@ -63,11 +64,11 @@ public class Menu extends javax.swing.JFrame {
         panel_menu.setLayout(panel_menuLayout);
         panel_menuLayout.setHorizontalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 594, Short.MAX_VALUE)
         );
         panel_menuLayout.setVerticalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGap(0, 377, Short.MAX_VALUE)
         );
 
         menu_ini.setText("INICIO");
@@ -157,16 +158,13 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(panel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 52, Short.MAX_VALUE)
-                .addComponent(panel_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panel_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -174,11 +172,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
-     java.awt.EventQueue.invokeLater(new Runnable() {
+    java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
             new FrmUsuario().setVisible(true);
         } 
      });
+    panel_menu.repaint();
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
