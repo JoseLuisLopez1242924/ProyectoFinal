@@ -52,8 +52,8 @@ public class UsuarioDAO {
 
             Usuario u = new Usuario(
                     Integer.parseInt(d[0]),
-                    d[0],
                     d[1],
+                    d[2],
                     d[3],
                     d[4],
                     d[5],
