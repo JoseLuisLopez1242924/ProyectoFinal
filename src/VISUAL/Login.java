@@ -4,7 +4,7 @@
  */
 package VISUAL;
 
-import LOGICA.ArchivoUsuarios;
+import LOGICA.UsuarioDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
     String user = txt_usuario.getText();
     String pass = new String(psw_pass.getPassword());
 
-    ArchivoUsuarios archivo = new ArchivoUsuarios();
+    UsuarioDAO archivo = new UsuarioDAO();
 
     if (archivo.validarUsuario(user, pass)) {
         Menu m = new Menu();

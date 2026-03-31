@@ -2,23 +2,25 @@ package LOGICA;
 
 public class Usuario {
     public int id;
-    public String nombre;
     public String usuario;
-    public String correo;
     public String password;
+    public String nombre;
+    public String apellido;
+    public String correo;
     public int acceso;
 
-    public Usuario(int id, String nombre, String usuario, String correo, String password, int acceso) {
+    public Usuario(int id, String usuario, String password, String nombre, String apellido, String correo, int acceso) {
         this.id = id;
-        this.nombre = nombre;
         this.usuario = usuario;
-        this.correo = correo;
         this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
         this.acceso = acceso;
     }
 
     @Override
     public String toString() {
-        return id + "," + nombre + "," + usuario + "," + correo + "," + password + "," + acceso;
+        return id + "," + usuario + "," + password + "," + nombre + "," + apellido +  "," + correo +  "," + acceso;
     }
 }
