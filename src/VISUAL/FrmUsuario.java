@@ -85,18 +85,19 @@ public class FrmUsuario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
 
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
-        BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/save-all.png"))); // NOI18N
+        BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png"))); // NOI18N
         BtnGuardar.setToolTipText("");
         BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
         BtnModificar.setBackground(new java.awt.Color(255, 255, 153));
-        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/pencil.png"))); // NOI18N
+        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/pencil.png"))); // NOI18N
         BtnModificar.addActionListener(this::BtnModificarActionPerformed);
 
         BtnEliminar.setBackground(new java.awt.Color(255, 153, 153));
-        BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/trash-2.png"))); // NOI18N
+        BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash-2.png"))); // NOI18N
         BtnEliminar.addActionListener(this::BtnEliminarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -184,7 +185,7 @@ public class FrmUsuario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
