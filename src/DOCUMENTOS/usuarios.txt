@@ -1,2 +1,2 @@
-414,admin,1234,juan,sosa,juan@gmail.com,1
 133,Caja1,12345,Luis,Martinez,luismartinez@gmail.com,1
+224,admin,1234,Juan,Sosa,juanosa@gmail.com,0

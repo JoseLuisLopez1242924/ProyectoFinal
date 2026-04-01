@@ -40,30 +40,33 @@ public class Login extends javax.swing.JFrame {
         btn_ini = new javax.swing.JButton();
         lblSoporte = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN RENT CAR");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(490, 260));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lb_login.setBackground(new java.awt.Color(255, 255, 255));
+        lb_login.setBackground(new java.awt.Color(0, 0, 0));
         lb_login.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        lb_login.setForeground(new java.awt.Color(255, 255, 255));
+        lb_login.setForeground(new java.awt.Color(0, 0, 0));
         lb_login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_login.setText("LOGIN");
         jPanel1.add(lb_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 44, 229, 35));
 
-        lb_usuario.setBackground(new java.awt.Color(255, 255, 255));
+        lb_usuario.setBackground(new java.awt.Color(0, 0, 0));
         lb_usuario.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
+        lb_usuario.setForeground(new java.awt.Color(0, 0, 0));
         lb_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_usuario.setText("Usuario:");
         jPanel1.add(lb_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 112, 97, 33));
 
         lb_pass.setBackground(new java.awt.Color(255, 255, 255));
         lb_pass.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
+        lb_pass.setForeground(new java.awt.Color(0, 0, 0));
         lb_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_pass.setText("Contraseña:");
         jPanel1.add(lb_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 163, 97, 33));
@@ -98,17 +101,26 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(lblSoporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 256, 137, -1));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/images.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 214, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,14 +128,15 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -189,6 +202,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ini;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_login;
