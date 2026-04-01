@@ -9,11 +9,16 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
-    
+    //BLOQUEO POR EL NIVEL DE ACCESO
+    public void setAcceso(int acceso) {
+    if (acceso != 1) {
+        menu_mant_usu.setEnabled(false);
+    }
+    }
     //cargar nombre el laber
     public void setNombreUsuario(String nombre) {
-    LblUsuario.setText("Bienvenido " + nombre + "!!"); // lblUsuario es tu JLabel en el menú
-}
+    LblUsuario.setText("Bienvenido " + nombre + "!!");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
