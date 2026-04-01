@@ -7,7 +7,32 @@ public class UsuarioDAO {
 
     private final String ruta = "src/DOCUMENTOS/usuarios.txt";
 
-    public String[] validarUsuario(String usuario, String clave) {
+   //CODIGO VIEJO DE VALIDAR
+   /* public boolean validarUsuario(String usuario, String clave) {
+        
+       try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+
+                String userArchivo = datos[1];
+                String passArchivo = datos[2];
+                
+            
+                if (usuario.equals(userArchivo) && clave.equals(passArchivo)) {
+                    return true; // Usuario válido
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    
+        return true; // No encontrado
+    }  */
+    // VALIDAR USUARIO
+     public String[] validarUsuario(String usuario, String clave) {
     try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
         String linea;
 
@@ -30,32 +55,6 @@ public class UsuarioDAO {
 
     return null; // Usuario o contraseña incorrectos
     }
-
-   /* public boolean validarUsuario(String usuario, String clave) {
-        
-       try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
-            String linea;
-
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-
-                String userArchivo = datos[1];
-                String passArchivo = datos[2];
-                String nombre = datos[3];
-                
-            
-                if (usuario.equals(userArchivo) && clave.equals(passArchivo)) {
-                    return true; // Usuario válido
-                }
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-    
-        return true; // No encontrado
-    }  */
-    
     // GUARDAR
     public void guardar(Usuario u) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, true));

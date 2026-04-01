@@ -11,16 +11,13 @@ public class FrmUsuario extends javax.swing.JFrame {
     
  private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmUsuario.class.getName());
     
- public FrmUsuario() 
- {
+    public FrmUsuario() {
     initComponents();
     cargarTabla();
  }
  
- 
     //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
-    public boolean validar() 
-    {
+    public boolean validar() {
     if (txtNombre.getText().isEmpty() ||
         txtUsuario.getText().isEmpty() ||
         txtMail.getText().isEmpty() ||
@@ -33,17 +30,16 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
     
     // LIMPIAR LOS CAMPOS
-    public void limpiar() 
-    {
+    public void limpiar() {
     txtNombre.setText("");
     txtUsuario.setText("");
     txtMail.setText("");
     jPasswordField1.setText("");
     txtApellido.setText("");
     }
+    
     // METODO DE CARGAR LA TABLA
-    public void cargarTabla() 
-    {
+    public void cargarTabla() {
     try {
         UsuarioDAO dao = new UsuarioDAO();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -59,7 +55,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         e.printStackTrace();
     }
     }
-   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -248,7 +244,7 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// BOTON DE GUARDADO
+    // BOTON DE GUARDADO
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
     try {
         if (!validar()) return;
@@ -280,7 +276,8 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
-// BOTON DE ELIMINAR
+    
+    // BOTON DE ELIMINAR
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
 
     try {
@@ -297,7 +294,8 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
 
     }//GEN-LAST:event_BtnEliminarActionPerformed
-// BOTON DE MODIFICAR
+    
+    // BOTON DE MODIFICAR
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
        try {
         int fila = jTable1.getSelectedRow();
@@ -324,6 +322,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_BtnModificarActionPerformed
 
+    // EVENTO PARA PASAR LOS DATOS DE LA TABLA A LOS TEXTBOX
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
          int fila = jTable1.getSelectedRow();
 
@@ -338,12 +337,9 @@ public class FrmUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void CbxAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAccesoActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_CbxAccesoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
      java.awt.EventQueue.invokeLater(() -> new FrmUsuario().setVisible(true));
     }
