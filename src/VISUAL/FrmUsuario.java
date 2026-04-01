@@ -108,14 +108,19 @@ public class FrmUsuario extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPasswordField1.setText("admin");
 
         CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
 
         lblID.setText("ID");
 
@@ -261,6 +266,23 @@ public class FrmUsuario extends javax.swing.JFrame {
         e.printStackTrace();
     }
     }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         int fila = jTable1.getSelectedRow();
+
+    if (fila != -1) {
+        lblID.setText(jTable1.getValueAt(fila, 0).toString());
+        txtUsuario.setText(jTable1.getValueAt(fila, 1).toString());
+        txtNombre.setText(jTable1.getValueAt(fila, 2).toString());
+        txtApellido.setText(jTable1.getValueAt(fila, 3).toString());       
+        txtMail.setText(jTable1.getValueAt(fila, 4).toString());
+        CbxAcceso.addItem(jTable1.getValueAt(fila, 5).toString());
+    }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void CbxAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAccesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CbxAccesoActionPerformed
 
     /**
      * @param args the command line arguments
