@@ -16,6 +16,9 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
+    public void setNombreUsuario(String nombre) {
+    LblUsuario.setText("Bienvenido " + nombre + "!!"); // lblUsuario es tu JLabel en el menú
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         panel_menu = new javax.swing.JPanel();
+        LblUsuario = new javax.swing.JLabel();
         mb_menu = new javax.swing.JMenuBar();
         menu_ini = new javax.swing.JMenu();
         menu_mant = new javax.swing.JMenu();
@@ -53,6 +57,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        CambioSesion = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PRINCIPAL");
@@ -64,12 +70,21 @@ public class Menu extends javax.swing.JFrame {
         panel_menu.setLayout(panel_menuLayout);
         panel_menuLayout.setHorizontalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panel_menuLayout.setVerticalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
+
+        LblUsuario.setBackground(new java.awt.Color(204, 204, 204));
+        LblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        LblUsuario.setText("USUARIO");
+        LblUsuario.setToolTipText("");
+
+        mb_menu.setBackground(new java.awt.Color(204, 204, 204));
+        mb_menu.setToolTipText("");
 
         menu_ini.setText("INICIO");
         mb_menu.add(menu_ini);
@@ -152,17 +167,39 @@ public class Menu extends javax.swing.JFrame {
 
         mb_menu.add(menu_cons);
 
+        CambioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/log-out.png"))); // NOI18N
+        CambioSesion.setAutoscrolls(true);
+        CambioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CambioSesion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        CambioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CambioSesionMouseClicked(evt);
+            }
+        });
+        CambioSesion.addActionListener(this::CambioSesionActionPerformed);
+        CambioSesion.add(jSeparator1);
+
+        mb_menu.add(CambioSesion);
+
         setJMenuBar(mb_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 252, Short.MAX_VALUE))
             .addComponent(panel_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LblUsuario)
+                .addGap(11, 11, 11))
         );
 
         pack();
@@ -190,6 +227,17 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowStateChanged
 
+    private void CambioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioSesionActionPerformed
+
+    }//GEN-LAST:event_CambioSesionActionPerformed
+
+    private void CambioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CambioSesionMouseClicked
+     Login login = new Login();
+    login.setVisible(true);
+
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_CambioSesionMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -216,6 +264,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu CambioSesion;
+    private javax.swing.JLabel LblUsuario;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -236,6 +286,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu menu_cons;
     private javax.swing.JMenu menu_ini;

@@ -6,9 +6,34 @@ import java.util.*;
 public class UsuarioDAO {
 
     private final String ruta = "src/DOCUMENTOS/usuarios.txt";
-    
-    public boolean validarUsuario(String usuario, String clave) {
-        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+
+    public String[] validarUsuario(String usuario, String clave) {
+    try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+            String[] datos = linea.split(",");
+
+            String userArchivo = datos[1];
+            String passArchivo = datos[2];
+            String nombre = datos[3];
+            String apellido = datos[4];
+
+            if (usuario.equals(userArchivo) && clave.equals(passArchivo)) {
+                return new String[]{nombre, apellido};
+            }
+        }
+
+    } catch (IOException e) {
+        System.out.println("Error al leer el archivo: " + e.getMessage());
+    }
+
+    return null; // Usuario o contraseña incorrectos
+    }
+
+   /* public boolean validarUsuario(String usuario, String clave) {
+        
+       try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
@@ -16,7 +41,9 @@ public class UsuarioDAO {
 
                 String userArchivo = datos[1];
                 String passArchivo = datos[2];
-
+                String nombre = datos[3];
+                
+            
                 if (usuario.equals(userArchivo) && clave.equals(passArchivo)) {
                     return true; // Usuario válido
                 }
@@ -26,8 +53,8 @@ public class UsuarioDAO {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     
-        return false; // No encontrado
-    }  
+        return true; // No encontrado
+    }  */
     
     // GUARDAR
     public void guardar(Usuario u) throws IOException {

@@ -136,7 +136,7 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -145,7 +145,27 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_iniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniActionPerformed
-    String user = txt_usuario.getText();
+        String user = txt_usuario.getText();
+        String pass = new String(psw_pass.getPassword());
+
+        UsuarioDAO archivo = new UsuarioDAO();
+
+        String[] nombreCompleto = archivo.validarUsuario(user, pass);
+
+        if (nombreCompleto != null) {
+        Menu m = new Menu();
+
+        // Combinar nombre y apellido
+        String nombreUsuario = nombreCompleto[0] + " " + nombreCompleto[1];
+        m.setNombreUsuario(nombreUsuario);
+
+        m.setVisible(true);
+        this.dispose();
+        } 
+        else {
+        JOptionPane.showMessageDialog(this, "Datos incorrectos");
+        }
+        /*String user = txt_usuario.getText();
     String pass = new String(psw_pass.getPassword());
 
     UsuarioDAO archivo = new UsuarioDAO();
@@ -156,7 +176,7 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     } else {
         JOptionPane.showMessageDialog(this, "Datos incorrectos");
-        }
+        }*/
     }//GEN-LAST:event_btn_iniActionPerformed
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
