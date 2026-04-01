@@ -124,7 +124,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "user", "admin", " " }));
         CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
 
         lblID.setText("ID");
@@ -306,10 +306,10 @@ public class FrmUsuario extends javax.swing.JFrame {
         Usuario u = new Usuario(
             id,
             txtUsuario.getText(),
+            jPasswordField1.getText(),
             txtNombre.getText(),
             txtApellido.getText(),
             txtMail.getText(),
-            jPasswordField1.getText(),
             CbxAcceso.getSelectedIndex()
         );
 

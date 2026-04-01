@@ -6,7 +6,32 @@ import java.util.*;
 public class UsuarioDAO {
 
     private final String ruta = "src/DOCUMENTOS/usuarios.txt";
+ public Usuario validarUsuario(String usuario, String clave) {
+    try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+        String linea;
 
+        while ((linea = br.readLine()) != null) {
+            String[] d = linea.split(",");
+
+            if (usuario.equals(d[1]) && clave.equals(d[2])) {
+                return new Usuario(
+                    Integer.parseInt(d[0]),
+                    d[1],
+                    d[2],
+                    d[3],
+                    d[4],
+                    d[5],
+                    Integer.parseInt(d[6])
+                );
+            }
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
    //CODIGO VIEJO DE VALIDAR
    /* public boolean validarUsuario(String usuario, String clave) {
         
@@ -32,7 +57,7 @@ public class UsuarioDAO {
         return true; // No encontrado
     }  */
     // VALIDAR USUARIO
-     public String[] validarUsuario(String usuario, String clave) {
+    /* public String[] validarUsuario(String usuario, String clave) {
     try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
         String linea;
 
@@ -54,7 +79,7 @@ public class UsuarioDAO {
     }
 
     return null; // Usuario o contraseña incorrectos
-    }
+    }*/
     // GUARDAR
     public void guardar(Usuario u) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, true));
