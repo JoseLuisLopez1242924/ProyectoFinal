@@ -131,8 +131,6 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         txtApellido.addActionListener(this::txtApellidoActionPerformed);
 
-        txtUsuario.setEditable(false);
-
         jLabel1.setText("Apellido");
 
         jLabel2.setText("Nombre");
@@ -249,6 +247,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     // BOTON DE GUARDADO
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
