@@ -1,3 +1,2 @@
-admin,1234
-juan,abcd
-maria,pass123
+133,user,1234,Luis,Martinez,luismartinez@gmail.com,0
+254,admin,admin,Juan,Sosa,juanosa@gmail.com,1
