@@ -9,19 +9,39 @@ import java.io.*;
 
 public class FrmUsuario extends javax.swing.JFrame {
     
- private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmUsuario.class.getName());
-    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmUsuario.class.getName());
+    private int nivelAccesoActual = 1; // por defecto user normal
+
     public FrmUsuario() {
-    initComponents();
-    cargarTabla();
- }
+        initComponents();
+        cargarTabla();
+    }
+
+    // Constructor que recibe el nivel de acceso del usuario logueado
+    public FrmUsuario(int nivelAcceso) {
+        initComponents();
+        this.nivelAccesoActual = nivelAcceso;
+        aplicarAcceso();
+        cargarTabla();
+    }
+
+    // Controla visibilidad de botones según nivel de acceso
+    // Según el enunciado: 0 = Administrador, 1 = usuario normal
+    private void aplicarAcceso() {
+        boolean esAdmin = (nivelAccesoActual == 0);
+        BtnGuardar.setVisible(esAdmin);
+        BtnModificar.setVisible(esAdmin);
+        BtnEliminar.setVisible(esAdmin);
+        CbxAcceso.setEnabled(esAdmin);
+        jPasswordField1.setEnabled(esAdmin);
+    }
  
     //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
     public boolean validar() {
     if (txtNombre.getText().isEmpty() ||
         txtUsuario.getText().isEmpty() ||
         txtMail.getText().isEmpty() ||
-        jPasswordField1.getText().isEmpty()) {
+        jPasswordField1.getPassword().length == 0) {
 
         JOptionPane.showMessageDialog(null, "Campos obligatorios");
         return false;
@@ -36,6 +56,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     txtMail.setText("");
     jPasswordField1.setText("");
     txtApellido.setText("");
+    CbxAcceso.setSelectedIndex(0);
     }
     
     // METODO DE CARGAR LA TABLA
@@ -47,7 +68,7 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         for (Usuario u : dao.listar()) {
             modelo.addRow(new Object[]{
-                u.id, u.usuario, u.nombre,u.apellido, u.correo, u.acceso
+                u.usuario, u.nombre, u.apellido, u.correo, u.acceso
             });
         }
 
@@ -67,7 +88,6 @@ public class FrmUsuario extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPasswordField1 = new javax.swing.JPasswordField();
         CbxAcceso = new javax.swing.JComboBox<>();
-        lblID = new java.awt.Label();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtMail = new javax.swing.JTextField();
@@ -78,7 +98,6 @@ public class FrmUsuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -98,21 +117,26 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Usuario", "Nombre", "Apellido", "E-Mail", "Acceso"
+                "Usuario", "Nombre", "Apellido", "E-Mail", "Acceso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
         });
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -124,12 +148,17 @@ public class FrmUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "user", "admin", " " }));
+        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "user" }));
         CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
 
-        lblID.setText("ID");
-
         txtApellido.addActionListener(this::txtApellidoActionPerformed);
+
+        // EVENTO EN TIEMPO REAL: al salir del campo usuario, valida si existe
+        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusLost(evt);
+            }
+        });
 
         jLabel1.setText("Apellido");
 
@@ -143,18 +172,12 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         jLabel6.setText("Acceso");
 
-        jLabel7.setText("ID");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,30 +227,23 @@ public class FrmUsuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(BtnGuardar)
+                        .addComponent(BtnEliminar)
+                        .addComponent(BtnModificar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(BtnGuardar)
-                                .addComponent(BtnEliminar)
-                                .addComponent(BtnModificar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CbxAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CbxAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,7 +275,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         Usuario u = new Usuario(
             new Random().nextInt(1000),
             txtUsuario.getText(),
-            jPasswordField1.getText(),
+            new String(jPasswordField1.getPassword()),
             txtNombre.getText(),
             txtApellido.getText(),
             txtMail.getText(),
@@ -274,8 +290,7 @@ public class FrmUsuario extends javax.swing.JFrame {
 
     } catch (Exception e) {
         e.printStackTrace();
-    }        // TODO add your handling code here:
-        
+    }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
@@ -284,41 +299,49 @@ public class FrmUsuario extends javax.swing.JFrame {
     
     // BOTON DE ELIMINAR
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-
     try {
         int fila = jTable1.getSelectedRow();
-        int id = (int) jTable1.getValueAt(fila, 0);
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario de la tabla");
+            return;
+        }
+        String usuario = jTable1.getValueAt(fila, 0).toString();
 
         UsuarioDAO dao = new UsuarioDAO();
-        dao.eliminar(id);
+        dao.eliminarPorUsuario(usuario);
 
         cargarTabla();
+        limpiar();
 
     } catch (Exception e) {
         e.printStackTrace();
     }
-
     }//GEN-LAST:event_BtnEliminarActionPerformed
     
     // BOTON DE MODIFICAR
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-       try {
+    try {
         int fila = jTable1.getSelectedRow();
-        int id = (int) jTable1.getValueAt(fila, 0);
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario de la tabla");
+            return;
+        }
+        String usuarioOriginal = jTable1.getValueAt(fila, 0).toString();
 
         UsuarioDAO dao = new UsuarioDAO();
 
+        // Usamos el usuario original como clave; el id se conserva dentro de modificarPorUsuario
         Usuario u = new Usuario(
-            id,
-            txtUsuario.getText(),
-            jPasswordField1.getText(),
+            0,
+            usuarioOriginal,
+            new String(jPasswordField1.getPassword()),
             txtNombre.getText(),
             txtApellido.getText(),
             txtMail.getText(),
             CbxAcceso.getSelectedIndex()
         );
 
-        dao.modificar(u);
+        dao.modificarPorUsuario(u);
 
         cargarTabla();
         limpiar();
@@ -329,21 +352,70 @@ public class FrmUsuario extends javax.swing.JFrame {
 
     // EVENTO PARA PASAR LOS DATOS DE LA TABLA A LOS TEXTBOX
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         int fila = jTable1.getSelectedRow();
+        int fila = jTable1.getSelectedRow();
 
-    if (fila != -1) {
-        lblID.setText(jTable1.getValueAt(fila, 0).toString());
-        txtUsuario.setText(jTable1.getValueAt(fila, 1).toString());
-        txtNombre.setText(jTable1.getValueAt(fila, 2).toString());
-        txtApellido.setText(jTable1.getValueAt(fila, 3).toString());       
-        txtMail.setText(jTable1.getValueAt(fila, 4).toString());
-        CbxAcceso.addItem(jTable1.getValueAt(fila, 5).toString());
-    }
+        if (fila != -1) {
+            String loginSeleccionado = jTable1.getValueAt(fila, 0).toString();
+            txtUsuario.setText(loginSeleccionado);
+            txtNombre.setText(jTable1.getValueAt(fila, 1).toString());
+            txtApellido.setText(jTable1.getValueAt(fila, 2).toString());
+            txtMail.setText(jTable1.getValueAt(fila, 3).toString());
+            int acceso = Integer.parseInt(jTable1.getValueAt(fila, 4).toString());
+            CbxAcceso.setSelectedIndex(acceso);
+
+            // Buscar la contraseña real desde el archivo y mostrarla en asteriscos
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                for (Usuario u : dao.listar()) {
+                    if (u.usuario.equals(loginSeleccionado)) {
+                        jPasswordField1.setText(u.password);
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void CbxAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAccesoActionPerformed
        
     }//GEN-LAST:event_CbxAccesoActionPerformed
+
+    // EVENTO AL PERDER FOCO EN CAMPO USUARIO: valida si existe → "Modificando" o "Creando"
+    private void txtUsuarioFocusLost(java.awt.event.FocusEvent evt) {
+        String login = txtUsuario.getText().trim();
+        if (login.isEmpty()) return;
+
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario encontrado = null;
+            for (Usuario u : dao.listar()) {
+                if (u.usuario.equals(login)) {
+                    encontrado = u;
+                    break;
+                }
+            }
+
+            if (encontrado != null) {
+                JOptionPane.showMessageDialog(null, "Modificando");
+                txtNombre.setText(encontrado.nombre);
+                txtApellido.setText(encontrado.apellido);
+                txtMail.setText(encontrado.correo);
+                jPasswordField1.setText("");
+                CbxAcceso.setSelectedIndex(encontrado.acceso);
+            } else {
+                JOptionPane.showMessageDialog(null, "Creando");
+                txtNombre.setText("");
+                txtApellido.setText("");
+                txtMail.setText("");
+                jPasswordField1.setText("");
+                CbxAcceso.setSelectedIndex(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String args[]) {
      java.awt.EventQueue.invokeLater(() -> new FrmUsuario().setVisible(true));
@@ -360,11 +432,9 @@ public class FrmUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.awt.Label lblID;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtNombre;

@@ -4,16 +4,26 @@ package VISUAL;
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
+    private int nivelAcceso = 1; // por defecto usuario normal
 
     public Menu() {
         initComponents();
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
     //BLOQUEO POR EL NIVEL DE ACCESO
+    // Según el enunciado: 0 = Administrador, 1 = usuario normal
     public void setAcceso(int acceso) {
-    if (acceso != 1) {
-        menu_mant_usu.setEnabled(false);
-    }
+        this.nivelAcceso = acceso;
+        if (acceso != 0) {
+            // usuario normal: solo puede ver CLIENTES en mantenimientos
+            menu_mant_usu.setVisible(false);
+            jMenuItem1.setVisible(false); // GAMAS
+            jMenuItem2.setVisible(false); // VEHICULOS
+            jMenuItem4.setVisible(false); // OFERTAS
+            // CLIENTES (jMenuItem3) queda visible
+            menu_mov.setVisible(false);
+            menu_cons.setVisible(false);
+        }
     }
     //cargar nombre el laber
     public void setNombreUsuario(String nombre) {
@@ -204,7 +214,7 @@ public class Menu extends javax.swing.JFrame {
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            new FrmUsuario().setVisible(true);
+            new FrmUsuario(nivelAcceso).setVisible(true);
         } 
      });
     panel_menu.repaint();
