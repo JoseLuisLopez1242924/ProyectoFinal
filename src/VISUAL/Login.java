@@ -49,14 +49,14 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(lb_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 44, 229, 35));
 
         lb_usuario.setBackground(new java.awt.Color(0, 0, 0));
-        lb_usuario.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
+        lb_usuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lb_usuario.setForeground(new java.awt.Color(0, 0, 0));
         lb_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_usuario.setText("Usuario:");
         jPanel1.add(lb_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 112, 97, 33));
 
         lb_pass.setBackground(new java.awt.Color(255, 255, 255));
-        lb_pass.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
+        lb_pass.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lb_pass.setForeground(new java.awt.Color(0, 0, 0));
         lb_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_pass.setText("Contraseña:");
@@ -77,7 +77,10 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(psw_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 167, 220, -1));
 
+        btn_ini.setBackground(new java.awt.Color(153, 153, 153));
+        btn_ini.setForeground(new java.awt.Color(0, 0, 0));
         btn_ini.setText("INICIAR SESIÓN");
+        btn_ini.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_ini.addActionListener(this::btn_iniActionPerformed);
         jPanel1.add(btn_ini, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 214, 137, 36));
 
@@ -96,6 +99,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/images.png"))); // NOI18N
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabel1.setName(""); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -104,8 +108,8 @@ public class Login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,8 +126,8 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
