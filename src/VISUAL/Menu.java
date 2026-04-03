@@ -103,10 +103,10 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.add(jMenuItem1);
 
         jMenuItem2.setText("VEHICULOS");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         menu_mant.add(jMenuItem2);
 
         jMenuItem3.setText("CLIENTES");
-        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
         menu_mant.add(jMenuItem3);
 
         jMenuItem4.setText("OFERTAS");
@@ -171,12 +171,11 @@ public class Menu extends javax.swing.JFrame {
 
         mb_menu.add(menu_cons);
 
-        mb_menu.add(javax.swing.Box.createHorizontalGlue());
-
         CambioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/log-out.png"))); // NOI18N
         CambioSesion.setAutoscrolls(true);
         CambioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         CambioSesion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        CambioSesion.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         CambioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CambioSesionMouseClicked(evt);
@@ -242,6 +241,11 @@ public class Menu extends javax.swing.JFrame {
 
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_CambioSesionMouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    FrmVehiculo frm = new FrmVehiculo();
+    frm.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
