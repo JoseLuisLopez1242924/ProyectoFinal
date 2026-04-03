@@ -11,18 +11,16 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
     //BLOQUEO POR EL NIVEL DE ACCESO
-    // Según el enunciado: 0 = Administrador, 1 = usuario normal
     public void setAcceso(int acceso) {
         this.nivelAcceso = acceso;
-        if (acceso != 0) {
-            // usuario normal: solo puede ver CLIENTES en mantenimientos
-            menu_mant_usu.setVisible(false);
-            jMenuItem1.setVisible(false); // GAMAS
-            jMenuItem2.setVisible(false); // VEHICULOS
-            jMenuItem4.setVisible(false); // OFERTAS
+        if (acceso != 1) {
+            menu_mant_usu.setEnabled(false);
+            jMenuItem1.setEnabled(false); // GAMAS
+            jMenuItem2.setEnabled(false); // VEHICULOS
+            jMenuItem4.setEnabled(false); // OFERTAS
             // CLIENTES (jMenuItem3) queda visible
-            menu_mov.setVisible(false);
-            menu_cons.setVisible(false);
+            //menu_mov.setVisible(false);
+            //menu_cons.setVisible(false);
         }
     }
     //cargar nombre el laber
@@ -215,7 +213,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
-
+    FrmUsuario frm = new FrmUsuario();
+    frm.setVisible(true);
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
