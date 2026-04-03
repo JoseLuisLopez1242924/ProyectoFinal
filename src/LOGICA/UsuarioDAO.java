@@ -34,10 +34,10 @@ public class UsuarioDAO {
 }
     // VERIFICAR SI EL USUARIO YA EXISTE
     public boolean existe(String usuario) throws IOException {
-        for (Usuario u : listar()) {
-            if (u.usuario.equals(usuario)) {
-                return true;
-            }
+         for (Usuario u : listar()) {
+        if (u.usuario.equals(usuario)) {
+            return true;
+        }
     }
     return false;
 }
@@ -77,56 +77,13 @@ public class UsuarioDAO {
         br.close();
         return lista;
     }
-<<<<<<< Updated upstream
-
-    // ELIMINAR por ID
-    public void eliminar(int id) throws IOException {
-        List<Usuario> lista = listar();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-
-        for (Usuario u : lista) {
-            if (u.id != id) {
-                bw.write(u.toString());
-                bw.newLine();
-            }
-        }
-        bw.close();
-    }
-
-    // ELIMINAR por usuario
-    public void eliminarPorUsuario(String usuario) throws IOException {
-        List<Usuario> lista = listar();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-
-        for (Usuario u : lista) {
-            if (!u.usuario.equals(usuario)) {
-                bw.write(u.toString());
-                bw.newLine();
-            }
-        }
-        bw.close();
-    }
-
-    // MODIFICAR por ID
-    public void modificar(Usuario nuevo) throws IOException {
-        List<Usuario> lista = listar();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-
-        for (Usuario u : lista) {
-            if (u.id == nuevo.id) {
-                bw.write(nuevo.toString());
-            } else {
-                bw.write(u.toString());
-            }
-=======
-    // ELIMINAR
+   // ELIMINAR
    public void eliminar(String usuario) throws IOException {
     List<Usuario> lista = listar();
     BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
     for (Usuario u : lista) {
         if (!u.usuario.equals(usuario)) {  // ← .equals() y negado
             bw.write(u.toString());
->>>>>>> Stashed changes
             bw.newLine();
         }
     }
@@ -134,35 +91,16 @@ public class UsuarioDAO {
 }
     // MODIFICAR
     public void modificar(Usuario nuevo) throws IOException {
-    List<Usuario> lista = listar();
+       List<Usuario> lista = listar();
     BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
     for (Usuario u : lista) {
-        if (u.usuario.equals(nuevo.usuario)) {  // ← .equals()
-            bw.write(nuevo.toString());
+        if (u.usuario.equals(nuevo.usuario)) {  // ← .equals() no ==
+            bw.write(nuevo.toString());          // escribe el usuario modificado
         } else {
-            bw.write(u.toString());
+            bw.write(u.toString());              // escribe el resto igual
         }
         bw.newLine();
     }
     bw.close();
     }
-
-    // MODIFICAR por usuario
-    public void modificarPorUsuario(Usuario nuevo) throws IOException {
-        List<Usuario> lista = listar();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
-
-        for (Usuario u : lista) {
-            if (u.usuario.equals(nuevo.usuario)) {
-                // conservar el id original
-                nuevo.id = u.id;
-                bw.write(nuevo.toString());
-            } else {
-                bw.write(u.toString());
-            }
-            bw.newLine();
-        }
-        bw.close();
-    }
-
 }
