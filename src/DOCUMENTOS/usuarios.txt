@@ -1,2 +1,7 @@
+<<<<<<< Updated upstream
 254,admin,admin,Juan,Sosa,juanosa@gmail.com,0
 518,user,1234,Jose,Lopez,joselopez@gmail.com,1
+=======
+admin,admin,Juan,Sosa,juansosa@gmail.com,1
+casosa,1234,carlos,sosa,csosa@gmail.com,0
+>>>>>>> Stashed changes

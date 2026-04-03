@@ -104,14 +104,12 @@ public class FrmUsuario extends javax.swing.JFrame {
         return false;
     }
     return true;
-    }
-    
+    } 
     // LIMPIAR LOS CAMPOS
     public void limpiar() {
     aplicarPlaceholders();
     CbxAcceso.setSelectedIndex(0);
     }
-    
     // METODO DE CARGAR LA TABLA
     public void cargarTabla() {
     try {
@@ -121,15 +119,23 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         for (Usuario u : dao.listar()) {
             modelo.addRow(new Object[]{
+<<<<<<< Updated upstream
                 u.usuario, u.nombre, u.apellido, u.correo, u.acceso
+=======
+                u.usuario,          // col 0
+                u.nombre,           // col 1
+                u.apellido,         // col 2
+                u.correo,           // col 3
+                u.acceso            // col 4
+                // ← u.clave NO se agrega, pero se carga al hacer clic
+>>>>>>> Stashed changes
             });
         }
-
     } catch (Exception e) {
         e.printStackTrace();
     }
-    }
-    
+}
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,14 +164,17 @@ public class FrmUsuario extends javax.swing.JFrame {
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png"))); // NOI18N
         BtnGuardar.setToolTipText("");
+        BtnGuardar.setBorderPainted(false);
         BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
-        BtnModificar.setBackground(new java.awt.Color(255, 255, 153));
+        BtnModificar.setBackground(new java.awt.Color(153, 153, 255));
         BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/pencil.png"))); // NOI18N
+        BtnModificar.setBorderPainted(false);
         BtnModificar.addActionListener(this::BtnModificarActionPerformed);
 
         BtnEliminar.setBackground(new java.awt.Color(255, 153, 153));
         BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash-2.png"))); // NOI18N
+        BtnEliminar.setBorderPainted(false);
         BtnEliminar.addActionListener(this::BtnEliminarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -180,18 +189,31 @@ public class FrmUsuario extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
+<<<<<<< Updated upstream
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+=======
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+>>>>>>> Stashed changes
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+<<<<<<< Updated upstream
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
+=======
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+>>>>>>> Stashed changes
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -200,6 +222,13 @@ public class FrmUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "user" }));
         CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
@@ -230,10 +259,15 @@ public class FrmUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addComponent(jLabel4)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+>>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -319,14 +353,13 @@ public class FrmUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     // BOTON DE GUARDADO
-    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {
     try {
         if (!validar()) return;
 
         UsuarioDAO dao = new UsuarioDAO();
 
         Usuario u = new Usuario(
-            new Random().nextInt(1000),
             txtUsuario.getText(),
             new String(jPasswordField1.getPassword()),
             txtNombre.getText(),
@@ -336,19 +369,34 @@ public class FrmUsuario extends javax.swing.JFrame {
         );
 
         dao.guardar(u);
-        JOptionPane.showMessageDialog(null, "Guardado");
-
+        JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
         cargarTabla();
         limpiar();
 
+<<<<<<< Updated upstream
     } catch (Exception e) {
         e.printStackTrace();
     }
     }//GEN-LAST:event_BtnGuardarActionPerformed
+=======
+    } catch (IllegalArgumentException e) {
+        // Mensaje específico cuando el usuario ya existe
+        JOptionPane.showMessageDialog(null, e.getMessage(), 
+            "Usuario duplicado", JOptionPane.WARNING_MESSAGE);
+>>>>>>> Stashed changes
 
+        }   catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+/*
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+*/
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
+<<<<<<< Updated upstream
     
     // BOTON DE ELIMINAR
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -362,6 +410,23 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         UsuarioDAO dao = new UsuarioDAO();
         dao.eliminarPorUsuario(usuario);
+=======
+
+    // BOTON DE ELIMINAR
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    try {
+        int fila = jTable1.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario");
+            return;
+        }
+
+        String usuario = jTable1.getValueAt(fila, 0).toString();
+
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.eliminar(usuario);
+>>>>>>> Stashed changes
 
         cargarTabla();
         limpiar();
@@ -369,25 +434,45 @@ public class FrmUsuario extends javax.swing.JFrame {
     } catch (Exception e) {
         e.printStackTrace();
     }
+<<<<<<< Updated upstream
+=======
+}
+    /*
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+>>>>>>> Stashed changes
     }//GEN-LAST:event_BtnEliminarActionPerformed
-    
+    */
     // BOTON DE MODIFICAR
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
     try {
         int fila = jTable1.getSelectedRow();
+<<<<<<< Updated upstream
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario de la tabla");
             return;
         }
+=======
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario");
+            return;
+        }
+
+>>>>>>> Stashed changes
         String usuarioOriginal = jTable1.getValueAt(fila, 0).toString();
 
         UsuarioDAO dao = new UsuarioDAO();
 
         // Usamos el usuario original como clave; el id se conserva dentro de modificarPorUsuario
         Usuario u = new Usuario(
+<<<<<<< Updated upstream
             0,
             usuarioOriginal,
             new String(jPasswordField1.getPassword()),
+=======
+            usuarioOriginal,
+            jPasswordField1.getText(),
+>>>>>>> Stashed changes
             txtNombre.getText(),
             txtApellido.getText(),
             txtMail.getText(),
@@ -398,15 +483,45 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         cargarTabla();
         limpiar();
+
     } catch (Exception e) {
         e.printStackTrace();
     }
+
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     // EVENTO PARA PASAR LOS DATOS DE LA TABLA A LOS TEXTBOX
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+    int fila = jTable1.getSelectedRow();
+
+    if (fila != -1) {
+        String usuarioSeleccionado = jTable1.getValueAt(fila, 0).toString();
+
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            for (Usuario u : dao.listar()) {
+                if (u.usuario.equals(usuarioSeleccionado)) {
+                    jPasswordField1.setText(u.password); // ← era u.clave, correcto es u.password
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        txtUsuario.setText(jTable1.getValueAt(fila, 0).toString());
+        txtNombre.setText(jTable1.getValueAt(fila, 1).toString());
+        txtApellido.setText(jTable1.getValueAt(fila, 2).toString());
+        txtMail.setText(jTable1.getValueAt(fila, 3).toString());
+        CbxAcceso.setSelectedIndex((int) jTable1.getValueAt(fila, 4)); // ← índice correcto
+    }
+
+    }
+    /*
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
 
+<<<<<<< Updated upstream
         if (fila != -1) {
             String loginSeleccionado = jTable1.getValueAt(fila, 0).toString();
             txtUsuario.setText(loginSeleccionado);
@@ -429,8 +544,17 @@ public class FrmUsuario extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
+=======
+    if (fila != -1) {
+        txtUsuario.setText(jTable1.getValueAt(fila, 0).toString());
+        txtNombre.setText(jTable1.getValueAt(fila, 1).toString());
+        txtApellido.setText(jTable1.getValueAt(fila, 2).toString());       
+        txtMail.setText(jTable1.getValueAt(fila, 3).toString());
+        CbxAcceso.addItem(jTable1.getValueAt(fila, 5).toString());
+    }
+>>>>>>> Stashed changes
     }//GEN-LAST:event_jTable1MouseClicked
-
+*/
     private void CbxAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAccesoActionPerformed
        
     }//GEN-LAST:event_CbxAccesoActionPerformed

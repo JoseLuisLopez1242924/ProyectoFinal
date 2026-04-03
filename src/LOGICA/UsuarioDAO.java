@@ -7,22 +7,21 @@ public class UsuarioDAO {
 
     private final String ruta = "src/DOCUMENTOS/usuarios.txt";
      // VALIDAR USUARIO
- public Usuario validarUsuario(String usuario, String clave) {
+    public Usuario validarUsuario(String usuario, String clave) {
     try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
         String linea;
 
         while ((linea = br.readLine()) != null) {
             String[] d = linea.split(",");
 
-            if (usuario.equals(d[1]) && clave.equals(d[2])) {
+            if (usuario.equals(d[0]) && clave.equals(d[1])) {
                 return new Usuario(
-                    Integer.parseInt(d[0]),
+                    d[0],
                     d[1],
                     d[2],
                     d[3],
                     d[4],
-                    d[5],
-                    Integer.parseInt(d[6])
+                    Integer.parseInt(d[5])
                 );
             }
         }
@@ -33,39 +32,25 @@ public class UsuarioDAO {
 
     return null;
 }
-   //CODIGO VIEJO DE VALIDAR
-   /* public boolean validarUsuario(String usuario, String clave) {
-        
-       try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
-            String linea;
-
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-
-                String userArchivo = datos[1];
-                String passArchivo = datos[2];
-                
-            
-                if (usuario.equals(userArchivo) && clave.equals(passArchivo)) {
-                    return true; // Usuario válido
-                }
+    // VERIFICAR SI EL USUARIO YA EXISTE
+    public boolean existe(String usuario) throws IOException {
+        for (Usuario u : listar()) {
+            if (u.usuario.equals(usuario)) {
+                return true;
             }
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-    
-        return true; // No encontrado
-    }  */
-    
+    }
+    return false;
+}
     // GUARDAR
     public void guardar(Usuario u) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, true));
-        bw.write(u.toString());
-        bw.newLine();
-        bw.close();
+    if (existe(u.usuario)) {
+        throw new IllegalArgumentException("El usuario '" + u.usuario + "' ya existe.");
     }
-
+    BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, true));
+    bw.write(u.toString());
+    bw.newLine();
+    bw.close();
+    }
     // LISTAR
     public List<Usuario> listar() throws IOException {
         List<Usuario> lista = new ArrayList<>();
@@ -80,19 +65,19 @@ public class UsuarioDAO {
             String[] d = linea.split(",");
 
             Usuario u = new Usuario(
-                    Integer.parseInt(d[0]),
+                    d[0],
                     d[1],
                     d[2],
                     d[3],
                     d[4],
-                    d[5],
-                    Integer.parseInt(d[6])
+                    Integer.parseInt(d[5])
             );
             lista.add(u);
         }
         br.close();
         return lista;
     }
+<<<<<<< Updated upstream
 
     // ELIMINAR por ID
     public void eliminar(int id) throws IOException {
@@ -133,9 +118,33 @@ public class UsuarioDAO {
             } else {
                 bw.write(u.toString());
             }
+=======
+    // ELIMINAR
+   public void eliminar(String usuario) throws IOException {
+    List<Usuario> lista = listar();
+    BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+    for (Usuario u : lista) {
+        if (!u.usuario.equals(usuario)) {  // ← .equals() y negado
+            bw.write(u.toString());
+>>>>>>> Stashed changes
             bw.newLine();
         }
-        bw.close();
+    }
+    bw.close();
+}
+    // MODIFICAR
+    public void modificar(Usuario nuevo) throws IOException {
+    List<Usuario> lista = listar();
+    BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+    for (Usuario u : lista) {
+        if (u.usuario.equals(nuevo.usuario)) {  // ← .equals()
+            bw.write(nuevo.toString());
+        } else {
+            bw.write(u.toString());
+        }
+        bw.newLine();
+    }
+    bw.close();
     }
 
     // MODIFICAR por usuario
