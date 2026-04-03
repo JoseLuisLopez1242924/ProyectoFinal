@@ -10,30 +10,41 @@ public class Vehiculo {
     public String matricula;
     public String marca;
     public String modelo;
-    public int anio;
-    public String color;
+    public int tipoVehiculo;      // 0=Turístico, 1=Normal
+    public int tipoMotor;         // 0=Diésel, 1=Gasolina
     public int idGama;
-    public double precioPorDia;
-    public String estado;   // "DISPONIBLE" o "RENTADO"
-    public String imagen;   // ruta o nombre del archivo
+    public String descripcionVeh;
+    public boolean techoElectrico;
+    public boolean aireAcondicionado;
+    public boolean interiorCuero;
+    public String colorVeh;
+    public boolean cambioAuto;
+    public boolean statusVeh;
  
-    public Vehiculo(String matricula, String marca, String modelo, int anio,
-                    String color, int idGama, double precioPorDia,
-                    String estado, String imagen) {
-        this.matricula    = matricula;
-        this.marca        = marca;
-        this.modelo       = modelo;
-        this.anio         = anio;
-        this.color        = color;
-        this.idGama       = idGama;
-        this.precioPorDia = precioPorDia;
-        this.estado       = estado;
-        this.imagen       = imagen;
+    public Vehiculo(String matricula, String marca, String modelo,
+                    int tipoVehiculo, int tipoMotor, int idGama,
+                    String descripcionVeh, boolean techoElectrico,
+                    boolean aireAcondicionado, boolean interiorCuero,
+                    String colorVeh, boolean cambioAuto, boolean statusVeh) {
+        this.matricula       = matricula;
+        this.marca           = marca;
+        this.modelo          = modelo;
+        this.tipoVehiculo    = tipoVehiculo;
+        this.tipoMotor       = tipoMotor;
+        this.idGama          = idGama;
+        this.descripcionVeh  = descripcionVeh;
+        this.techoElectrico  = techoElectrico;
+        this.aireAcondicionado = aireAcondicionado;
+        this.interiorCuero   = interiorCuero;
+        this.colorVeh        = colorVeh;
+        this.cambioAuto      = cambioAuto;
+        this.statusVeh       = statusVeh;
     }
  
     @Override
     public String toString() {
-        return matricula + "," + marca + "," + modelo + "," + anio + "," +
-               color + "," + idGama + "," + precioPorDia + "," + estado + "," + imagen;
+        return matricula + "," + marca + "," + modelo + "," + tipoVehiculo + "," + tipoMotor + "," + idGama + "," +
+        descripcionVeh + "," + techoElectrico + "," + aireAcondicionado + "," + interiorCuero + "," + colorVeh + "," +
+        cambioAuto + "," + statusVeh;
     }
 }
