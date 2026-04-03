@@ -4,10 +4,7 @@
  */
 package LOGICA;
 
-/**
- *
- * @author User
- */
+
 public class VehiculoDAO {
     
 }
