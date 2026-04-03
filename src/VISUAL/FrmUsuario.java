@@ -14,6 +14,7 @@ public class FrmUsuario extends javax.swing.JFrame {
 
     public FrmUsuario() {
         initComponents();
+        aplicarPlaceholders();
         cargarTabla();
     }
 
@@ -21,8 +22,17 @@ public class FrmUsuario extends javax.swing.JFrame {
     public FrmUsuario(int nivelAcceso) {
         initComponents();
         this.nivelAccesoActual = nivelAcceso;
+        aplicarPlaceholders();
         aplicarAcceso();
         cargarTabla();
+    }
+
+    private void aplicarPlaceholders() {
+        setPlaceholder(txtUsuario, "Usuario");
+        setPlaceholder(txtNombre, "Nombre");
+        setPlaceholder(txtApellido, "Apellido");
+        setPlaceholder(txtMail, "Correo electrónico");
+        setPlaceholder(jPasswordField1, "Contraseña");
     }
 
     // Controla visibilidad de botones según nivel de acceso
@@ -36,12 +46,59 @@ public class FrmUsuario extends javax.swing.JFrame {
         jPasswordField1.setEnabled(esAdmin);
     }
  
-    //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
+    // METODO UTILITARIO: agrega placeholder (shadow text) a un JTextField
+    private void setPlaceholder(javax.swing.JTextField field, String placeholder) {
+        field.setForeground(java.awt.Color.GRAY);
+        field.setText(placeholder);
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (field.getText().equals(placeholder)) {
+                    field.setText("");
+                    field.setForeground(java.awt.Color.BLACK);
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (field.getText().isEmpty()) {
+                    field.setForeground(java.awt.Color.GRAY);
+                    field.setText(placeholder);
+                }
+            }
+        });
+    }
+
+    // METODO UTILITARIO: agrega placeholder a un JPasswordField
+    private void setPlaceholder(javax.swing.JPasswordField field, String placeholder) {
+        field.setForeground(java.awt.Color.GRAY);
+        field.setEchoChar((char) 0);
+        field.setText(placeholder);
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (new String(field.getPassword()).equals(placeholder)) {
+                    field.setText("");
+                    field.setForeground(java.awt.Color.BLACK);
+                    field.setEchoChar('\u2022');
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (field.getPassword().length == 0) {
+                    field.setForeground(java.awt.Color.GRAY);
+                    field.setEchoChar((char) 0);
+                    field.setText(placeholder);
+                }
+            }
+        });
+    }
+    // METODO PARA VALIDAR QUE LOS CAMPOS SEAN OBLIGATORIOS
     public boolean validar() {
-    if (txtNombre.getText().isEmpty() ||
-        txtUsuario.getText().isEmpty() ||
-        txtMail.getText().isEmpty() ||
-        jPasswordField1.getPassword().length == 0) {
+    String usuario = txtUsuario.getText();
+    String nombre = txtNombre.getText();
+    String mail = txtMail.getText();
+
+    if (usuario.isEmpty() || usuario.equals("Usuario") ||
+        nombre.isEmpty() || nombre.equals("Nombre") ||
+        mail.isEmpty() || mail.equals("Correo electrónico") ||
+        jPasswordField1.getPassword().length == 0 ||
+        new String(jPasswordField1.getPassword()).equals("Contraseña")) {
 
         JOptionPane.showMessageDialog(null, "Campos obligatorios");
         return false;
@@ -51,11 +108,7 @@ public class FrmUsuario extends javax.swing.JFrame {
     
     // LIMPIAR LOS CAMPOS
     public void limpiar() {
-    txtNombre.setText("");
-    txtUsuario.setText("");
-    txtMail.setText("");
-    jPasswordField1.setText("");
-    txtApellido.setText("");
+    aplicarPlaceholders();
     CbxAcceso.setSelectedIndex(0);
     }
     

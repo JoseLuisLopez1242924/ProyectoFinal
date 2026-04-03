@@ -108,6 +108,7 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.add(jMenuItem2);
 
         jMenuItem3.setText("CLIENTES");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
         menu_mant.add(jMenuItem3);
 
         jMenuItem4.setText("OFERTAS");
@@ -172,6 +173,8 @@ public class Menu extends javax.swing.JFrame {
 
         mb_menu.add(menu_cons);
 
+        mb_menu.add(javax.swing.Box.createHorizontalGlue());
+
         CambioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/log-out.png"))); // NOI18N
         CambioSesion.setAutoscrolls(true);
         CambioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -221,13 +224,16 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       
+        java.awt.EventQueue.invokeLater(() -> new FrmGama(nivelAcceso).setVisible(true));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+        java.awt.EventQueue.invokeLater(() -> new FrmClientes(nivelAcceso).setVisible(true));
+    }
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         
     }//GEN-LAST:event_formWindowStateChanged
