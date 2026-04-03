@@ -44,7 +44,7 @@ public class VehiculoDAO {
         String linea;
         while ((linea = br.readLine()) != null) {
             if (linea.trim().isEmpty()) continue;
-            String[] d = linea.split("\\|");
+            String[] d = linea.split("\\,");
             lista.add(new Vehiculo(
                 d[0],
                 d[1],

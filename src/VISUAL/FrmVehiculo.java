@@ -11,11 +11,20 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVehiculo extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmVehiculo.class.getName());
-
+    
+    private int nivelAccesoActual = 1;
+ 
     public FrmVehiculo() {
         initComponents();
+        cargarTabla();
     }
-
+   
+    public FrmVehiculo(int nivelAcceso) {
+        initComponents();
+        this.nivelAccesoActual = nivelAcceso;
+        aplicarAcceso();
+        cargarTabla();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,9 +66,9 @@ public class FrmVehiculo extends javax.swing.JFrame {
 
         txtIdGama.setText("ID Gama");
 
-        cbxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TipoVehiculo" }));
+        cbxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TipoVehiculo", "Turistico", "Normal" }));
 
-        cbxTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Motor" }));
+        cbxTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Motor", "Gasolina", "Disel" }));
 
         chkCambioAuto.setText("Cambio Auto");
 
@@ -74,13 +83,10 @@ public class FrmVehiculo extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14"
+                "Matricula", "Marca", "Modelo", "Tipo Vehiculo", "Tipo Motor", "Id Gama", "Color Vehiculo", "Statu Vehiculo"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,7 +111,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chkStatus)
                         .addGap(18, 18, 18)
@@ -144,8 +150,8 @@ public class FrmVehiculo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbxTipoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxTipoMotor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +188,13 @@ public class FrmVehiculo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //ACCESO
+    private void aplicarAcceso() {
+        boolean esAdmin = (nivelAccesoActual == 0);
+        BtnGuardar.setVisible(esAdmin);
+        BtnModificar.setVisible(esAdmin);
+        BtnEliminar.setVisible(esAdmin);
+    }
     //VALIDACION
     public boolean validar() {
         if (txtMatricula.getText().trim().isEmpty()) {
@@ -336,25 +348,33 @@ public class FrmVehiculo extends javax.swing.JFrame {
     private void txtGamaInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGamaInfoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGamaInfoActionPerformed
+    
     // BOTON GUARDAR
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-     try {
-            if (!validar()) return;
-            // Verificar que la gama existe antes de guardar
-            int idGama = Integer.parseInt(txtIdGama.getText().trim());
-            Gama g = new GamaDAO().buscarPorId(idGama);
-            if (g == null) {
-                JOptionPane.showMessageDialog(this, "Id Gama no existe. No se puede guardar.");
+      if (!validar()) return;
+        try {
+            int id = Integer.parseInt(txtIdGama.getText().trim());
+ 
+            // Verificar si ya existe
+            Gama existente = new GamaDAO().buscarPorId(id);
+            if (existente != null) {
+                JOptionPane.showMessageDialog(this,
+                        "El ID " + id + " ya existe. Use Modificar para editarlo.",
+                        "ID duplicado", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            Vehiculo v = buildVehiculo();
-            new VehiculoDAO().guardar(v);
-            JOptionPane.showMessageDialog(this, "Vehículo guardado correctamente.");
+ 
+            Gama g = new Gama(
+                id,
+                txtDescripcion.getText().trim(),
+                Double.parseDouble(txtPrecio.getText().trim())
+            );
+            new GamaDAO().guardar(g);
+            JOptionPane.showMessageDialog(this, "Guardado correctamente.");
             cargarTabla();
             limpiar();
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Matrícula duplicada", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
             e.printStackTrace();
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
