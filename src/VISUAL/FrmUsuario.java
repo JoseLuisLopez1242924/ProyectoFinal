@@ -71,7 +71,6 @@ public class FrmUsuario extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPasswordField1 = new javax.swing.JPasswordField();
         CbxAcceso = new javax.swing.JComboBox<>();
-        lblID = new java.awt.Label();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtMail = new javax.swing.JTextField();
@@ -146,7 +145,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "user", "admin", " " }));
         CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
 
-        lblID.setText("ID");
+
 
         txtApellido.addActionListener(this::txtApellidoActionPerformed);
 
@@ -171,7 +170,7 @@ public class FrmUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+      
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +225,7 @@ public class FrmUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                       
                         .addGap(12, 12, 12))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
@@ -420,7 +419,6 @@ public class FrmUsuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.awt.Label lblID;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtNombre;
