@@ -6,37 +6,34 @@ package LOGICA;
 
 
 public class Vehiculo {
-    String matricula;
-    String marca;
-    String modelo;
-    int tipoVehiculo;
-    int tipoMotor;
-    int gama;
-    String descripcionVeh;
-    boolean techoElectrico;
-    boolean aireAcondicionado;
-    boolean interiorCuero;
-    String colorVeh;
-    boolean cambioAuto;
-    boolean statusVeh;
 
-      public Vehiculo(String matricula, String marca, String modelo, int tipoVehiculo, int tipoMotor,
-                    int gama, String descripcionVeh, boolean techoElectrico,
-                    boolean aireAcondicionado, boolean interiorCuero,
-                    String colorVeh, boolean cambioAuto, boolean statusVeh) {
-
-        this.matricula = matricula;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.tipoVehiculo = tipoVehiculo;
-        this.tipoMotor = tipoMotor;
-        this.gama = gama;
-        this.descripcionVeh = descripcionVeh;
-        this.techoElectrico = techoElectrico;
-        this.aireAcondicionado = aireAcondicionado;
-        this.interiorCuero = interiorCuero;
-        this.colorVeh = colorVeh;
-        this.cambioAuto = cambioAuto;
-        this.statusVeh = statusVeh;
+    public String matricula;
+    public String marca;
+    public String modelo;
+    public int anio;
+    public String color;
+    public int idGama;
+    public double precioPorDia;
+    public String estado;   // "DISPONIBLE" o "RENTADO"
+    public String imagen;   // ruta o nombre del archivo
+ 
+    public Vehiculo(String matricula, String marca, String modelo, int anio,
+                    String color, int idGama, double precioPorDia,
+                    String estado, String imagen) {
+        this.matricula    = matricula;
+        this.marca        = marca;
+        this.modelo       = modelo;
+        this.anio         = anio;
+        this.color        = color;
+        this.idGama       = idGama;
+        this.precioPorDia = precioPorDia;
+        this.estado       = estado;
+        this.imagen       = imagen;
+    }
+ 
+    @Override
+    public String toString() {
+        return matricula + "," + marca + "," + modelo + "," + anio + "," +
+               color + "," + idGama + "," + precioPorDia + "," + estado + "," + imagen;
     }
 }
