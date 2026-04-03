@@ -215,12 +215,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new FrmUsuario(nivelAcceso).setVisible(true);
-        } 
-     });
-    panel_menu.repaint();
+
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
