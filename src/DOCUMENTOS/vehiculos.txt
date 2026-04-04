@@ -1,5 +1,5 @@
 ABC123,Toyota,Corolla,0,1,1,Sedan compacto economico,false,true,false,Blanco,false,true
-DEF456,Honda,Civic,1,1,2,Sedan turistico premium,true,true,true,Negro,true,true
+DEF456,Honda,Accord,1,1,2,Sedan turistico premium,true,true,true,Negro,true,true
 GHI789,Ford,Explorer,0,0,1,SUV familiar diesel,false,true,true,Gris,false,true
 JKL012,BMW,320i,1,1,3,Sedan de lujo automatico,true,true,true,Azul,true,true
 MNO345,Hyundai,Tucson,0,1,2,SUV compacta gasolina,false,true,false,Rojo,true,true

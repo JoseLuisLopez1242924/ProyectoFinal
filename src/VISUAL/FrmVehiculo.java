@@ -49,7 +49,6 @@ public class FrmVehiculo extends javax.swing.JFrame {
         BtnGuardar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         BtnLimpiar = new javax.swing.JButton();
-        txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,8 +109,6 @@ public class FrmVehiculo extends javax.swing.JFrame {
         BtnLimpiar.setText("Limpiar");
         BtnLimpiar.addActionListener(this::BtnLimpiarActionPerformed);
 
-        txtPrecio.setText("Precio");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,13 +153,11 @@ public class FrmVehiculo extends javax.swing.JFrame {
                                     .addComponent(txtGamaInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(BtnLimpiar))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbxTipoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbxTipoMotor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxTipoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxTipoMotor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +167,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
                     .addComponent(BtnEliminar)
                     .addComponent(BtnGuardar)
                     .addComponent(BtnModificar)
-                    .addComponent(BtnLimpiar)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,6 +194,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     //ACCESO
     private void aplicarAcceso() {
@@ -364,32 +359,25 @@ public class FrmVehiculo extends javax.swing.JFrame {
     
     // BOTON GUARDAR
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-      if (!validar()) return;
-        try {
-            int id = Integer.parseInt(txtIdGama.getText().trim());
- 
-            // Verificar si ya existe
-            Gama existente = new GamaDAO().buscarPorId(id);
-            if (existente != null) {
-                JOptionPane.showMessageDialog(this,
-                        "El ID " + id + " ya existe. Use Modificar para editarlo.",
-                        "ID duplicado", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
- 
-            Gama g = new Gama(
-                id,
-                txtDescripcion.getText().trim(),
-                Double.parseDouble(txtPrecio.getText().trim())
-            );
-            new GamaDAO().guardar(g);
-            JOptionPane.showMessageDialog(this, "Guardado correctamente.");
-            cargarTabla();
-            limpiar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
-            e.printStackTrace();
-        }
+     if (!validar()) return;
+
+    try {
+        Vehiculo v = buildVehiculo();
+
+        VehiculoDAO dao = new VehiculoDAO();
+        dao.guardar(v);
+
+        JOptionPane.showMessageDialog(this, "Vehículo guardado correctamente");
+
+        cargarTabla();
+        limpiar();
+
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_BtnGuardarActionPerformed
     //BOTON ELIMINAR
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -409,27 +397,29 @@ public class FrmVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEliminarActionPerformed
     //BOTON MODIFICAR
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
-        try {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione un vehículo de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            if (!validar()) return;
-            int idGama = Integer.parseInt(txtIdGama.getText().trim());
-            if (new GamaDAO().buscarPorId(idGama) == null) {
-                JOptionPane.showMessageDialog(this, "Id Gama no existe. No se puede guardar.");
-                return;
-            }
-            Vehiculo v = buildVehiculo();
-            new VehiculoDAO().modificar(v);
-            JOptionPane.showMessageDialog(this, "Vehículo modificado correctamente.");
-            cargarTabla();
-            limpiar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al modificar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+         if (!validar()) return;
+
+    try {
+        int fila = jTable1.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un vehículo");
+            return;
         }
+
+        Vehiculo v = buildVehiculo();
+
+        VehiculoDAO dao = new VehiculoDAO();
+        dao.modificar(v);
+
+        JOptionPane.showMessageDialog(this, "Vehículo modificado");
+
+        cargarTabla();
+        limpiar();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_BtnModificarActionPerformed
     //CARGAR LOS VALORES DE LA TABLA AL TXTBOX
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -495,6 +485,5 @@ public class FrmVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
