@@ -95,7 +95,6 @@
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnModificar" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -112,6 +111,7 @@
                           <Component id="CbxAcceso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
