@@ -212,7 +212,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
-    FrmUsuario frm = new FrmUsuario();
+    FrmUsuarios frm = new FrmUsuarios();
     frm.setVisible(true);
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
