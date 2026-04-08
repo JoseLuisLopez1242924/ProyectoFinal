@@ -133,14 +133,14 @@ public class FrmVehiculo extends javax.swing.JFrame {
         BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
         BtnModificar.setBackground(new java.awt.Color(153, 153, 255));
-        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/pencil.png"))); // NOI18N
+        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/refresh-ccw.png"))); // NOI18N
         BtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnModificar.setFocusPainted(false);
         BtnModificar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnModificar.addActionListener(this::BtnModificarActionPerformed);
 
         BtnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
-        BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser (1).png"))); // NOI18N
+        BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser (2).png"))); // NOI18N
         BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnLimpiar.setFocusPainted(false);
         BtnLimpiar.setPreferredSize(new java.awt.Dimension(35, 35));
