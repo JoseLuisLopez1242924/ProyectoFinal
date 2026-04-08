@@ -222,8 +222,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowStateChanged
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FrmVehiculo = new FrmVehiculo();
-         frm.setVisible(true);      // TODO add your handling code here:
+        FrmVehiculo frm = new FrmVehiculo();
+        frm.setVisible(true); // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
