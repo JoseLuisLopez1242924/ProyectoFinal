@@ -11,16 +11,18 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
     //BLOQUEO POR EL NIVEL DE ACCESO
+    // Según el enunciado: 0 = Administrador, 1 = usuario normal
     public void setAcceso(int acceso) {
         this.nivelAcceso = acceso;
         if (acceso != 0) {
-            menu_mant_usu.setEnabled(false);
-            jMenuItem1.setEnabled(false); // GAMAS
-            jMenuItem2.setEnabled(false); // VEHICULOS
-            jMenuItem4.setEnabled(false); // OFERTAS
+            // usuario normal: solo puede ver CLIENTES en mantenimientos
+            menu_mant_usu.setVisible(false);
+            jMenuItem1.setVisible(false); // GAMAS
+            jMenuItem2.setVisible(false); // VEHICULOS
+            jMenuItem4.setVisible(false); // OFERTAS
             // CLIENTES (jMenuItem3) queda visible
-            //menu_mov.setVisible(false);
-            //menu_cons.setVisible(false);
+            menu_mov.setVisible(false);
+            menu_cons.setVisible(false);
         }
     }
     //cargar nombre el laber
@@ -41,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         btnCliente = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         menu_mov = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -60,6 +63,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        CambioSesion = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PRINCIPAL");
@@ -75,7 +80,7 @@ public class Menu extends javax.swing.JFrame {
         );
         panel_menuLayout.setVerticalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
 
         LblUsuario.setBackground(new java.awt.Color(204, 204, 204));
@@ -87,12 +92,7 @@ public class Menu extends javax.swing.JFrame {
         mb_menu.setBackground(new java.awt.Color(204, 204, 204));
         mb_menu.setToolTipText("");
 
-        menu_ini.setText("SESION");
-        menu_ini.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu_iniMouseClicked(evt);
-            }
-        });
+        menu_ini.setText("INICIO");
         mb_menu.add(menu_ini);
 
         menu_mant.setText("MANTENIMIENTOS");
@@ -110,8 +110,11 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.add(jMenuItem1);
 
         jMenuItem2.setText("VEHICULOS");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         menu_mant.add(jMenuItem2);
+
+        jMenuItem3.setText("CLIENTES");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        menu_mant.add(jMenuItem3);
 
         jMenuItem4.setText("OFERTAS");
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
@@ -176,6 +179,22 @@ public class Menu extends javax.swing.JFrame {
 
         mb_menu.add(menu_cons);
 
+        mb_menu.add(javax.swing.Box.createHorizontalGlue());
+
+        CambioSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/log-out.png"))); // NOI18N
+        CambioSesion.setAutoscrolls(true);
+        CambioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CambioSesion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        CambioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CambioSesionMouseClicked(evt);
+            }
+        });
+        CambioSesion.addActionListener(this::CambioSesionActionPerformed);
+        CambioSesion.add(jSeparator1);
+
+        mb_menu.add(CambioSesion);
+
         setJMenuBar(mb_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,8 +221,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
-    FrmUsuarios frm = new FrmUsuarios();
-    frm.setVisible(true);
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new FrmUsuario(nivelAcceso).setVisible(true);
+        } 
+     });
+    panel_menu.repaint();
     }//GEN-LAST:event_menu_mant_usuActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -221,22 +244,16 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowStateChanged
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    FrmVehiculo frm = new FrmVehiculo();
-    frm.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void CambioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambioSesionActionPerformed
 
-    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        FrmClientes frm = new FrmClientes();
-        frm.setVisible(true);
-    }//GEN-LAST:event_btnClienteActionPerformed
+    }//GEN-LAST:event_CambioSesionActionPerformed
 
-    private void menu_iniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_iniMouseClicked
+    private void CambioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CambioSesionMouseClicked
      Login login = new Login();
     login.setVisible(true);
 
     this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_menu_iniMouseClicked
+    }//GEN-LAST:event_CambioSesionMouseClicked
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
     FrmOferta frm = new FrmOferta();
@@ -248,8 +265,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu CambioSesion;
     private javax.swing.JLabel LblUsuario;
-    private javax.swing.JMenuItem btnCliente;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -263,12 +280,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu menu_cons;
     private javax.swing.JMenu menu_ini;

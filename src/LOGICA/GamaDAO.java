@@ -33,7 +33,7 @@ public class GamaDAO {
         String linea;
         while ((linea = br.readLine()) != null) {
             if (linea.trim().isEmpty()) continue;
-            String[] d = linea.split(";");
+            String[] d = linea.split(",");
             lista.add(new Gama(Integer.parseInt(d[0]), d[1], Double.parseDouble(d[2])));
         }
         br.close();
