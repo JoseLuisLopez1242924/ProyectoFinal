@@ -110,6 +110,7 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.add(jMenuItem2);
 
         jMenuItem4.setText("OFERTAS");
+        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         menu_mant.add(jMenuItem4);
 
         btnCliente.setText("CLIENTE");
@@ -236,6 +237,11 @@ public class Menu extends javax.swing.JFrame {
 
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_menu_iniMouseClicked
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FrmOferta frm = new FrmOferta();
+        frm.setVisible(true);     // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
