@@ -37,7 +37,7 @@ public class Login extends javax.swing.JFrame {
         setTitle("LOGIN RENT CAR");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(243, 243, 243));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(490, 260));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -77,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(psw_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 167, 220, -1));
 
-        btn_ini.setBackground(new java.awt.Color(212, 212, 212));
+        btn_ini.setBackground(new java.awt.Color(153, 153, 153));
         btn_ini.setForeground(new java.awt.Color(0, 0, 0));
         btn_ini.setText("INICIAR SESIÓN");
         btn_ini.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));

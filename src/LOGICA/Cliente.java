@@ -17,9 +17,8 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-  @Override
+    @Override
     public String toString() {
-        return idCedula + ";" + nombre + ";" + apellidos + ";" + direccion + ";" + email + ";" + telefono;
-    
+        return idCedula + "|" + nombre + "|" + apellidos + "|" + direccion + "|" + email + "|" + telefono;
     }
 }
