@@ -228,10 +228,9 @@
     <Component class="javax.swing.JComboBox" name="cbxTipoMotor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Gas"/>
-            <StringItem index="1" value="Gasolina"/>
-            <StringItem index="2" value="Disel"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Gasolina"/>
+            <StringItem index="1" value="Disel"/>
           </StringArray>
         </Property>
       </Properties>

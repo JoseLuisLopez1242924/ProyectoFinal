@@ -23,7 +23,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
     public FrmVehiculo(int nivelAcceso) {
         initComponents();
         this.nivelAccesoActual = nivelAcceso;
-        aplicarAcceso();
+        //aplicarAcceso();
         cargarTabla();
     }
 
@@ -72,7 +72,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
 
         cbxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turistico", "Normal" }));
 
-        cbxTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gas", "Gasolina", "Disel" }));
+        cbxTipoMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Disel" }));
 
         chkCambioAuto.setText("Cambio Auto");
 
@@ -295,12 +295,12 @@ public class FrmVehiculo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     //ACCESO
-    private void aplicarAcceso() {
+    /*private void aplicarAcceso() {
         boolean esAdmin = (nivelAccesoActual == 0);
         BtnGuardar.setVisible(esAdmin);
         BtnModificar.setVisible(esAdmin);
         BtnEliminar.setVisible(esAdmin);
-    }
+    }*/
     //VALIDACION
     public boolean validar() {
         if (txtMatricula.getText().trim().isEmpty()) {

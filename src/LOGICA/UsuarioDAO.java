@@ -12,7 +12,7 @@ public class UsuarioDAO {
         String linea;
 
         while ((linea = br.readLine()) != null) {
-            String[] d = linea.split(",");
+            String[] d = linea.split(";");
 
             if (usuario.equals(d[0]) && clave.equals(d[1])) {
                 return new Usuario(
@@ -62,7 +62,7 @@ public class UsuarioDAO {
         String linea;
 
         while ((linea = br.readLine()) != null) {
-            String[] d = linea.split(",");
+            String[] d = linea.split(";");
 
             Usuario u = new Usuario(
                     d[0],

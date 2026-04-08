@@ -21,18 +21,18 @@ public class FrmGama extends javax.swing.JFrame {
         initComponents();
         this.nivelAccesoActual = nivelAcceso;
         aplicarPlaceholders();
-        aplicarAcceso();
+        //aplicarAcceso();
         cargarTabla();
     }
 
-    private void aplicarAcceso() {
+    /*private void aplicarAcceso() {
         boolean esAdmin = (nivelAccesoActual == 0);
         BtnGuardar.setVisible(esAdmin);
         BtnModificar.setVisible(esAdmin);
         BtnEliminar.setVisible(esAdmin);
         txtDescripcion.setEnabled(esAdmin);
         txtPrecio.setEnabled(esAdmin);
-    }
+    }*/
 
     // PLACEHOLDER PARA JTEXTFIELD
     private void setPlaceholder(JTextField field, String placeholder) {

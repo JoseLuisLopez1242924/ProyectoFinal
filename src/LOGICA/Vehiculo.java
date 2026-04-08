@@ -43,8 +43,8 @@ public class Vehiculo {
  
     @Override
     public String toString() {
-        return matricula + "," + marca + "," + modelo + "," + tipoVehiculo + "," + tipoMotor + "," + idGama + "," +
-        descripcionVeh + "," + techoElectrico + "," + aireAcondicionado + "," + interiorCuero + "," + colorVeh + "," +
-        cambioAuto + "," + statusVeh;
+        return matricula + ";" + marca + ";" + modelo + ";" + tipoVehiculo + ";" + tipoMotor + ";" + idGama + ";" +
+        descripcionVeh + ";" + techoElectrico + ";" + aireAcondicionado + ";" + interiorCuero + ";" + colorVeh + ";" +
+        cambioAuto + ";" + statusVeh;
     }
 }

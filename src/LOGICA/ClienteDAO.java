@@ -33,7 +33,7 @@ public class ClienteDAO {
         String linea;
         while ((linea = br.readLine()) != null) {
             if (linea.trim().isEmpty()) continue;
-            String[] d = linea.split("\\|");
+            String[] d = linea.split(";");
             lista.add(new Cliente(
                 d[0], d[1], d[2], d[3], d[4], d[5]
             ));

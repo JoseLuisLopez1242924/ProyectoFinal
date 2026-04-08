@@ -20,16 +20,16 @@ public class FrmClientes extends javax.swing.JFrame {
         initComponents();
         this.nivelAccesoActual = nivelAcceso;
         aplicarPlaceholders();
-        aplicarAcceso();
+        //aplicarAcceso();
         cargarTabla();
     }
 
-    private void aplicarAcceso() {
+   /* private void aplicarAcceso() {
         boolean esAdmin = (nivelAccesoActual == 0);
         BtnGuardar.setVisible(esAdmin);
         BtnModificar.setVisible(esAdmin);
         BtnEliminar.setVisible(esAdmin);
-    }
+    }*/
 
     private void setPlaceholder(JTextField field, String placeholder) {
         field.setForeground(java.awt.Color.GRAY);

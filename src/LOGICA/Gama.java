@@ -13,6 +13,6 @@ public class Gama {
 
     @Override
     public String toString() {
-        return idGama + "," + descripcion + "," + precio;
+        return idGama + ";" + descripcion + ";" + precio;
     }
 }

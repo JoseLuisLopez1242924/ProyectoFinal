@@ -1,2 +1,2 @@
-admin,admin,Juan,Sosa,juansosa@gmail.com,1
-casosa,1234,carlos,sosa,csosa@gmail.com,0
+admin;admin;Juan;Sosa;juansosa@gmail.com;0
+casosa;1234;Carlos;Sosa;csosa@gmail.com;1

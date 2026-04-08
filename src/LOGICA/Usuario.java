@@ -17,8 +17,7 @@ public class Usuario {
         this.acceso = acceso;
     }
 
-    @Override
     public String toString() {
-        return usuario + "," + password + "," + nombre + "," + apellido +  "," + correo +  "," + acceso;
+        return usuario + ";" + password + ";" + nombre + ";" + apellido + ";" + correo + ";" + acceso;
     }
 }
