@@ -26,6 +26,7 @@ public class Vehiculo {
                     String descripcionVeh, boolean techoElectrico,
                     boolean aireAcondicionado, boolean interiorCuero,
                     String colorVeh, boolean cambioAuto, boolean statusVeh) {
+        
         this.matricula       = matricula;
         this.marca           = marca;
         this.modelo          = modelo;

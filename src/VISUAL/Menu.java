@@ -38,10 +38,10 @@ public class Menu extends javax.swing.JFrame {
         menu_ini = new javax.swing.JMenu();
         menu_mant = new javax.swing.JMenu();
         menu_mant_usu = new javax.swing.JMenuItem();
+        btnCliente = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        btnCliente = new javax.swing.JMenuItem();
         menu_mov = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -101,6 +101,10 @@ public class Menu extends javax.swing.JFrame {
         menu_mant_usu.addActionListener(this::menu_mant_usuActionPerformed);
         menu_mant.add(menu_mant_usu);
 
+        btnCliente.setText("CLIENTE");
+        btnCliente.addActionListener(this::btnClienteActionPerformed);
+        menu_mant.add(btnCliente);
+
         jMenuItem1.setText("GAMAS");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         menu_mant.add(jMenuItem1);
@@ -110,11 +114,8 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.add(jMenuItem2);
 
         jMenuItem4.setText("OFERTAS");
+        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         menu_mant.add(jMenuItem4);
-
-        btnCliente.setText("CLIENTE");
-        btnCliente.addActionListener(this::btnClienteActionPerformed);
-        menu_mant.add(btnCliente);
 
         mb_menu.add(menu_mant);
 
@@ -236,6 +237,11 @@ public class Menu extends javax.swing.JFrame {
 
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_menu_iniMouseClicked
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    FrmOferta frm = new FrmOferta();
+    frm.setVisible(true);      // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
