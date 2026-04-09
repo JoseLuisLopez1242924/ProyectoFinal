@@ -348,6 +348,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         dao.eliminar(usuario);
 
         cargarTabla();
+        limpiar();
 
     } catch (Exception e) {
         e.printStackTrace();

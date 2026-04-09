@@ -1,5 +1,4 @@
-1;Economico;4500.00
-2;Compacto;6500.00
-3;Intermedio;8500.00
-4;Estandar;10000.00
-5;Lujoso;15000.00
+2;Compacto;6500.0
+3;Intermedio;8500.0
+4;Estandar;10000.0
+5;Lujoso;15000.001
