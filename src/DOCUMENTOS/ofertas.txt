@@ -1,0 +1,4 @@
+1;A123BC;Descuento verano 10%;38.00
+2;B456DE;Promocion fin de semana;55.00
+3;E345JK;Oferta corporativa BMW;130.00
+4;D012HI;Especial cliente frecuente;47.00

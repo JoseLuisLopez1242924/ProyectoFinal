@@ -8,19 +8,19 @@ import LOGICA.VehiculoDAO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class FrmVehiculo extends javax.swing.JFrame {
+public class FrmVehiculos extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmVehiculo.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmVehiculos.class.getName());
     
     private int nivelAccesoActual = 1;
  
-    public FrmVehiculo() {
+    public FrmVehiculos() {
         initComponents();
         cargarTabla();
         
     }
    
-    public FrmVehiculo(int nivelAcceso) {
+    public FrmVehiculos(int nivelAcceso) {
         initComponents();
         this.nivelAccesoActual = nivelAcceso;
         //aplicarAcceso();
@@ -563,7 +563,7 @@ public class FrmVehiculo extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(() -> new FrmVehiculo().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmVehiculos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
