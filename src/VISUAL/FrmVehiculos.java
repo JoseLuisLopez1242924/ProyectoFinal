@@ -64,6 +64,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         jLabel7.setText("Color");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MANTENIMIENTO VEHICULOS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         txtGamaInfo.addActionListener(this::txtGamaInfoActionPerformed);

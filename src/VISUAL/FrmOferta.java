@@ -56,7 +56,7 @@ public class FrmOferta extends javax.swing.JFrame {
         lblPrecioGama.setText("Precio Gama: -");
         precioGamaActual = 0.0;
     }
-
+    //Metodo Limpiar
     public void limpiar() {
         aplicarPlaceholders();
     }
@@ -141,7 +141,8 @@ public class FrmOferta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MANTENIMIENTO OFERA");
 
         jLabel1.setText("ID");
 
@@ -155,13 +156,32 @@ public class FrmOferta extends javax.swing.JFrame {
 
         lblPrecioGama.setText("Precio Gama");
 
+        txtIdOferta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdOfertaFocusLost(evt);
+            }
+        });
+
+        txtIdMatricula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdMatriculaFocusLost(evt);
+            }
+        });
+        txtIdMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdMatriculaKeyPressed(evt);
+            }
+        });
+
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save.png"))); // NOI18N
         BtnGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
         BtnEliminar.setBackground(new java.awt.Color(255, 153, 153));
         BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash.png"))); // NOI18N
         BtnEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnEliminar.addActionListener(this::BtnEliminarActionPerformed);
 
         BtnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
         BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser (2).png"))); // NOI18N
@@ -171,6 +191,7 @@ public class FrmOferta extends javax.swing.JFrame {
         BtnModificar.setBackground(new java.awt.Color(153, 153, 255));
         BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/refresh-ccw.png"))); // NOI18N
         BtnModificar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnModificar.addActionListener(this::BtnModificarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,10 +201,29 @@ public class FrmOferta extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "MATRICULA", "PRECIO", "DESCRIPCION"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,10 +233,7 @@ public class FrmOferta extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -211,27 +248,27 @@ public class FrmOferta extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPrecioOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblInfoVehiculo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblPrecioGama)
-                                .addGap(52, 52, 52)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescripcionOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDescripcionOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)))
+                            .addComponent(lblInfoVehiculo)
+                            .addComponent(lblPrecioGama))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(31, Short.MAX_VALUE))
+                                .addContainerGap(12, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,23 +276,22 @@ public class FrmOferta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDescripcionOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtIdOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIdMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrecioOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblInfoVehiculo)
-                                    .addComponent(lblPrecioGama)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtIdOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPrecioOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDescripcionOferta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInfoVehiculo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPrecioGama))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,24 +301,108 @@ public class FrmOferta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
     limpiar();        // TODO add your handling code here:
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    // Requisito V: al salir del ID Oferta
-    private void txtIdOfertaFocusLost(java.awt.event.FocusEvent evt) {
-        String idStr = txtIdOferta.getText().trim();
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int fila = jTable1.getSelectedRow();
+        if (fila != -1) {
+            txtIdOferta.setText(jTable1.getValueAt(fila, 0).toString());
+            txtIdOferta.setForeground(java.awt.Color.BLACK);
+            String mat = jTable1.getValueAt(fila, 1).toString();
+            txtIdMatricula.setText(mat);
+            txtIdMatricula.setForeground(java.awt.Color.BLACK);
+            txtDescripcionOferta.setText(jTable1.getValueAt(fila, 2).toString());
+            txtDescripcionOferta.setForeground(java.awt.Color.BLACK);
+            txtPrecioOferta.setText(jTable1.getValueAt(fila, 3).toString());
+            txtPrecioOferta.setForeground(java.awt.Color.BLACK);
+            buscarYMostrarVehiculo(mat);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+           try {
+            if (!validar()) return;
+            Oferta o = new Oferta(
+                Integer.parseInt(txtIdOferta.getText()),
+                txtIdMatricula.getText(),
+                txtDescripcionOferta.getText(),
+                Double.parseDouble(txtPrecioOferta.getText())
+            );
+            new OfertaDAO().guardar(o);
+            JOptionPane.showMessageDialog(null, "Oferta guardada correctamente.");
+            cargarTabla();
+            limpiar();
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                "Oferta duplicada", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+    try {
+            int fila = jTable1.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(null, "Seleccione una oferta de la tabla");
+                return;
+            }
+            int id = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
+            new OfertaDAO().eliminar(id);
+            cargarTabla();
+            limpiar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+    try {
+            int fila = jTable1.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(null, "Seleccione una oferta de la tabla");
+                return;
+            }
+            if (!validar()) return;
+            int id = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
+            Oferta o = new Oferta(
+                id,
+                txtIdMatricula.getText(),
+                txtDescripcionOferta.getText(),
+                Double.parseDouble(txtPrecioOferta.getText())
+            );
+            new OfertaDAO().modificar(o);
+            JOptionPane.showMessageDialog(null, "Oferta modificada correctamente.");
+            cargarTabla();
+            limpiar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }      // TODO add your handling code here:
+    }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void txtIdMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdMatriculaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdMatriculaKeyPressed
+
+    private void txtIdMatriculaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdMatriculaFocusLost
+    String mat = txtIdMatricula.getText().trim();
+        if (mat.isEmpty() || mat.equals("Matrícula")) return;
+        buscarYMostrarVehiculo(mat);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdMatriculaFocusLost
+
+    private void txtIdOfertaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdOfertaFocusLost
+          String idStr = txtIdOferta.getText().trim();
         if (idStr.isEmpty() || idStr.equals("ID Oferta")) return;
         try {
             int id = Integer.parseInt(idStr);
@@ -314,16 +434,12 @@ public class FrmOferta extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }//GEN-LAST:event_txtIdOfertaFocusLost
 
-    // Requisito VI: al salir del campo Matrícula
-    private void txtIdMatriculaFocusLost(java.awt.event.FocusEvent evt) {
-        String mat = txtIdMatricula.getText().trim();
-        if (mat.isEmpty() || mat.equals("Matrícula")) return;
-        buscarYMostrarVehiculo(mat);
-    }
+    /**
+     * @param args the command line arguments
+     */
 
-    // Método auxiliar: busca el vehículo y muestra Marca, Modelo y Precio Gama
     private void buscarYMostrarVehiculo(String matricula) {
         try {
             Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
@@ -353,88 +469,12 @@ public class FrmOferta extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
-    // Botón Guardar
-    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            if (!validar()) return;
-            Oferta o = new Oferta(
-                Integer.parseInt(txtIdOferta.getText()),
-                txtIdMatricula.getText(),
-                txtDescripcionOferta.getText(),
-                Double.parseDouble(txtPrecioOferta.getText())
-            );
-            new OfertaDAO().guardar(o);
-            JOptionPane.showMessageDialog(null, "Oferta guardada correctamente.");
-            cargarTabla();
-            limpiar();
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                "Oferta duplicada", JOptionPane.WARNING_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Botón Eliminar
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione una oferta de la tabla");
-                return;
-            }
-            int id = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
-            new OfertaDAO().eliminar(id);
-            cargarTabla();
-            limpiar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Botón Modificar
-    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione una oferta de la tabla");
-                return;
-            }
-            if (!validar()) return;
-            int id = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
-            Oferta o = new Oferta(
-                id,
-                txtIdMatricula.getText(),
-                txtDescripcionOferta.getText(),
-                Double.parseDouble(txtPrecioOferta.getText())
-            );
-            new OfertaDAO().modificar(o);
-            JOptionPane.showMessageDialog(null, "Oferta modificada correctamente.");
-            cargarTabla();
-            limpiar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Click en tabla
+    
+    /*
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
-        int fila = jTable1.getSelectedRow();
-        if (fila != -1) {
-            txtIdOferta.setText(jTable1.getValueAt(fila, 0).toString());
-            txtIdOferta.setForeground(java.awt.Color.BLACK);
-            String mat = jTable1.getValueAt(fila, 1).toString();
-            txtIdMatricula.setText(mat);
-            txtIdMatricula.setForeground(java.awt.Color.BLACK);
-            txtDescripcionOferta.setText(jTable1.getValueAt(fila, 2).toString());
-            txtDescripcionOferta.setForeground(java.awt.Color.BLACK);
-            txtPrecioOferta.setText(jTable1.getValueAt(fila, 3).toString());
-            txtPrecioOferta.setForeground(java.awt.Color.BLACK);
-            buscarYMostrarVehiculo(mat);
-        }
-    }
 
+    }
+*/
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
