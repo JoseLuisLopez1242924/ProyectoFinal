@@ -24,6 +24,20 @@ public class FrmOferta extends javax.swing.JFrame {
         initComponents();
         aplicarPlaceholders();
         cargarTabla();
+        OcultarBotones();
+    }
+    
+    public void OcultarBotones(){
+        BtnGuardar.setEnabled(true);
+        BtnEliminar.setEnabled(false);
+        BtnLimpiar.setEnabled(false);
+        BtnModificar.setEnabled(false);
+    }
+        public void MostrarBotones(){
+        BtnGuardar.setEnabled(false);
+        BtnEliminar.setEnabled(true);
+        BtnLimpiar.setEnabled(true);
+        BtnModificar.setEnabled(true);
     }
     //Metodo para Crear el texto invisible
     private void setPlaceholder(JTextField field, String placeholder) {
@@ -114,6 +128,7 @@ public class FrmOferta extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
     
          /**
      * This method is called from within the constructor to initialize the form.
@@ -311,7 +326,8 @@ public class FrmOferta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-    limpiar();        // TODO add your handling code here:
+    limpiar();   
+    OcultarBotones();// TODO add your handling code here:
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -327,7 +343,8 @@ public class FrmOferta extends javax.swing.JFrame {
             txtPrecioOferta.setText(jTable1.getValueAt(fila, 3).toString());
             txtPrecioOferta.setForeground(java.awt.Color.BLACK);
             buscarYMostrarVehiculo(mat);
-        }        // TODO add your handling code here:
+        } 
+       MostrarBotones();// TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
@@ -364,7 +381,8 @@ public class FrmOferta extends javax.swing.JFrame {
             limpiar();
         } catch (Exception e) {
             e.printStackTrace();
-        }        // TODO add your handling code here:
+        }
+    OcultarBotones();// TODO add your handling code here:
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
@@ -388,7 +406,8 @@ public class FrmOferta extends javax.swing.JFrame {
             limpiar();
         } catch (Exception e) {
             e.printStackTrace();
-        }      // TODO add your handling code here:
+        }  
+        OcultarBotones();    // TODO add your handling code here:
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void txtIdMatriculaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdMatriculaKeyPressed

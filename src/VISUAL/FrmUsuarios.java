@@ -17,6 +17,20 @@ public class FrmUsuarios extends javax.swing.JFrame {
     public FrmUsuarios() {
         initComponents();
         cargarTabla();
+        OcultarBotones();
+    }
+    
+    public void OcultarBotones(){
+        BtnGuardar.setEnabled(true);
+        BtnEliminar.setEnabled(false);
+        BtnLimpiar.setEnabled(false);
+        BtnModificar.setEnabled(false);
+    }
+    public void MostrarBotones(){
+        BtnGuardar.setEnabled(false);
+        BtnEliminar.setEnabled(true);
+        BtnLimpiar.setEnabled(true);
+        BtnModificar.setEnabled(true);
     }
     
     //METODO PARA VALIDAR DE QUE LO CAMPOR SEAN OBLIGATORIOS
@@ -74,7 +88,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         BtnGuardar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BtnLimpiar = new javax.swing.JButton();
         txtApellido = new javax.swing.JTextField();
         txtMail = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
@@ -113,9 +127,10 @@ public class FrmUsuarios extends javax.swing.JFrame {
         BtnEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnEliminar.addActionListener(this::BtnEliminarActionPerformed);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser.png"))); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
+        BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser.png"))); // NOI18N
+        BtnLimpiar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnLimpiar.addActionListener(this::BtnLimpiarActionPerformed);
 
         txtApellido.addActionListener(this::txtApellidoActionPerformed);
 
@@ -195,7 +210,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -215,11 +230,9 @@ public class FrmUsuarios extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtMail)
-                            .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-                            .addContainerGap()))))
+                            .addComponent(txtMail))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +254,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -325,6 +338,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Usuario modificado correctamente.");
         cargarTabla();
         limpiar();
+        OcultarBotones();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al modificar: " + e.getMessage(),
@@ -349,6 +363,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
 
         cargarTabla();
         limpiar();
+        OcultarBotones();
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -382,12 +397,18 @@ public class FrmUsuarios extends javax.swing.JFrame {
         txtApellido.setText(jTable1.getValueAt(fila, 2).toString());
         txtMail.setText(jTable1.getValueAt(fila, 3).toString());
         CbxAcceso.setSelectedIndex((int) jTable1.getValueAt(fila, 4)); // ← índice correcto
+        MostrarBotones();
     }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void CbxAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbxAccesoActionPerformed
 
     }//GEN-LAST:event_CbxAccesoActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        limpiar(); 
+        OcultarBotones();// TODO add your handling code here:
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,9 +438,9 @@ public class FrmUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnLimpiar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JComboBox<String> CbxAcceso;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
