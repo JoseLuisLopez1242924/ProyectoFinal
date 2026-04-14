@@ -1,9 +1,9 @@
 ABC123;Toyota;Corolla;0;1;1;Sedan compacto economico y practico;false;true;false;Blanco;false;true
-DEF456;Honda;Civic;1;1;2;Sedan turistico premium;true;true;true;Negro;true;true
-GHI789;Ford;Explorer;0;0;1;SUV familiar diesel;false;true;true;Gris;false;true
+DEF456;Honda;Civic;1;1;2;Sedan turistico premium;true;true;true;Negro;true;false
+GHI789;Ford;Explorer;0;0;1;SUV familiar diesel;false;true;true;Gris;false;false
 JKL012;BMW;320i;1;1;3;Sedan de lujo automatico;true;true;true;Azul;true;false
 MNO345;Hyundai;Tucson;0;1;2;SUV compacta gasolina;false;true;false;Rojo;true;true
 PQR678;Chevrolet;Silverado;0;0;1;Pickup diesel de trabajo;false;false;false;Blanco;false;false
 STU901;Nissan;Altima;1;1;2;Sedan turistico comodo;true;true;false;Plateado;true;false
-VWX234;Kia;Sportage;0;1;1;SUV compacta gasolina;false;true;false;Verde;false;true
+VWX234;Kia;Sportage;0;1;1;SUV compacta gasolina;false;true;false;Verde;false;false
 BPA725;Kia;K5;0;1;1;SUV compacta gasolina;false;true;true;Blanco;false;true

@@ -281,7 +281,7 @@ public class FrmReservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
- if (idClienteSeleccionado.isEmpty()) {
+    if (idClienteSeleccionado.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente.");
             return;
         }
@@ -301,7 +301,7 @@ public class FrmReservas extends javax.swing.JFrame {
         // Guardar en archivo TXT
         // Formato: idCliente; vehiculo; matricula; precio; desde; hasta; cantDias; importe
         try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter("reservas.txt", true))) {
+                new FileWriter("src/DOCUMENTOS/reservas.txt", true))) {
  
             for (int i = 0; i < model.getRowCount(); i++) {
                 String vehiculo  = model.getValueAt(i, 0).toString();
