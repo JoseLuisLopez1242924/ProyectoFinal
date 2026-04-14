@@ -4,6 +4,13 @@
  */
 package VISUAL;
 
+import LOGICA.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author jsosa
@@ -12,13 +19,120 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmConsultarVehiculo.class.getName());
 
+     private FrmReservas padre;
+ 
+    /** Lista completa de vehículos disponibles */
+    private List<Vehiculo> listaVehiculos;
     /**
      * Creates new form FrmConsultarVehiculo
      */
     public FrmConsultarVehiculo() {
         initComponents();
+        cargarVehiculos();
+        configurarFiltro();
     }
-
+ public FrmConsultarVehiculo(FrmReservas padre) {
+        initComponents();
+        this.padre = padre;
+        cargarVehiculos();
+        configurarFiltro();
+    }
+ 
+    // -------------------------------------------------------------------------
+    // CARGA INICIAL — solo vehículos DISPONIBLES (statusVeh = true)
+    // -------------------------------------------------------------------------
+    private void cargarVehiculos() {
+        try {
+            VehiculoDAO dao = new VehiculoDAO();
+            listaVehiculos = new ArrayList<>();
+            for (Vehiculo v : dao.listar()) {
+                // Solo cargamos los disponibles (no rentados)
+                if (v.statusVeh) {
+                    listaVehiculos.add(v);
+                }
+            }
+            poblarTabla(listaVehiculos);
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+        }
+    }
+ 
+    /** Llena la tabla con la lista recibida */
+    private void poblarTabla(List<Vehiculo> lista) {
+        DefaultTableModel model = new DefaultTableModel(
+            new String[]{
+                "Matrícula", "Marca", "Modelo",
+                "Tipo Vehículo", "Tipo Motor", "ID Gama",
+                "Color", "Estado"
+            }, 0
+        ) {
+            public boolean isCellEditable(int r, int c) { return false; }
+        };
+ 
+        for (Vehiculo v : lista) {
+            model.addRow(new Object[]{
+                v.matricula,
+                v.marca,
+                v.modelo,
+                v.tipoVehiculo == 0 ? "Turístico" : "Normal",
+                v.tipoMotor    == 0 ? "Diésel"    : "Gasolina",
+                v.idGama,
+                v.colorVeh,
+                v.statusVeh    ? "Disponible" : "Rentado"   // columna Estado
+            });
+        }
+ 
+        jTable1.setModel(model);
+ 
+        // Colorear la columna Estado: verde = disponible, rojo = rentado
+        jTable1.getColumnModel().getColumn(7).setCellRenderer(
+            new javax.swing.table.DefaultTableCellRenderer() {
+                public java.awt.Component getTableCellRendererComponent(
+                        javax.swing.JTable table, Object value,
+                        boolean isSelected, boolean hasFocus, int row, int col) {
+                    super.getTableCellRendererComponent(
+                            table, value, isSelected, hasFocus, row, col);
+                    if ("Disponible".equals(value)) {
+                        setForeground(new java.awt.Color(0, 128, 0));
+                    } else {
+                        setForeground(java.awt.Color.RED);
+                    }
+                    return this;
+                }
+            }
+        );
+    }
+ 
+    // -------------------------------------------------------------------------
+    // FILTRO EN TIEMPO REAL (por matrícula o marca/modelo)
+    // -------------------------------------------------------------------------
+    private void configurarFiltro() {
+        Buscar.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e)  { filtrar(); }
+            public void removeUpdate(DocumentEvent e)  { filtrar(); }
+            public void changedUpdate(DocumentEvent e) { filtrar(); }
+        });
+    }
+ 
+    private void filtrar() {
+        String texto = Buscar.getText().trim().toLowerCase();
+        if (listaVehiculos == null) return;
+ 
+        if (texto.isEmpty() || texto.equals("buscar por matrícula o vehículo...")) {
+            poblarTabla(listaVehiculos);
+            return;
+        }
+ 
+        List<Vehiculo> filtrados = new ArrayList<>();
+        for (Vehiculo v : listaVehiculos) {
+            String matricula = v.matricula.toLowerCase();
+            String vehiculo  = (v.marca + " " + v.modelo).toLowerCase();
+            if (matricula.contains(texto) || vehiculo.contains(texto)) {
+                filtrados.add(v);
+            }
+        }
+        poblarTabla(filtrados);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +146,7 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Buscar.setText("Buscar");
 
@@ -47,6 +161,11 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -71,7 +190,39 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       int fila = jTable1.getSelectedRow();
+        if (fila == -1) return;
+ 
+        String matricula    = jTable1.getValueAt(fila, 0).toString();
+        String marca        = jTable1.getValueAt(fila, 1).toString();
+        String modelo       = jTable1.getValueAt(fila, 2).toString();
+        String tipoVehiculo = jTable1.getValueAt(fila, 3).toString();
+        int    idGama;
+ 
+        try {
+            idGama = Integer.parseInt(jTable1.getValueAt(fila, 5).toString());
+        } catch (NumberFormatException e) {
+            idGama = 0;
+        }
+ 
+        // Obtener precio de gama para calcular el importe
+        double precioGama = 0.0;
+        try {
+            Gama g = new GamaDAO().buscarPorId(idGama);
+            if (g != null) precioGama = g.precio;
+        } catch (Exception e) {
+            logger.warning("Error al buscar gama: " + e.getMessage());
+        }
+ 
+        if (padre != null) {
+            padre.cargarVehiculo(matricula, marca, modelo, tipoVehiculo, precioGama);
+            this.dispose(); // cierra al seleccionar
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

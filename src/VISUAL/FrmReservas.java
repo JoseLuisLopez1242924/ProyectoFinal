@@ -4,21 +4,81 @@
  */
 package VISUAL;
 
+import LOGICA.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 /**
  *
  * @author jsosa
  */
 public class FrmReservas extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmReservas.class.getName());
-
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmReservas.class.getName());       
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+ 
+    // Datos del cliente y vehículo seleccionados
+    private String idClienteSeleccionado   = "";
+    private String matriculaSeleccionada   = "";
+    private double precioVehiculoSeleccionado = 0.0;
+    
     /**
      * Creates new form FrmReservas
      */
     public FrmReservas() {
         initComponents();
+        configurarFechas();
     }
 
+    // CONFIGURACIÓN INICIAL
+    private void configurarFechas() {
+        // Fecha de hoy como valor por defecto
+        txtFechaInicio.setText(LocalDate.now().format(FMT));
+        txtFechaFin.setText(LocalDate.now().format(FMT));
+    }
+ 
+    // MÉTODOS PÚBLICOS LLAMADOS DESDE LOS FORMULARIOS HIJOS
+ 
+    /** Llamado desde FrmConsultarCliente cuando el usuario hace clic en un cliente */
+    public void cargarCliente(String idCedula, String nombre, String apellidos,
+                               String direccion, String email, String telefono) {
+        idClienteSeleccionado = idCedula;
+        lblCliente.setText(nombre + " " + apellidos);
+ 
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addElement("Cédula:     " + idCedula);
+        model.addElement("Nombre:     " + nombre + " " + apellidos);
+        model.addElement("Dirección:  " + direccion);
+        model.addElement("Email:      " + email);
+        model.addElement("Teléfono:   " + telefono);
+        ltDatosCliente.setModel(model);
+    }
+ 
+    /** Llamado desde FrmConsultarVehiculo cuando el usuario hace clic en un vehículo */
+    public void cargarVehiculo(String matricula, String marca, String modelo,
+                                String tipoVehiculo, double precio) {
+        matriculaSeleccionada          = matricula;
+        precioVehiculoSeleccionado     = precio;
+        lblInfovehiculo.setText(marca + " " + modelo + " | " + tipoVehiculo
+                + " | Precio/día: $" + String.format("%.2f", precio));
+    }
+ 
+    // =========================================================================
+    // CALCULAR DÍAS E IMPORTE
+    // =========================================================================
+    private long calcularDias() {
+        try {
+            LocalDate inicio = LocalDate.parse(txtFechaInicio.getText().trim(), FMT);
+            LocalDate fin    = LocalDate.parse(txtFechaFin.getText().trim(),    FMT);
+            if (fin.isBefore(inicio)) return 0;
+            return ChronoUnit.DAYS.between(inicio, fin);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +105,7 @@ public class FrmReservas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnRentar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -54,13 +114,11 @@ public class FrmReservas extends javax.swing.JFrame {
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
+        BtnBuscarCliente.addActionListener(this::BtnBuscarClienteActionPerformed);
 
         TablaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Vehiculo", "Matricula", "Precio", "Desde", "Hasta", "Cant Dias", "Importe"
@@ -82,6 +140,7 @@ public class FrmReservas extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         jButton1.setText("Buscar Vehiculo");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jScrollPane2.setViewportView(ltDatosCliente);
 
@@ -95,6 +154,7 @@ public class FrmReservas extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
         jButton2.setText("Agregar");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         lblInfovehiculo.setText("InfoVehiculo");
 
@@ -182,12 +242,152 @@ public class FrmReservas extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel2))
                     .addComponent(btnRentar))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
+       FrmConsultarCliente frm = new FrmConsultarCliente(this);
+       frm.setVisible(true);
+    }//GEN-LAST:event_BtnBuscarClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FrmConsultarVehiculo frm = new FrmConsultarVehiculo(this);
+        frm.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    if (matriculaSeleccionada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero seleccione un vehículo.");
+            return;
+        }
+        if (txtFechaInicio.getText().trim().isEmpty() || txtFechaFin.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese las fechas Desde y Hasta.");
+            return;
+        }
+ 
+        long dias = calcularDias();
+        if (dias <= 0) {
+            JOptionPane.showMessageDialog(this,
+                    "La fecha Hasta debe ser posterior a la fecha Desde.");
+            return;
+        }
+ 
+        double importe = precioVehiculoSeleccionado * dias;
+ 
+        // Obtener descripción del vehículo desde lblInfovehiculo
+        String infoVeh = lblInfovehiculo.getText();
+ 
+        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+        model.addRow(new Object[]{
+            infoVeh,
+            matriculaSeleccionada,
+            String.format("%.2f", precioVehiculoSeleccionado),
+            txtFechaInicio.getText().trim(),
+            txtFechaFin.getText().trim(),
+            dias,
+            String.format("%.2f", importe)
+        });
+ 
+        // Actualizar total
+        actualizarTotal();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+    /** Recalcula y muestra el total sumando todos los importes de la tabla */
+    private void actualizarTotal() {
+        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+        double total = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                total += Double.parseDouble(model.getValueAt(i, 6).toString());
+            } catch (Exception ignored) {}
+        }
+        jLabel1.setText(String.format("%.2f", total));
+    }
+ 
+    /** Guarda todas las filas de la tabla en un archivo TXT */
+    private void BtnRentarActionPerformed() {
+        if (idClienteSeleccionado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente.");
+            return;
+        }
+ 
+        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No hay vehículos agregados.");
+            return;
+        }
+ 
+        // Confirmar acción
+        int resp = JOptionPane.showConfirmDialog(this,
+                "¿Confirmar renta para " + lblCliente.getText() + "?",
+                "Confirmar Renta", JOptionPane.YES_NO_OPTION);
+        if (resp != JOptionPane.YES_OPTION) return;
+ 
+        // Guardar en archivo TXT
+        // Formato: idCliente; vehiculo; matricula; precio; desde; hasta; cantDias; importe
+        try (BufferedWriter bw = new BufferedWriter(
+                new FileWriter("reservas.txt", true))) {
+ 
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String vehiculo  = model.getValueAt(i, 0).toString();
+                String matricula = model.getValueAt(i, 1).toString();
+                String precio    = model.getValueAt(i, 2).toString();
+                String desde     = model.getValueAt(i, 3).toString();
+                String hasta     = model.getValueAt(i, 4).toString();
+                String dias      = model.getValueAt(i, 5).toString();
+                String importe   = model.getValueAt(i, 6).toString();
+ 
+                String linea = idClienteSeleccionado + "; "
+                        + vehiculo + "; "
+                        + matricula + "; "
+                        + precio + "; "
+                        + desde + "; "
+                        + hasta + "; "
+                        + dias + "; "
+                        + importe;
+ 
+                bw.write(linea);
+                bw.newLine();
+ 
+                // Marcar el vehículo como rentado en el archivo de vehículos
+                try {
+                    Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
+                    if (v != null) {
+                        v.statusVeh = false;
+                        new VehiculoDAO().modificar(v);
+                    }
+                } catch (Exception ex) {
+                    logger.warning("Error al actualizar status vehículo: " + ex.getMessage());
+                }
+            }
+ 
+            JOptionPane.showMessageDialog(this,
+                    "Renta guardada correctamente en reservas.txt");
+ 
+            // Limpiar formulario
+            limpiarFormulario();
+ 
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al guardar la reserva: " + e.getMessage());
+            logger.warning(e.getMessage());
+        }
+    }
+   /** Limpia todos los campos y la tabla */
+    private void limpiarFormulario() {
+        idClienteSeleccionado          = "";
+        matriculaSeleccionada          = "";
+        precioVehiculoSeleccionado     = 0.0;
+        lblCliente.setText("(Sin cliente seleccionado)");
+        lblInfovehiculo.setText("(Sin vehículo seleccionado)");
+        ltDatosCliente.setModel(new DefaultListModel<>());
+        configurarFechas();
+        jLabel1.setText("0.00");
+        ((DefaultTableModel) TablaDetalle.getModel()).setRowCount(0);
+    }
     /**
      * @param args the command line arguments
      */

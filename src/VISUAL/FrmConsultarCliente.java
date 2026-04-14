@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISUAL;
-
+import LOGICA.Cliente;
+import LOGICA.ClienteDAO;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.util.List;
 /**
  *
  * @author jsosa
@@ -12,11 +18,85 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmConsultarCliente.class.getName());
 
+     /** Referencia al formulario padre para devolverle los datos */
+    private FrmReservas padre;
+    
+    /** Lista completa de clientes cargada una sola vez */
+    private List<Cliente> listaClientes;
+    
     /**
      * Creates new form FrmConsultarCliente
      */
     public FrmConsultarCliente() {
         initComponents();
+        cargarClientes();
+        configurarFiltro();
+    }
+    
+    public FrmConsultarCliente(FrmReservas padre) {
+        initComponents();
+        this.padre = padre;
+        cargarClientes();
+        configurarFiltro();
+    }
+ 
+    // -------------------------------------------------------------------------
+    // CARGA INICIAL
+    // -------------------------------------------------------------------------
+    private void cargarClientes() {
+        try {
+            ClienteDAO dao = new ClienteDAO();
+            listaClientes = dao.listar();
+            poblarTabla(listaClientes);
+        } catch (Exception e) {
+            logger.warning(e.getMessage());
+        }
+    }
+ 
+    /** Llena la tabla con la lista recibida */
+    private void poblarTabla(List<Cliente> lista) {
+        DefaultTableModel model = new DefaultTableModel(
+            new String[]{"ID Cédula", "Nombre", "Apellidos", "Dirección", "Email", "Teléfono"}, 0
+        ) {
+            public boolean isCellEditable(int r, int c) { return false; }
+        };
+        for (Cliente c : lista) {
+            model.addRow(new Object[]{
+                c.idCedula, c.nombre, c.apellidos, c.direccion, c.email, c.telefono
+            });
+        }
+        jTable1.setModel(model);
+    }
+ 
+    // -------------------------------------------------------------------------
+    // FILTRO EN TIEMPO REAL (por nombre o cédula)
+    // -------------------------------------------------------------------------
+    private void configurarFiltro() {
+        Buscar.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e)  { filtrar(); }
+            public void removeUpdate(DocumentEvent e)  { filtrar(); }
+            public void changedUpdate(DocumentEvent e) { filtrar(); }
+        });
+    }
+ 
+    private void filtrar() {
+        String texto = Buscar.getText().trim().toLowerCase();
+        if (listaClientes == null) return;
+ 
+        if (texto.isEmpty()) {
+            poblarTabla(listaClientes);
+            return;
+        }
+ 
+        List<Cliente> filtrados = new java.util.ArrayList<>();
+        for (Cliente c : listaClientes) {
+            String nombre   = (c.nombre   + " " + c.apellidos).toLowerCase();
+            String cedula   = c.idCedula.toLowerCase();
+            if (nombre.contains(texto) || cedula.contains(texto)) {
+                filtrados.add(c);
+            }
+        }
+        poblarTabla(filtrados);
     }
 
     /**
@@ -32,21 +112,26 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Buscar.setText("Buscar");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -71,8 +156,28 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+     int fila = jTable1.getSelectedRow();
+        if (fila == -1) return;
+ 
+        String idCedula  = jTable1.getValueAt(fila, 0).toString();
+        String nombre    = jTable1.getValueAt(fila, 1).toString();
+        String apellidos = jTable1.getValueAt(fila, 2).toString();
+        String direccion = jTable1.getValueAt(fila, 3).toString();
+        String email     = jTable1.getValueAt(fila, 4).toString();
+        String telefono  = jTable1.getValueAt(fila, 5).toString();
+ 
+        if (padre != null) {
+            padre.cargarCliente(idCedula, nombre, apellidos, direccion, email, telefono);
+            this.dispose(); // cierra esta ventana al seleccionar
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    
+    
     /**
      * @param args the command line arguments
      */
