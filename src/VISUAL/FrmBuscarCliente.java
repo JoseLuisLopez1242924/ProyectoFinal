@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FrmConsultarCliente extends javax.swing.JFrame {
+public class FrmBuscarCliente extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmConsultarCliente.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBuscarCliente.class.getName());
 
      //Referencia al formulario padre para devolverle los datos
     private FrmReservas padre;
     private List<Cliente> listaClientes = new ArrayList<>();
     
      
-    public FrmConsultarCliente() {
+    public FrmBuscarCliente() {
         initComponents();
         cargarClientes();
         configurarFiltro();
     }
    
-     public FrmConsultarCliente(FrmReservas padre) {
+     public FrmBuscarCliente(FrmReservas padre) {
         initComponents();
         this.padre = padre;
         cargarClientes();
@@ -202,7 +202,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmConsultarCliente().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmBuscarCliente().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

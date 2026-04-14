@@ -126,6 +126,7 @@ public class Menu extends javax.swing.JFrame {
         menu_mov.add(jMenuItem5);
 
         jMenuItem6.setText("RECEPCION");
+        jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
         menu_mov.add(jMenuItem6);
 
         mb_menu.add(menu_mov);
@@ -244,6 +245,11 @@ public class Menu extends javax.swing.JFrame {
     FrmOferta frm= new FrmOferta();
     frm.setVisible(true); // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    FrmResepcion frm= new FrmResepcion();
+    frm.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));

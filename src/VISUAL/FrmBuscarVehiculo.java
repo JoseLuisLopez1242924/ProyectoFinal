@@ -15,9 +15,9 @@ import java.util.ArrayList;
  *
  * @author jsosa
  */
-public class FrmConsultarVehiculo extends javax.swing.JFrame {
+public class FrmBuscarVehiculo extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmConsultarVehiculo.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBuscarVehiculo.class.getName());
 
      private FrmReservas padre;
  
@@ -26,12 +26,12 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
     /**
      * Creates new form FrmConsultarVehiculo
      */
-    public FrmConsultarVehiculo() {
+    public FrmBuscarVehiculo() {
         initComponents();
         cargarVehiculos();
         configurarFiltro();
     }
- public FrmConsultarVehiculo(FrmReservas padre) {
+ public FrmBuscarVehiculo(FrmReservas padre) {
         initComponents();
         this.padre = padre;
         cargarVehiculos();
@@ -246,7 +246,7 @@ public class FrmConsultarVehiculo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmConsultarVehiculo().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmBuscarVehiculo().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
