@@ -24,7 +24,33 @@ public class ClienteDAO {
     }
 
     // LISTAR
-    public List<Cliente> listar() throws IOException {
+   /* public List<Cliente> listar() {
+    List<Cliente> lista = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader("clientes.txt"))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            linea = linea.trim();
+            if (linea.isEmpty()) continue;          // saltar líneas vacías
+
+            String[] datos = linea.split(";", -1);  // -1 conserva campos vacíos
+
+            if (datos.length < 6) continue;         // saltar líneas incompletas
+
+            lista.add(new Cliente(
+                datos[0].trim(),
+                datos[1].trim(),
+                datos[2].trim(),
+                datos[3].trim(),
+                datos[4].trim(),
+                datos[5].trim()
+            ));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return lista;
+}*/
+   public List<Cliente> listar() throws IOException {
         List<Cliente> lista = new ArrayList<>();
         File file = new File(ruta);
         if (!file.exists()) return lista;
