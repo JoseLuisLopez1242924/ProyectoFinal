@@ -1,4 +1,3 @@
-
 package VISUAL;
 
 import LOGICA.UsuarioDAO;
@@ -35,35 +34,30 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(243, 243, 243));
         jPanel1.setMaximumSize(new java.awt.Dimension(490, 260));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lb_login.setBackground(new java.awt.Color(0, 0, 0));
         lb_login.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         lb_login.setForeground(new java.awt.Color(0, 0, 0));
         lb_login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_login.setText("LOGIN");
-        jPanel1.add(lb_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 44, 229, 35));
 
         lb_usuario.setBackground(new java.awt.Color(0, 0, 0));
         lb_usuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lb_usuario.setForeground(new java.awt.Color(0, 0, 0));
         lb_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_usuario.setText("Usuario:");
-        jPanel1.add(lb_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 112, 97, 33));
 
         lb_pass.setBackground(new java.awt.Color(255, 255, 255));
         lb_pass.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lb_pass.setForeground(new java.awt.Color(0, 0, 0));
         lb_pass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_pass.setText("Contraseña:");
-        jPanel1.add(lb_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 163, 97, 33));
 
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyPressed(evt);
             }
         });
-        jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 116, 220, -1));
 
         psw_pass.setOpaque(true);
         psw_pass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -71,14 +65,12 @@ public class Login extends javax.swing.JFrame {
                 psw_passKeyPressed(evt);
             }
         });
-        jPanel1.add(psw_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 167, 220, -1));
 
         btn_ini.setBackground(new java.awt.Color(212, 212, 212));
         btn_ini.setForeground(new java.awt.Color(0, 0, 0));
         btn_ini.setText("INICIAR SESIÓN");
         btn_ini.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_ini.addActionListener(this::btn_iniActionPerformed);
-        jPanel1.add(btn_ini, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 214, 137, 36));
 
         lblSoporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSoporte.setText("Contactar con Soporte");
@@ -89,7 +81,53 @@ public class Login extends javax.swing.JFrame {
                 lblSoporteMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSoporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 256, 137, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(lb_login, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(lb_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(psw_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(btn_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(lblSoporte, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lb_login, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(psw_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btn_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(lblSoporte))
+        );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -123,7 +161,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
