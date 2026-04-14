@@ -81,6 +81,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         chkStatus.setText("Status");
         chkStatus.setBorder(null);
+        chkStatus.setEnabled(false); // Solo se modifica desde Reservas/Recepción
 
         chkTecho.setText("Techo Electrico");
 
