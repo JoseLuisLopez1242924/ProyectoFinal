@@ -91,5 +91,41 @@ public class VehiculoDAO {
             bw.newLine();
         }
         bw.close();
-    } 
+    }
+
+    // BUSCAR POR MARCA (contiene, sin distinción de mayúsculas)
+    public List<Vehiculo> buscarPorMarca(String marca) throws IOException {
+        List<Vehiculo> resultado = new ArrayList<>();
+        for (Vehiculo v : listar()) {
+            if (v.marca.equalsIgnoreCase(marca.trim())) resultado.add(v);
+        }
+        return resultado;
+    }
+
+    // LISTAR DISPONIBLES (statusVeh = true)
+    public List<Vehiculo> listarDisponibles() throws IOException {
+        List<Vehiculo> resultado = new ArrayList<>();
+        for (Vehiculo v : listar()) {
+            if (v.statusVeh) resultado.add(v);
+        }
+        return resultado;
+    }
+
+    // LISTAR RENTADOS (statusVeh = false)
+    public List<Vehiculo> listarRentados() throws IOException {
+        List<Vehiculo> resultado = new ArrayList<>();
+        for (Vehiculo v : listar()) {
+            if (!v.statusVeh) resultado.add(v);
+        }
+        return resultado;
+    }
+
+    // BUSCAR POR GAMA
+    public List<Vehiculo> buscarPorGama(int idGama) throws IOException {
+        List<Vehiculo> resultado = new ArrayList<>();
+        for (Vehiculo v : listar()) {
+            if (v.idGama == idGama) resultado.add(v);
+        }
+        return resultado;
+    }
 }
