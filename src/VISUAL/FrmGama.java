@@ -17,6 +17,7 @@ public class FrmGama extends javax.swing.JFrame {
         initComponents();
         aplicarPlaceholders();
         cargarTabla();
+        OcultarBotones();
     }
 
     public FrmGama(int nivelAcceso) {
@@ -24,6 +25,19 @@ public class FrmGama extends javax.swing.JFrame {
         this.nivelAccesoActual = nivelAcceso;
         aplicarPlaceholders();
         cargarTabla();
+        OcultarBotones();
+    }
+
+    public void OcultarBotones() {
+        BtnGuardar.setEnabled(true);
+        BtnEliminar.setEnabled(false);
+        BtnModificar.setEnabled(false);
+    }
+
+    public void MostrarBotones() {
+        BtnGuardar.setEnabled(false);
+        BtnEliminar.setEnabled(true);
+        BtnModificar.setEnabled(true);
     }
 
     private void setPlaceholder(javax.swing.JTextField field, String placeholder) {
@@ -73,6 +87,7 @@ public class FrmGama extends javax.swing.JFrame {
 
     public void limpiar() {
         aplicarPlaceholders();
+        OcultarBotones();
     }
 
     public void cargarTabla() {
@@ -107,7 +122,7 @@ public class FrmGama extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Gamas");
 
-        jLabel1.setText("ID Gama");
+        jLabel1.setText(" # Gama");
 
         jLabel2.setText("Descripción");
 
@@ -268,15 +283,18 @@ public class FrmGama extends javax.swing.JFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         try {
             if (!validar()) return;
-            Gama g = new Gama(
-                Integer.parseInt(txtIdGama.getText()),
-                txtDescripcion.getText(),
-                Double.parseDouble(txtPrecio.getText())
-            );
+            int id = Integer.parseInt(txtIdGama.getText());
+            // Validar duplicado
+            if (new GamaDAO().buscarPorId(id) != null) {
+                JOptionPane.showMessageDialog(null, "Ya existe una Gama con ese ID.", "Duplicado", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            Gama g = new Gama(id, txtDescripcion.getText(), Double.parseDouble(txtPrecio.getText()));
             new GamaDAO().guardar(g);
             JOptionPane.showMessageDialog(null, "Guardado");
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -293,6 +311,7 @@ public class FrmGama extends javax.swing.JFrame {
             new GamaDAO().eliminar(id);
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -312,6 +331,7 @@ public class FrmGama extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Modificado");
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -326,6 +346,7 @@ public class FrmGama extends javax.swing.JFrame {
             txtDescripcion.setForeground(java.awt.Color.BLACK);
             txtPrecio.setText(jTable1.getValueAt(fila, 2).toString());
             txtPrecio.setForeground(java.awt.Color.BLACK);
+            MostrarBotones();
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

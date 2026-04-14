@@ -17,6 +17,7 @@ public class FrmClientes extends javax.swing.JFrame {
         initComponents();
         aplicarPlaceholders();
         cargarTabla();
+        OcultarBotones();
     }
 
     public FrmClientes(int nivelAcceso) {
@@ -24,6 +25,19 @@ public class FrmClientes extends javax.swing.JFrame {
         this.nivelAccesoActual = nivelAcceso;
         aplicarPlaceholders();
         cargarTabla();
+        OcultarBotones();
+    }
+
+    public void OcultarBotones() {
+        BtnGuardar.setEnabled(true);
+        BtnEliminar.setEnabled(false);
+        BtnModificar.setEnabled(false);
+    }
+
+    public void MostrarBotones() {
+        BtnGuardar.setEnabled(false);
+        BtnEliminar.setEnabled(true);
+        BtnModificar.setEnabled(true);
     }
 
     private void setPlaceholder(javax.swing.JTextField field, String placeholder) {
@@ -101,6 +115,7 @@ public class FrmClientes extends javax.swing.JFrame {
 
     public void limpiar() {
         aplicarPlaceholders();
+        OcultarBotones();
     }
 
     public void cargarTabla() {
@@ -353,6 +368,7 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Guardado");
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -369,6 +385,7 @@ public class FrmClientes extends javax.swing.JFrame {
             new ClienteDAO().eliminar(id);
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -389,6 +406,7 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Modificado");
             cargarTabla();
             limpiar();
+            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -403,6 +421,7 @@ public class FrmClientes extends javax.swing.JFrame {
             txtDireccion.setText(jTable1.getValueAt(fila, 3).toString()); txtDireccion.setForeground(java.awt.Color.BLACK);
             txtEmail.setText(jTable1.getValueAt(fila, 4).toString());     txtEmail.setForeground(java.awt.Color.BLACK);
             txtTelefono.setText(jTable1.getValueAt(fila, 5).toString());  txtTelefono.setForeground(java.awt.Color.BLACK);
+            MostrarBotones();
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

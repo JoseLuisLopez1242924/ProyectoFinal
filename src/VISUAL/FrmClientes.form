@@ -24,94 +24,89 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-        <!-- FILA 1: ID Cédula | Nombre | Apellidos | Email | Teléfono | Botones -->
-        <Group type="102" attributes="0">
-          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-            <Component id="txtIdCedula" min="-2" pref="120" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtIdCedula" min="-2" pref="120" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombre" min="-2" pref="130" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtApellidos" min="-2" pref="130" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEmail" min="-2" pref="160" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTelefono" min="-2" pref="110" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="BtnEliminar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="BtnModificar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="15" max="32767" attributes="0"/>
           </Group>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-            <Component id="txtNombre" min="-2" pref="130" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollDireccion" min="-2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-            <Component id="txtApellidos" min="-2" pref="130" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-            <Component id="txtEmail" min="-2" pref="160" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-            <Component id="txtTelefono" min="-2" pref="110" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-          <Component id="BtnEliminar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-          <Component id="BtnModificar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace min="15" pref="15" max="32767" attributes="0"/>
-        </Group>
-        <!-- FILA 2: Dirección -->
-        <Group type="102" attributes="0">
-          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-            <Component id="jScrollDireccion" min="-2" pref="700" max="32767" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-        </Group>
-        <!-- TABLA -->
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="jScrollPane1" min="-2" max="32767" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-        </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-        <Group type="102" attributes="0">
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="3" attributes="0">
-            <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtIdCedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnModificar" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollDireccion" min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="171" max="-2" attributes="0"/>
+              <EmptySpace min="10" max="32767" attributes="0"/>
           </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="txtIdCedula" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnModificar" alignment="0" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="jScrollDireccion" min="-2" pref="55" max="-2" attributes="0"/>
-          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-          <Component id="jScrollPane1" min="-2" pref="171" max="-2" attributes="0"/>
-          <EmptySpace min="10" pref="10" max="32767" attributes="0"/>
-        </Group>
       </Group>
     </DimensionLayout>
   </Layout>
-
   <SubComponents>
-
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID C&#xe9;dula"/>
@@ -142,7 +137,6 @@
         <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
       </Properties>
     </Component>
-
     <Component class="javax.swing.JTextField" name="txtIdCedula">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtIdCedulaFocusLost"/>
@@ -160,11 +154,11 @@
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyReleased"/>
       </Events>
     </Component>
-
     <Container class="javax.swing.JScrollPane" name="jScrollDireccion">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
+
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="txtDireccion">
@@ -176,7 +170,6 @@
         </Component>
       </SubComponents>
     </Container>
-
     <Component class="javax.swing.JButton" name="BtnGuardar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -185,18 +178,17 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/save-all.png"/>
         </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGuardarActionPerformed"/>
       </Events>
     </Component>
-
     <Component class="javax.swing.JButton" name="BtnEliminar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -205,18 +197,17 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/trash-2.png"/>
         </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEliminarActionPerformed"/>
       </Events>
     </Component>
-
     <Component class="javax.swing.JButton" name="BtnModificar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -225,22 +216,22 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/pencil.png"/>
         </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnModificarActionPerformed"/>
       </Events>
     </Component>
-
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
+
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="jTable1">
@@ -263,6 +254,5 @@
         </Component>
       </SubComponents>
     </Container>
-
   </SubComponents>
 </Form>
