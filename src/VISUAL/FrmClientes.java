@@ -32,12 +32,15 @@ public class FrmClientes extends javax.swing.JFrame {
         BtnGuardar.setEnabled(true);
         BtnEliminar.setEnabled(false);
         BtnModificar.setEnabled(false);
+        BtnLimpiar.setEnabled(false);
+        lblEstado.setText(" ");
     }
 
     public void MostrarBotones() {
         BtnGuardar.setEnabled(false);
         BtnEliminar.setEnabled(true);
         BtnModificar.setEnabled(true);
+        BtnLimpiar.setEnabled(true);
     }
 
     private void setPlaceholder(javax.swing.JTextField field, String placeholder) {
@@ -45,16 +48,10 @@ public class FrmClientes extends javax.swing.JFrame {
         field.setText(placeholder);
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(java.awt.Color.BLACK);
-                }
+                if (field.getText().equals(placeholder)) { field.setText(""); field.setForeground(java.awt.Color.BLACK); }
             }
             public void focusLost(java.awt.event.FocusEvent e) {
-                if (field.getText().isEmpty()) {
-                    field.setForeground(java.awt.Color.GRAY);
-                    field.setText(placeholder);
-                }
+                if (field.getText().isEmpty()) { field.setForeground(java.awt.Color.GRAY); field.setText(placeholder); }
             }
         });
     }
@@ -64,16 +61,10 @@ public class FrmClientes extends javax.swing.JFrame {
         area.setText(placeholder);
         area.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent e) {
-                if (area.getText().equals(placeholder)) {
-                    area.setText("");
-                    area.setForeground(java.awt.Color.BLACK);
-                }
+                if (area.getText().equals(placeholder)) { area.setText(""); area.setForeground(java.awt.Color.BLACK); }
             }
             public void focusLost(java.awt.event.FocusEvent e) {
-                if (area.getText().isEmpty()) {
-                    area.setForeground(java.awt.Color.GRAY);
-                    area.setText(placeholder);
-                }
+                if (area.getText().isEmpty()) { area.setForeground(java.awt.Color.GRAY); area.setText(placeholder); }
             }
         });
     }
@@ -88,27 +79,20 @@ public class FrmClientes extends javax.swing.JFrame {
     }
 
     public boolean validar() {
-        String id        = txtIdCedula.getText();
-        String nombre    = txtNombre.getText();
-        String apellidos = txtApellidos.getText();
-        String direccion = txtDireccion.getText();
-        String telefono  = txtTelefono.getText();
-
-        if (id.isEmpty() || id.equals("ID Cédula") ||
-            nombre.isEmpty() || nombre.equals("Nombre") ||
+        String id = txtIdCedula.getText(), nombre = txtNombre.getText();
+        String apellidos = txtApellidos.getText(), direccion = txtDireccion.getText();
+        String telefono = txtTelefono.getText();
+        if (id.isEmpty() || id.equals("ID Cédula") || nombre.isEmpty() || nombre.equals("Nombre") ||
             apellidos.isEmpty() || apellidos.equals("Apellidos") ||
             direccion.isEmpty() || direccion.equals("Dirección") ||
             telefono.isEmpty() || telefono.equals("Teléfono")) {
-            JOptionPane.showMessageDialog(null, "Campos obligatorios");
-            return false;
+            JOptionPane.showMessageDialog(null, "Campos obligatorios"); return false;
         }
         if (!id.matches("\\d{3}-\\d{7}-\\d{1}")) {
-            JOptionPane.showMessageDialog(null, "Formato de cédula inválido. Use: XXX-XXXXXXX-X");
-            return false;
+            JOptionPane.showMessageDialog(null, "Formato de cédula inválido. Use: XXX-XXXXXXX-X"); return false;
         }
         if (!telefono.matches("\\d{3}-\\d{3}-\\d{4}")) {
-            JOptionPane.showMessageDialog(null, "Formato de teléfono inválido. Use: XXX-XXX-XXXX");
-            return false;
+            JOptionPane.showMessageDialog(null, "Formato de teléfono inválido. Use: XXX-XXX-XXXX"); return false;
         }
         return true;
     }
@@ -120,15 +104,12 @@ public class FrmClientes extends javax.swing.JFrame {
 
     public void cargarTabla() {
         try {
-            ClienteDAO dao = new ClienteDAO();
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
             modelo.setRowCount(0);
-            for (Cliente c : dao.listar()) {
+            for (Cliente c : new ClienteDAO().listar()) {
                 modelo.addRow(new Object[]{ c.idCedula, c.nombre, c.apellidos, c.direccion, c.email, c.telefono });
             }
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
-        }
+        } catch (Exception e) { logger.warning(e.getMessage()); }
     }
 
     @SuppressWarnings("unchecked")
@@ -141,6 +122,7 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         txtIdCedula  = new javax.swing.JTextField();
         txtNombre    = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
@@ -151,6 +133,7 @@ public class FrmClientes extends javax.swing.JFrame {
         BtnGuardar   = new javax.swing.JButton();
         BtnEliminar  = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
+        BtnLimpiar   = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1      = new javax.swing.JTable();
 
@@ -164,21 +147,18 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel5.setText("Email");
         jLabel6.setText("Teléfono");
 
+        lblEstado.setText(" ");
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblEstado.setForeground(new java.awt.Color(0, 128, 0));
+
         txtIdCedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtIdCedulaFocusLost(evt);
-            }
+            public void focusLost(java.awt.event.FocusEvent evt) { txtIdCedulaFocusLost(evt); }
         });
         txtIdCedula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIdCedulaKeyReleased(evt);
-            }
+            public void keyReleased(java.awt.event.KeyEvent evt) { txtIdCedulaKeyReleased(evt); }
         });
-
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTelefonoKeyReleased(evt);
-            }
+            public void keyReleased(java.awt.event.KeyEvent evt) { txtTelefonoKeyReleased(evt); }
         });
 
         txtDireccion.setRows(2);
@@ -188,45 +168,47 @@ public class FrmClientes extends javax.swing.JFrame {
 
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png")));
-        BtnGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnGuardar.setFocusPainted(false);
+        BtnGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnGuardarActionPerformed(evt);
-            }
+            public void actionPerformed(java.awt.event.ActionEvent evt) { BtnGuardarActionPerformed(evt); }
         });
 
         BtnEliminar.setBackground(new java.awt.Color(255, 153, 153));
         BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash-2.png")));
-        BtnEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnEliminar.setFocusPainted(false);
+        BtnEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
-            }
+            public void actionPerformed(java.awt.event.ActionEvent evt) { BtnEliminarActionPerformed(evt); }
         });
 
-        BtnModificar.setBackground(new java.awt.Color(255, 255, 153));
-        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/pencil.png")));
-        BtnModificar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnModificar.setBackground(new java.awt.Color(153, 153, 255));
+        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/refresh-ccw.png")));
         BtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnModificar.setFocusPainted(false);
+        BtnModificar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
-            }
+            public void actionPerformed(java.awt.event.ActionEvent evt) { BtnModificarActionPerformed(evt); }
+        });
+
+        BtnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
+        BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser (2).png")));
+        BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiar.setFocusPainted(false);
+        BtnLimpiar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) { BtnLimpiarActionPerformed(evt); }
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {},
-            new String [] { "ID Cédula", "Nombre", "Apellidos", "Dirección", "Email", "Teléfono" }
-        ) {
-            public boolean isCellEditable(int rowIndex, int columnIndex) { return false; }
-        });
+            new Object[][]{},
+            new String[]{ "ID Cédula", "Nombre", "Apellidos", "Dirección", "Email", "Teléfono" }
+        ) { public boolean isCellEditable(int r, int c) { return false; } });
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) { jTable1MouseClicked(evt); }
         });
         jScrollPane1.setViewportView(jTable1);
 
@@ -235,39 +217,42 @@ public class FrmClientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(txtIdCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(6)
                 .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(6)
                 .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6)
+                .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4)
                     .addComponent(jScrollDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addGap(15))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -276,7 +261,7 @@ public class FrmClientes extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1).addComponent(jLabel2).addComponent(jLabel3)
                     .addComponent(jLabel5).addComponent(jLabel6))
@@ -289,12 +274,15 @@ public class FrmClientes extends javax.swing.JFrame {
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                    .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4)
+                .addComponent(lblEstado)
+                .addGap(4)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -310,21 +298,29 @@ public class FrmClientes extends javax.swing.JFrame {
         try {
             Cliente encontrado = new ClienteDAO().buscarPorId(id);
             if (encontrado != null) {
-                JOptionPane.showMessageDialog(null, "Modificando");
+                lblEstado.setText("✎  Modificando");
+                lblEstado.setForeground(new java.awt.Color(0, 100, 200));
                 txtNombre.setText(encontrado.nombre);       txtNombre.setForeground(java.awt.Color.BLACK);
                 txtApellidos.setText(encontrado.apellidos); txtApellidos.setForeground(java.awt.Color.BLACK);
                 txtDireccion.setText(encontrado.direccion); txtDireccion.setForeground(java.awt.Color.BLACK);
                 txtEmail.setText(encontrado.email);         txtEmail.setForeground(java.awt.Color.BLACK);
                 txtTelefono.setText(encontrado.telefono);   txtTelefono.setForeground(java.awt.Color.BLACK);
+                MostrarBotones();
+                BtnGuardar.setEnabled(false);
             } else {
-                JOptionPane.showMessageDialog(null, "Creando");
+                lblEstado.setText("✚  Nuevo registro");
+                lblEstado.setForeground(new java.awt.Color(0, 150, 0));
+                txtNombre.setText(""); txtApellidos.setText("");
+                txtDireccion.setText(""); txtEmail.setText(""); txtTelefono.setText("");
                 aplicarPlaceholders();
                 txtIdCedula.setText(id);
                 txtIdCedula.setForeground(java.awt.Color.BLACK);
+                BtnGuardar.setEnabled(true);
+                BtnEliminar.setEnabled(false);
+                BtnModificar.setEnabled(false);
+                BtnLimpiar.setEnabled(true);
             }
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
-        }
+        } catch (Exception e) { logger.warning(e.getMessage()); }
     }//GEN-LAST:event_txtIdCedulaFocusLost
 
     private void txtIdCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdCedulaKeyReleased
@@ -356,61 +352,46 @@ public class FrmClientes extends javax.swing.JFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         try {
             if (!validar()) return;
-            Cliente c = new Cliente(
-                txtIdCedula.getText(),
-                txtNombre.getText(),
-                txtApellidos.getText(),
-                txtDireccion.getText(),
-                txtEmail.getText(),
-                txtTelefono.getText()
-            );
-            new ClienteDAO().guardar(c);
-            JOptionPane.showMessageDialog(null, "Guardado");
+            String id = txtIdCedula.getText();
+            // Validar duplicado
+            if (new ClienteDAO().buscarPorId(id) != null) {
+                JOptionPane.showMessageDialog(null, "Ya existe un cliente con esa cédula.", "Duplicado", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            new ClienteDAO().guardar(new Cliente(id, txtNombre.getText(), txtApellidos.getText(),
+                txtDireccion.getText(), txtEmail.getText(), txtTelefono.getText()));
+            JOptionPane.showMessageDialog(null, "Guardado correctamente.");
             cargarTabla();
             limpiar();
-            OcultarBotones();
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
-        }
+        } catch (Exception e) { logger.warning(e.getMessage()); }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         try {
             int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente de la tabla");
-                return;
-            }
-            String id = jTable1.getValueAt(fila, 0).toString();
-            new ClienteDAO().eliminar(id);
+            if (fila == -1) { JOptionPane.showMessageDialog(null, "Seleccione un cliente de la tabla"); return; }
+            new ClienteDAO().eliminar(jTable1.getValueAt(fila, 0).toString());
             cargarTabla();
             limpiar();
-            OcultarBotones();
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
-        }
+        } catch (Exception e) { logger.warning(e.getMessage()); }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         try {
             int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente de la tabla");
-                return;
-            }
+            if (fila == -1) { JOptionPane.showMessageDialog(null, "Seleccione un cliente de la tabla"); return; }
             if (!validar()) return;
-            String id = txtIdCedula.getText();
-            Cliente c = new Cliente(id, txtNombre.getText(), txtApellidos.getText(),
-                txtDireccion.getText(), txtEmail.getText(), txtTelefono.getText());
-            new ClienteDAO().modificar(c);
-            JOptionPane.showMessageDialog(null, "Modificado");
+            new ClienteDAO().modificar(new Cliente(txtIdCedula.getText(), txtNombre.getText(),
+                txtApellidos.getText(), txtDireccion.getText(), txtEmail.getText(), txtTelefono.getText()));
+            JOptionPane.showMessageDialog(null, "Modificado correctamente.");
             cargarTabla();
             limpiar();
-            OcultarBotones();
-        } catch (Exception e) {
-            logger.warning(e.getMessage());
-        }
+        } catch (Exception e) { logger.warning(e.getMessage()); }
     }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
@@ -421,15 +402,16 @@ public class FrmClientes extends javax.swing.JFrame {
             txtDireccion.setText(jTable1.getValueAt(fila, 3).toString()); txtDireccion.setForeground(java.awt.Color.BLACK);
             txtEmail.setText(jTable1.getValueAt(fila, 4).toString());     txtEmail.setForeground(java.awt.Color.BLACK);
             txtTelefono.setText(jTable1.getValueAt(fila, 5).toString());  txtTelefono.setForeground(java.awt.Color.BLACK);
+            lblEstado.setText("✎  Modificando");
+            lblEstado.setForeground(new java.awt.Color(0, 100, 200));
             MostrarBotones();
+            BtnGuardar.setEnabled(false);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmClientes().setVisible(true);
-            }
+            public void run() { new FrmClientes().setVisible(true); }
         });
     }
 
@@ -437,12 +419,14 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
+    private javax.swing.JButton BtnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JScrollPane jScrollDireccion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

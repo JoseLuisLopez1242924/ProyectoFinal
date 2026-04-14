@@ -31,6 +31,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         txtGamaInfo = new javax.swing.JTextField();
@@ -63,6 +64,10 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         jLabel7.setText("Color");
 
+        lblEstado.setText(" ");
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblEstado.setForeground(new java.awt.Color(0, 128, 0));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MANTENIMIENTO VEHICULOS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -70,6 +75,17 @@ public class FrmVehiculos extends javax.swing.JFrame {
         txtGamaInfo.addActionListener(this::txtGamaInfoActionPerformed);
 
         txtMatricula.addActionListener(this::txtMatriculaActionPerformed);
+        txtMatricula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMatriculaFocusLost();
+            }
+        });
+
+        txtIdGama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdGamaFocusLost();
+            }
+        });
 
         cbxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turistico", "Normal" }));
 
@@ -184,6 +200,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(chkTecho))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -282,6 +299,8 @@ public class FrmVehiculos extends javax.swing.JFrame {
                             .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(9, 9, 9)
+                .addComponent(lblEstado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkStatus)
                     .addComponent(chkCambioAuto)
@@ -413,11 +432,12 @@ public class FrmVehiculos extends javax.swing.JFrame {
         try {
             Vehiculo v = new VehiculoDAO().buscarPorMatricula(mat);
             if (v != null) {
-                JOptionPane.showMessageDialog(this, "Modificando");
+                lblEstado.setText("✎  Modificando");
+                lblEstado.setForeground(new java.awt.Color(0, 100, 200));
                 poblarCampos(v);
             } else {
-                JOptionPane.showMessageDialog(this, "Creando");
-                // Limpia todo excepto matrícula
+                lblEstado.setText("✚  Nuevo registro");
+                lblEstado.setForeground(new java.awt.Color(0, 150, 0));
                 txtMarca.setText(""); txtModelo.setText("");
                 txtDescripcion.setText(""); txtColor.setText("");
                 txtIdGama.setText(""); txtGamaInfo.setText("");
@@ -586,6 +606,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

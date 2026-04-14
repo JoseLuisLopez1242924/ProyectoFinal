@@ -32,12 +32,15 @@ public class FrmGama extends javax.swing.JFrame {
         BtnGuardar.setEnabled(true);
         BtnEliminar.setEnabled(false);
         BtnModificar.setEnabled(false);
+        BtnLimpiar.setEnabled(false);
+        lblEstado.setText(" ");
     }
 
     public void MostrarBotones() {
         BtnGuardar.setEnabled(false);
         BtnEliminar.setEnabled(true);
         BtnModificar.setEnabled(true);
+        BtnLimpiar.setEnabled(true);
     }
 
     private void setPlaceholder(javax.swing.JTextField field, String placeholder) {
@@ -110,23 +113,27 @@ public class FrmGama extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         txtIdGama = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
+        BtnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Gamas");
 
-        jLabel1.setText(" # Gama");
-
+        jLabel1.setText("# Gama");
         jLabel2.setText("Descripción");
-
         jLabel3.setText("Precio");
+
+        lblEstado.setText(" ");
+        lblEstado.setFont(new java.awt.Font("Segoe UI", 1, 12));
+        lblEstado.setForeground(new java.awt.Color(0, 128, 0));
 
         txtIdGama.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -134,15 +141,10 @@ public class FrmGama extends javax.swing.JFrame {
             }
         });
 
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
-        BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png"))); // NOI18N
-        BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png")));
+        BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnGuardar.setFocusPainted(false);
         BtnGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,8 +153,9 @@ public class FrmGama extends javax.swing.JFrame {
         });
 
         BtnEliminar.setBackground(new java.awt.Color(255, 153, 153));
-        BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash-2.png"))); // NOI18N
-        BtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/trash-2.png")));
+        BtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnEliminar.setFocusPainted(false);
         BtnEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,9 +163,10 @@ public class FrmGama extends javax.swing.JFrame {
             }
         });
 
-        BtnModificar.setBackground(new java.awt.Color(255, 255, 153));
-        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/pencil.png"))); // NOI18N
-        BtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BtnModificar.setBackground(new java.awt.Color(153, 153, 255));
+        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/refresh-ccw.png")));
+        BtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnModificar.setFocusPainted(false);
         BtnModificar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,28 +174,24 @@ public class FrmGama extends javax.swing.JFrame {
             }
         });
 
+        BtnLimpiar.setBackground(new java.awt.Color(255, 255, 153));
+        BtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/eraser (2).png")));
+        BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiar.setFocusPainted(false);
+        BtnLimpiar.setPreferredSize(new java.awt.Dimension(35, 35));
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Gama", "Descripción", "Precio"
-            }
+            new Object [][] {},
+            new String [] { "ID Gama", "Descripción", "Precio" }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
+            Class[] types = new Class[]{ Integer.class, String.class, Double.class };
+            public Class getColumnClass(int c) { return types[c]; }
+            public boolean isCellEditable(int r, int c) { return false; }
         });
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -220,14 +220,20 @@ public class FrmGama extends javax.swing.JFrame {
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(6, 6, 6)
                 .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(6, 6, 6)
                 .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -235,18 +241,19 @@ public class FrmGama extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel1).addComponent(jLabel2).addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txtIdGama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(lblEstado)
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -262,16 +269,27 @@ public class FrmGama extends javax.swing.JFrame {
             int id = Integer.parseInt(idStr);
             Gama encontrada = new GamaDAO().buscarPorId(id);
             if (encontrada != null) {
-                JOptionPane.showMessageDialog(null, "Modificando");
+                // EXISTE → modo modificar, poblar campos sin limpiar el ID
+                lblEstado.setText("✎  Modificando");
+                lblEstado.setForeground(new java.awt.Color(0, 100, 200));
                 txtDescripcion.setText(encontrada.descripcion);
                 txtDescripcion.setForeground(java.awt.Color.BLACK);
                 txtPrecio.setText(String.valueOf(encontrada.precio));
                 txtPrecio.setForeground(java.awt.Color.BLACK);
+                MostrarBotones();
+                BtnGuardar.setEnabled(false); // ya existe, no guardar nuevo
             } else {
-                JOptionPane.showMessageDialog(null, "Creando");
-                aplicarPlaceholders();
-                txtIdGama.setText(idStr);
-                txtIdGama.setForeground(java.awt.Color.BLACK);
+                // NO EXISTE → modo crear, NO limpiar el ID
+                lblEstado.setText("✚  Nuevo registro");
+                lblEstado.setForeground(new java.awt.Color(0, 150, 0));
+                txtDescripcion.setText("");
+                txtDescripcion.setForeground(java.awt.Color.BLACK);
+                txtPrecio.setText("");
+                txtPrecio.setForeground(java.awt.Color.BLACK);
+                BtnGuardar.setEnabled(true);
+                BtnEliminar.setEnabled(false);
+                BtnModificar.setEnabled(false);
+                BtnLimpiar.setEnabled(true);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID Gama debe ser un número entero");
@@ -284,17 +302,15 @@ public class FrmGama extends javax.swing.JFrame {
         try {
             if (!validar()) return;
             int id = Integer.parseInt(txtIdGama.getText());
-            // Validar duplicado
             if (new GamaDAO().buscarPorId(id) != null) {
                 JOptionPane.showMessageDialog(null, "Ya existe una Gama con ese ID.", "Duplicado", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             Gama g = new Gama(id, txtDescripcion.getText(), Double.parseDouble(txtPrecio.getText()));
             new GamaDAO().guardar(g);
-            JOptionPane.showMessageDialog(null, "Guardado");
+            JOptionPane.showMessageDialog(null, "Guardado correctamente.");
             cargarTabla();
             limpiar();
-            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -311,7 +327,6 @@ public class FrmGama extends javax.swing.JFrame {
             new GamaDAO().eliminar(id);
             cargarTabla();
             limpiar();
-            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
@@ -328,14 +343,17 @@ public class FrmGama extends javax.swing.JFrame {
             int id = Integer.parseInt(txtIdGama.getText());
             Gama g = new Gama(id, txtDescripcion.getText(), Double.parseDouble(txtPrecio.getText()));
             new GamaDAO().modificar(g);
-            JOptionPane.showMessageDialog(null, "Modificado");
+            JOptionPane.showMessageDialog(null, "Modificado correctamente.");
             cargarTabla();
             limpiar();
-            OcultarBotones();
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
     }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
@@ -346,19 +364,16 @@ public class FrmGama extends javax.swing.JFrame {
             txtDescripcion.setForeground(java.awt.Color.BLACK);
             txtPrecio.setText(jTable1.getValueAt(fila, 2).toString());
             txtPrecio.setForeground(java.awt.Color.BLACK);
+            lblEstado.setText("✎  Modificando");
+            lblEstado.setForeground(new java.awt.Color(0, 100, 200));
             MostrarBotones();
+            BtnGuardar.setEnabled(false);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmGama().setVisible(true);
-            }
+            public void run() { new FrmGama().setVisible(true); }
         });
     }
 
@@ -366,9 +381,11 @@ public class FrmGama extends javax.swing.JFrame {
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnModificar;
+    private javax.swing.JButton BtnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtDescripcion;
