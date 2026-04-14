@@ -118,7 +118,7 @@ public class FrmReserva extends javax.swing.JFrame {
                 Vehiculo v = new VehiculoDAO().buscarPorMatricula(mat);
                 if (v != null) {
                     Gama g = new GamaDAO().buscarPorId(v.idGama);
-                    if (g != null) return g.precioGama;
+                    //if (g != null) return g.precioGama;
                 }
             }
         } catch (Exception e) { logger.warning(e.getMessage()); }

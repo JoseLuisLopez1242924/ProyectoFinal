@@ -24,186 +24,196 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-        <!-- FILA 1: Matrícula | Vehículo | Cédula | Cliente | Oferta | Botones -->
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-            <Component id="txtMatricula" min="-2" pref="100" max="-2" attributes="0"/>
+          <Component id="jSeparator1" min="-2" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMatricula" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDescVehiculo" min="-2" pref="190" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCedula" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombreCliente" min="-2" pref="160" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtOferta" min="-2" pref="80" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnEliminar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnLimpiar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFechaReserva" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFechaSalida" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFechaEntrada" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDias" min="-2" pref="55" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTotal" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtObservacion" min="-2" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jScrollPane1" min="-2" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-            <Component id="txtDescVehiculo" min="-2" pref="190" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-            <Component id="txtCedula" min="-2" pref="120" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-            <Component id="txtNombreCliente" min="-2" pref="160" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-            <Component id="txtOferta" min="-2" pref="80" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="BtnEliminar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="BtnLimpiar" min="-2" max="-2" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-        </Group>
-        <!-- FILA 2: Fechas | Días | Total | Observación -->
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-            <Component id="txtFechaReserva" min="-2" pref="100" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-            <Component id="txtFechaSalida" min="-2" pref="100" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-            <Component id="txtFechaEntrada" min="-2" pref="100" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-            <Component id="txtDias" min="-2" pref="55" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-            <Component id="txtTotal" min="-2" pref="100" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-            <Component id="txtObservacion" min="-2" pref="200" max="32767" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-        </Group>
-        <!-- SEPARADOR -->
-        <Component id="jSeparator1" min="-2" max="32767" attributes="0"/>
-        <!-- TABLA PADRE -->
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="jScrollPane1" min="-2" max="32767" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-        </Group>
-        <!-- TABLA HIJO -->
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Component id="jScrollPane2" min="-2" max="32767" attributes="0"/>
-          <EmptySpace max="-2" attributes="0"/>
-        </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-        <Group type="102" attributes="0">
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="3" attributes="0">
-            <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtMatricula" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDescVehiculo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombreCliente" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtOferta" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnLimpiar" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtFechaReserva" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtFechaSalida" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtFechaEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDias" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtObservacion" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace min="10" max="32767" attributes="0"/>
           </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="txtMatricula" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtDescVehiculo" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtCedula" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtNombreCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtOferta" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnGuardar" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="BtnLimpiar" alignment="0" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="3" attributes="0">
-            <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-            <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace max="-2" attributes="0"/>
-          <Group type="103" groupAlignment="0" attributes="0">
-            <Component id="txtFechaReserva" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtFechaSalida" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtFechaEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtDias" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtTotal" alignment="0" min="-2" max="-2" attributes="0"/>
-            <Component id="txtObservacion" alignment="0" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-          <Component id="jScrollPane1" min="-2" pref="150" max="-2" attributes="0"/>
-          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-          <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
-          <EmptySpace min="10" pref="10" max="32767" attributes="0"/>
-        </Group>
       </Group>
     </DimensionLayout>
   </Layout>
-
   <SubComponents>
-
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties><Property name="text" type="java.lang.String" value="Matr&#xed;cula *"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Matr&#xed;cula *"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties><Property name="text" type="java.lang.String" value="Veh&#xed;culo"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Veh&#xed;culo"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties><Property name="text" type="java.lang.String" value="ID C&#xe9;dula *"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID C&#xe9;dula *"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties><Property name="text" type="java.lang.String" value="Cliente"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cliente"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties><Property name="text" type="java.lang.String" value="ID Oferta"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ID Oferta"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties><Property name="text" type="java.lang.String" value="F. Reserva"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F. Reserva"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties><Property name="text" type="java.lang.String" value="F. Salida *"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F. Salida *"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties><Property name="text" type="java.lang.String" value="F. Entrada *"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F. Entrada *"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties><Property name="text" type="java.lang.String" value="D&#xed;as"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D&#xed;as"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties><Property name="text" type="java.lang.String" value="Total RD$"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total RD$"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties><Property name="text" type="java.lang.String" value="Observaci&#xf3;n"/></Properties>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Observaci&#xf3;n"/>
+      </Properties>
     </Component>
-
     <Component class="javax.swing.JTextField" name="txtMatricula">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMatriculaFocusLost"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDescVehiculo">
-      <Properties><Property name="editable" type="boolean" value="false"/></Properties>
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCedula">
       <Events>
@@ -211,7 +221,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombreCliente">
-      <Properties><Property name="editable" type="boolean" value="false"/></Properties>
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtOferta">
       <Events>
@@ -219,7 +231,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFechaReserva">
-      <Properties><Property name="editable" type="boolean" value="false"/></Properties>
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFechaSalida">
       <Events>
@@ -232,13 +246,17 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDias">
-      <Properties><Property name="editable" type="boolean" value="false"/></Properties>
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTotal">
-      <Properties><Property name="editable" type="boolean" value="false"/></Properties>
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtObservacion"/>
-
+    <Component class="javax.swing.JTextField" name="txtObservacion">
+    </Component>
     <Component class="javax.swing.JButton" name="BtnGuardar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -247,19 +265,18 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/save-all.png"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="focusPainted" type="boolean" value="false"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
+        </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[35, 35]"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGuardarActionPerformed"/>
       </Events>
     </Component>
-
     <Component class="javax.swing.JButton" name="BtnEliminar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -268,19 +285,18 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/trash-2.png"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="focusPainted" type="boolean" value="false"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
+        </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[35, 35]"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEliminarActionPerformed"/>
       </Events>
     </Component>
-
     <Component class="javax.swing.JButton" name="BtnLimpiar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -289,25 +305,25 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/VISUAL/MULTIMEDIA/eraser (2).png"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[35, 35]"/>
-        </Property>
-        <Property name="focusPainted" type="boolean" value="false"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
+        </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[35, 35]"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLimpiarActionPerformed"/>
       </Events>
     </Component>
-
-    <Component class="javax.swing.JSeparator" name="jSeparator1"/>
-
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
+
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblPadre">
@@ -331,11 +347,11 @@
         </Component>
       </SubComponents>
     </Container>
-
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
+
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblHijo">
@@ -358,6 +374,5 @@
         </Component>
       </SubComponents>
     </Container>
-
   </SubComponents>
 </Form>

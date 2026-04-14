@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISUAL;
+
 import LOGICA.Cliente;
 import LOGICA.ClienteDAO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.util.ArrayList;
 import java.util.List;
+ 
 /**
  *
  * @author jsosa
@@ -20,9 +23,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
 
      /** Referencia al formulario padre para devolverle los datos */
     private FrmReservas padre;
-    
-    /** Lista completa de clientes cargada una sola vez */
-    private List<Cliente> listaClientes;
+    private List<Cliente> listaClientes = new ArrayList<>();
     
     /**
      * Creates new form FrmConsultarCliente
@@ -33,7 +34,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         configurarFiltro();
     }
     
-    public FrmConsultarCliente(FrmReservas padre) {
+   public FrmConsultarCliente(FrmReservas padre) {
         initComponents();
         this.padre = padre;
         cargarClientes();
@@ -41,35 +42,55 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
     }
  
     // -------------------------------------------------------------------------
-    // CARGA INICIAL
+    // CARGA DE CLIENTES
     // -------------------------------------------------------------------------
     private void cargarClientes() {
         try {
-            ClienteDAO dao = new ClienteDAO();
-            listaClientes = dao.listar();
+            listaClientes = new ClienteDAO().listar();
             poblarTabla(listaClientes);
         } catch (Exception e) {
-            logger.warning(e.getMessage());
+            logger.warning("Error al cargar clientes: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,
+                "Error al cargar clientes: " + e.getMessage());
         }
     }
  
-    /** Llena la tabla con la lista recibida */
     private void poblarTabla(List<Cliente> lista) {
+        // Siempre crear un modelo nuevo con las columnas correctas
         DefaultTableModel model = new DefaultTableModel(
             new String[]{"ID Cédula", "Nombre", "Apellidos", "Dirección", "Email", "Teléfono"}, 0
         ) {
-            public boolean isCellEditable(int r, int c) { return false; }
+            @Override
+            public boolean isCellEditable(int row, int col) { return false; }
         };
+ 
         for (Cliente c : lista) {
             model.addRow(new Object[]{
-                c.idCedula, c.nombre, c.apellidos, c.direccion, c.email, c.telefono
+                c.idCedula,
+                c.nombre,
+                c.apellidos,
+                c.direccion,
+                c.email,
+                c.telefono
             });
         }
+ 
+        // Asignar el modelo a la tabla que creó initComponents()
         jTable1.setModel(model);
+ 
+        // Ajustar ancho de columnas
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(110); // Cédula
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(110); // Nombre
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(120); // Apellidos
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150); // Dirección
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(130); // Email
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(100); // Teléfono
+        }
     }
  
     // -------------------------------------------------------------------------
-    // FILTRO EN TIEMPO REAL (por nombre o cédula)
+    // FILTRO EN TIEMPO REAL
     // -------------------------------------------------------------------------
     private void configurarFiltro() {
         Buscar.getDocument().addDocumentListener(new DocumentListener() {
@@ -81,24 +102,23 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
  
     private void filtrar() {
         String texto = Buscar.getText().trim().toLowerCase();
-        if (listaClientes == null) return;
  
-        if (texto.isEmpty()) {
+        if (texto.isEmpty() || texto.equals("buscar por nombre o cédula...")) {
             poblarTabla(listaClientes);
             return;
         }
  
-        List<Cliente> filtrados = new java.util.ArrayList<>();
+        List<Cliente> filtrados = new ArrayList<>();
         for (Cliente c : listaClientes) {
-            String nombre   = (c.nombre   + " " + c.apellidos).toLowerCase();
-            String cedula   = c.idCedula.toLowerCase();
+            String nombre = (c.nombre + " " + c.apellidos).toLowerCase();
+            String cedula = c.idCedula.toLowerCase();
             if (nombre.contains(texto) || cedula.contains(texto)) {
                 filtrados.add(c);
             }
         }
         poblarTabla(filtrados);
     }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,20 +180,23 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-     int fila = jTable1.getSelectedRow();
+            int fila = jTable1.getSelectedRow();
         if (fila == -1) return;
  
-        String idCedula  = jTable1.getValueAt(fila, 0).toString();
-        String nombre    = jTable1.getValueAt(fila, 1).toString();
-        String apellidos = jTable1.getValueAt(fila, 2).toString();
-        String direccion = jTable1.getValueAt(fila, 3).toString();
-        String email     = jTable1.getValueAt(fila, 4).toString();
-        String telefono  = jTable1.getValueAt(fila, 5).toString();
+        // convertRowIndexToModel por si el usuario ordenó columnas
+        int filaModelo = jTable1.convertRowIndexToModel(fila);
+ 
+        String idCedula  = jTable1.getModel().getValueAt(filaModelo, 0).toString();
+        String nombre    = jTable1.getModel().getValueAt(filaModelo, 1).toString();
+        String apellidos = jTable1.getModel().getValueAt(filaModelo, 2).toString();
+        String direccion = jTable1.getModel().getValueAt(filaModelo, 3).toString();
+        String email     = jTable1.getModel().getValueAt(filaModelo, 4).toString();
+        String telefono  = jTable1.getModel().getValueAt(filaModelo, 5).toString();
  
         if (padre != null) {
             padre.cargarCliente(idCedula, nombre, apellidos, direccion, email, telefono);
-            this.dispose(); // cierra esta ventana al seleccionar
         }
+        this.dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
     
