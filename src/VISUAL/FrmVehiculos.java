@@ -16,12 +16,14 @@ public class FrmVehiculos extends javax.swing.JFrame {
  
     public FrmVehiculos() {
         initComponents();
+        txtGamaInfo.setEditable(false);
         cargarTabla();
-        
+        OcultarBotones();
     }
    
     public FrmVehiculos(int nivelAcceso) {
         initComponents();
+        txtGamaInfo.setEditable(false);
         this.nivelAccesoActual = nivelAcceso;
         //aplicarAcceso();
         cargarTabla();
@@ -425,14 +427,13 @@ public class FrmVehiculos extends javax.swing.JFrame {
         // Mostrar info de gama
         mostrarInfoGama(v.idGama);
     }
-    //MOSTRAR INFO GAMA
     private void mostrarInfoGama(int idGama) {
         try {
             Gama g = new GamaDAO().buscarPorId(idGama);
             if (g != null) {
                 txtGamaInfo.setText(g.descripcion + "  –  $" + g.precio);
             } else {
-                txtGamaInfo.setText("Id Gama no existe");
+                txtGamaInfo.setText("");
             }
         } catch (Exception e) {
             txtGamaInfo.setText("");
@@ -448,6 +449,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 lblEstado.setText("✎  Modificando");
                 lblEstado.setForeground(new java.awt.Color(0, 100, 200));
                 poblarCampos(v);
+                MostrarBotones();
             } else {
                 lblEstado.setText("✚  Nuevo registro");
                 lblEstado.setForeground(new java.awt.Color(0, 150, 0));
@@ -459,6 +461,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 chkTecho.setSelected(false); chkAire.setSelected(false);
                 chkCuero.setSelected(false); chkCambioAuto.setSelected(false);
                 chkStatus.setSelected(true);
+                OcultarBotones();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -474,7 +477,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
             if (g != null) {
                 txtGamaInfo.setText(g.descripcion + "  –  $" + g.precio);
             } else {
-                txtGamaInfo.setText("Id Gama no existe");
+                txtGamaInfo.setText("");
                 JOptionPane.showMessageDialog(this, "Id Gama no existe");
             }
         } catch (NumberFormatException ex) {
@@ -524,7 +527,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
             new VehiculoDAO().eliminar(mat);
             cargarTabla();
             limpiar();
-            MostrarBotones();
+            OcultarBotones();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -550,7 +553,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         cargarTabla();
         limpiar();
-        MostrarBotones();
+        OcultarBotones();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -577,6 +580,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
         limpiar();
+        OcultarBotones();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed

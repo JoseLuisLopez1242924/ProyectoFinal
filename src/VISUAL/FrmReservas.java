@@ -131,6 +131,11 @@ public class FrmReservas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDetalleMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDetalle);
         if (TablaDetalle.getColumnModel().getColumnCount() > 0) {
             TablaDetalle.getColumnModel().getColumn(4).setResizable(false);
@@ -260,6 +265,20 @@ public class FrmReservas extends javax.swing.JFrame {
        
        
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
+
+    private void TablaDetalleMouseClicked(java.awt.event.MouseEvent evt) {
+        int fila = TablaDetalle.getSelectedRow();
+        if (fila != -1) {
+            int resp = JOptionPane.showConfirmDialog(this,
+                    "¿Desea quitar este vehículo de la lista?",
+                    "Quitar Vehículo",
+                    JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
+                actualizarTotal();
+            }
+        }
+    }
 
     private void BtnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarVehiculoActionPerformed
         FrmBuscarVehiculo frm = new FrmBuscarVehiculo(this, null);
