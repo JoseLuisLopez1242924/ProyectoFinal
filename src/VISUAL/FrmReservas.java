@@ -102,13 +102,12 @@ public class FrmReservas extends javax.swing.JFrame {
         btnRentar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reservas");
 
         lblCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente.setText("Clientes");
 
-        BtnBuscarCliente.setBackground(new java.awt.Color(255, 255, 255));
-        BtnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
@@ -136,8 +135,6 @@ public class FrmReservas extends javax.swing.JFrame {
             TablaDetalle.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        BtnBuscarVehiculo.setBackground(new java.awt.Color(255, 255, 255));
-        BtnBuscarVehiculo.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarVehiculo.setText("Buscar Vehiculo");
         BtnBuscarVehiculo.addActionListener(this::BtnBuscarVehiculoActionPerformed);
@@ -152,14 +149,11 @@ public class FrmReservas extends javax.swing.JFrame {
         lblCliente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente2.setText("Hasta");
 
-        BtnAgregarVehiculo.setBackground(new java.awt.Color(255, 255, 255));
-        BtnAgregarVehiculo.setForeground(new java.awt.Color(0, 0, 0));
         BtnAgregarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
         BtnAgregarVehiculo.setText("Agregar");
         BtnAgregarVehiculo.addActionListener(this::BtnAgregarVehiculoActionPerformed);
 
         lblInfovehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblInfovehiculo.setForeground(new java.awt.Color(0, 0, 0));
         lblInfovehiculo.setText("InfoVehiculo");
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -169,9 +163,7 @@ public class FrmReservas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("TOTAL:");
 
-        btnRentar.setBackground(new java.awt.Color(255, 255, 255));
         btnRentar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRentar.setForeground(new java.awt.Color(0, 0, 0));
         btnRentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save.png"))); // NOI18N
         btnRentar.setText("Rentar");
         btnRentar.addActionListener(this::btnRentarActionPerformed);

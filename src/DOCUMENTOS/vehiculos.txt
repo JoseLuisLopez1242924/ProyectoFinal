@@ -1,4 +1,4 @@
-ABC123;Toyota;Corolla;0;1;1;Sedan compacto economico y practico;false;true;false;Blanco;false;false
+ABC123;Toyota;Corolla;0;1;1;Sedan compacto economico y practico;false;true;false;Blanco;false;true
 DEF456;Honda;Civic;1;1;2;Sedan turistico premium;true;true;true;Negro;true;true
 GHI789;Ford;Explorer;0;0;1;SUV familiar diesel;false;true;true;Gris;false;true
 JKL012;BMW;320i;1;1;3;Sedan de lujo automatico;true;true;true;Azul;true;true

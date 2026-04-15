@@ -59,39 +59,19 @@ public class FrmBuscarReservas extends javax.swing.JFrame {
                 String[] datos = linea.split(";");
 
                 String cliente = datos[1].trim();
-                String estatus = datos.length > 9 ? datos[9].trim() : "P";
+                String entregado = datos.length > 9 ? datos[9].trim() : "false";
 
                 // 🔥 FILTRO PRINCIPAL
-                if (cliente.equals(idCliente) && !estatus.equalsIgnoreCase("R") && !estatus.equalsIgnoreCase("true")) {
-
-                    String matricula = datos[0].trim();
-                    String desde = datos[4].trim();
-                    String hasta = datos[5].trim();
-                    String dias = datos[7].trim();
-                    String importe = datos[8].trim();
-
-                    String vehiculo = "";
-                    String precio = "0.0";
-                    try {
-                        Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
-                        if (v != null) {
-                            vehiculo = v.marca + " " + v.modelo;
-                            if (Integer.parseInt(dias) > 0) {
-                                precio = String.format(java.util.Locale.US, "%.2f",
-                                        Double.parseDouble(importe) / Integer.parseInt(dias));
-                            }
-                        }
-                    } catch (Exception ignored) {
-                    }
+                if (cliente.equals(idCliente) && entregado.equalsIgnoreCase("false")) {
 
                     model.addRow(new Object[] {
-                            vehiculo,
-                            matricula,
-                            precio,
-                            desde,
-                            hasta,
-                            dias,
-                            importe
+                            datos[2].trim(), // vehiculo
+                            datos[3].trim(), // matricula
+                            datos[4].trim(), // precio
+                            datos[5].trim(), // desde
+                            datos[6].trim(), // hasta
+                            datos[7].trim(), // dias
+                            datos[8].trim()  // importe
                     });
                 }
             }
