@@ -358,7 +358,7 @@ public class FrmReservas extends javax.swing.JFrame {
                         + desde + "; "
                         + hasta + "; "
                         + dias + "; "
-                        + importe;
+                        + importe + "; false";
  
                 bw.write(linea);
                 bw.newLine();

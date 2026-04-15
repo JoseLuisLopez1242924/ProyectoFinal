@@ -20,11 +20,9 @@ public class FrmResepcion extends javax.swing.JFrame {
     private static final String FILE_RESERVAS    = "src/DOCUMENTOS/reservas.txt";
     private static final String FILE_RECEPCIONES = "src/DOCUMENTOS/recepciones.txt";
     
-    private String idClienteSeleccionado   = "";
-    private String matriculaSeleccionada   = "";
-    private double precioVehiculoSeleccionado = 0.0;
     
     private String idClienteActual = "";
+    private String idClienteSeleccionado = "";
     private List<String[]> lineasClienteActual = new ArrayList<>();
     
     public FrmResepcion() {
@@ -32,16 +30,15 @@ public class FrmResepcion extends javax.swing.JFrame {
         btnBuscarVehiculo.setEnabled(false);
         limpiarFormulario();
     }
-       public void MostrarBotones(){
+    
+    public void MostrarBotones(){
      btnBuscarVehiculo.setEnabled(true);
-     BtnAgregar.setEnabled(true);
     }
-    
-  
-    
+      
     public void cargarCliente(String idCedula, String nombre, String apellidos, String direccion, String email, String telefono) {
+        idClienteActual = idCedula;
         idClienteSeleccionado = idCedula;
- 
+        
         lblCliente.setText(nombre + " " + apellidos);
  
         DefaultListModel<String> model = new DefaultListModel<>();
@@ -109,65 +106,13 @@ public class FrmResepcion extends javax.swing.JFrame {
         }
         return String.format("V%05d", maxNum + 1);
     }
- 
 
-    /*public void cargarCliente(String idCedula, String nombre, String apellidos, String direccion, String email, String telefono) {
-        idClienteActual = idCedula;
-        lblCliente.setText(nombre + " " + apellidos);
  
-        // Cargar datos del cliente en la lista lateral
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addElement("Cédula:    " + idCedula);
-        model.addElement("Dirección: " + direccion);
-        model.addElement("Email:     " + email);
-        model.addElement("Teléfono:  " + telefono);
-        ltDatosCliente.setModel(model);
- 
-        // Filtrar reservas pendientes (entregado=false) del cliente
-        lineasClienteActual.clear();
-        for (String[] campos : leerReservas()) {
-            if (campos[0].equalsIgnoreCase(idCedula) && "false".equalsIgnoreCase(campos[8])) {
-                lineasClienteActual.add(campos);
-            }
-        }
- 
-        if (lineasClienteActual.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "El cliente no tiene vehículos pendientes de entrega.",
-                    "Sin pendientes", JOptionPane.INFORMATION_MESSAGE);
-            idClienteActual = "";
-        }
-    }*/
- 
-    public void cargarVehiculo(String matricula, String infoVehiculo, String precio, String desde, String hasta, String dias, String importe) {
+   /* public void cargarVehiculo(String matricula, String infoVehiculo, String precio, String desde, String hasta, String dias, String importe) {
         lblInfovehiculo.setText(infoVehiculo + "  |  Matrícula: " + matricula +
                 "  |  Precio/día: $" + precio);
-    }
+    }*/
  
-    private void cargarTodosVehiculos() {
-        if (idClienteActual.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Primero seleccione un cliente.");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
-        model.setRowCount(0);
-        for (String[] campos : lineasClienteActual) {
-            // campos[1]=vehiculo, campos[2]=matricula, campos[3]=precio,
-            // campos[4]=desde, campos[5]=hasta, campos[6]=dias, campos[7]=importe
-            model.addRow(new Object[]{
-                campos[1], // Vehículo
-                campos[2], // Matrícula
-                campos[3], // Precio
-                campos[4], // Desde
-                campos[5], // Hasta
-                campos[6], // Días
-                campos[7]  // Importe
-            });
-        }
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No hay vehículos pendientes para este cliente.");
-        }
-    }
  
     private void ejecutarRecepcion() {
         if (idClienteActual.isEmpty()) {
@@ -252,7 +197,7 @@ public class FrmResepcion extends javax.swing.JFrame {
         idClienteActual = "";
         lineasClienteActual.clear();
         lblCliente.setText("(Sin cliente seleccionado)");
-        lblInfovehiculo.setText("(Sin vehículo seleccionado)");
+   //     lblInfovehiculo.setText("(Sin vehículo seleccionado)");
         ltDatosCliente.setModel(new DefaultListModel<>());
         ((DefaultTableModel) TablaDetalle.getModel()).setRowCount(0);
     }
@@ -266,9 +211,7 @@ public class FrmResepcion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ltDatosCliente = new javax.swing.JList<>();
         lblCliente = new javax.swing.JLabel();
-        BtnAgregar = new javax.swing.JButton();
         BtnBuscarCliente = new javax.swing.JButton();
-        lblInfovehiculo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDetalle = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -297,22 +240,12 @@ public class FrmResepcion extends javax.swing.JFrame {
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente.setText("Clientes");
 
-        BtnAgregar.setBackground(new java.awt.Color(255, 255, 255));
-        BtnAgregar.setForeground(new java.awt.Color(0, 0, 0));
-        BtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
-        BtnAgregar.setText("Agregar");
-        BtnAgregar.addActionListener(this::BtnAgregarActionPerformed);
-
         BtnBuscarCliente.setBackground(new java.awt.Color(255, 255, 255));
         BtnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
         BtnBuscarCliente.addActionListener(this::BtnBuscarClienteActionPerformed);
-
-        lblInfovehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblInfovehiculo.setForeground(new java.awt.Color(0, 0, 0));
-        lblInfovehiculo.setText("InfoVehiculo");
 
         TablaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -346,13 +279,8 @@ public class FrmResepcion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(lblInfovehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnAgregar))
+                                .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -362,7 +290,7 @@ public class FrmResepcion extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -383,13 +311,8 @@ public class FrmResepcion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblInfovehiculo))
-                    .addComponent(BtnAgregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +320,7 @@ public class FrmResepcion extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -406,23 +329,156 @@ public class FrmResepcion extends javax.swing.JFrame {
 
     private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
 
+    FrmBuscarReservas frm = new FrmBuscarReservas(this, idClienteActual);
+    frm.setVisible(true);
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
+    int fila = TablaDetalle.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Seleccione un vehículo");
+        return;
+    }
 
+    String idReserva = TablaDetalle.getValueAt(fila, 0).toString();
+    String matricula = TablaDetalle.getValueAt(fila, 2).toString();
+
+    actualizarEstadoReserva(idReserva, matricula);
+
+    generarCodigoRecepcion(); // V00001 etc
+
+    JOptionPane.showMessageDialog(this, "Recepción guardada");
+
+    cargarVehiculosCliente(idClienteSeleccionado);
     }//GEN-LAST:event_btnRecibirActionPerformed
+    
+    public void cargarVehiculosCliente(String idCliente) {
 
-    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-   // TODO add your handling code here:
-    }//GEN-LAST:event_BtnAgregarActionPerformed
+    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+    model.setRowCount(0);
 
+    try (BufferedReader br = new BufferedReader(
+            new FileReader("src/DOCUMENTOS/reservas.txt"))) {
+
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+
+            String[] datos = linea.split(";");
+
+            String idRes     = datos[0].trim();
+            String cliente   = datos[1].trim();
+            String vehiculo  = datos[2].trim();
+            String matricula = datos[3].trim();
+            String precio    = datos[4].trim();
+            String desde     = datos[5].trim();
+            String hasta     = datos[6].trim();
+            String dias      = datos[7].trim();
+            String importe   = datos[8].trim();
+            String estado    = datos[9].trim(); // false / true
+
+            // FILTRO CLAVE
+            if (cliente.equals(idCliente) && estado.equals("false")) {
+
+                model.addRow(new Object[]{
+                    idRes,
+                    vehiculo,
+                    matricula,
+                    desde,
+                    hasta,
+                    dias,
+                    importe
+                });
+            }
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+            "Error cargando reservas: " + e.getMessage());
+    }
+}
+    
+    public void agregarVehiculo(String vehiculo, String matricula, String precio, String desde, String hasta, String dias, String importe) {
+
+    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+
+    model.addRow(new Object[]{
+        vehiculo,
+        matricula,
+        precio,
+        desde,
+        hasta,
+        dias,
+        importe
+    });
+    
+    actualizarTotal();
+}
+    
+    private void actualizarEstadoReserva(String idReserva, String matricula) {
+
+    File inputFile = new File("src/DOCUMENTOS/reservas.txt");
+    File tempFile = new File("src/DOCUMENTOS/temp.txt");
+
+    try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+
+            String[] datos = linea.split(";");
+
+            if (datos[0].trim().equals(idReserva)
+                && datos[3].trim().equals(matricula)) {
+
+                // cambiar false → true
+                datos[9] = " true";
+
+                linea = String.join(";",
+                        datos[0], datos[1], datos[2], datos[3],
+                        datos[4], datos[5], datos[6], datos[7],
+                        datos[8], datos[9]
+                );
+            }
+
+            bw.write(linea);
+            bw.newLine();
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+
+    inputFile.delete();
+    tempFile.renameTo(inputFile);
+}
+    
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
     FrmBuscarCliente frm = new FrmBuscarCliente(null, this);
     frm.setTitle("Buscar Cliente Resepcion");
     frm.setVisible(true);
     MostrarBotones();
+    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+    model.setRowCount(0);
+    actualizarTotal();
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
+    
+    private void actualizarTotal() {
 
+    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+    double total = 0;
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        try {
+            total += Double.parseDouble(model.getValueAt(i, 6).toString());
+        } catch (Exception e) {
+            // por si hay error de formato
+        }
+    }
+
+    jLabel1.setText(String.format("%.2f", total));
+    }
     /**
      * @param args the command line arguments
      */
@@ -447,9 +503,9 @@ public class FrmResepcion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new FrmResepcion().setVisible(true));
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnBuscarCliente;
     private javax.swing.JTable TablaDetalle;
     private javax.swing.JButton btnBuscarVehiculo;
@@ -459,7 +515,6 @@ public class FrmResepcion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCliente;
-    private javax.swing.JLabel lblInfovehiculo;
     private javax.swing.JList<String> ltDatosCliente;
     // End of variables declaration//GEN-END:variables
 }

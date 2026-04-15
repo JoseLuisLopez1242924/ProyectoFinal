@@ -6,4 +6,4 @@ MNO345;Hyundai;Tucson;0;1;2;SUV compacta gasolina;false;true;false;Rojo;true;fal
 PQR678;Chevrolet;Silverado;0;0;1;Pickup diesel de trabajo;false;false;false;Blanco;false;false
 STU901;Nissan;Altima;1;1;2;Sedan turistico comodo;true;true;false;Plateado;true;true
 VWX234;Kia;Sportage;0;1;1;SUV compacta gasolina;false;true;false;Verde;false;true
-BPA725;Kia;K5;0;1;1;SUV compacta gasolina;false;true;true;Blanco;false;true
+BPA725;Kia;K5;0;1;1;SUV compacta gasolina;false;true;true;Blanco;false;false

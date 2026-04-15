@@ -4,6 +4,16 @@
  */
 package VISUAL;
 
+import LOGICA.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author eduardo
@@ -11,14 +21,65 @@ package VISUAL;
 public class FrmBuscarReservas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBuscarReservas.class.getName());
+    
+    private FrmResepcion frmResepcion;
+    private String idCliente;
 
-    /**
-     * Creates new form FrmBuscarReservas
-     */
+    
     public FrmBuscarReservas() {
         initComponents();
+
+    cargarVehiculosCliente();
+    }
+    public FrmBuscarReservas(FrmResepcion frm, String idCliente) {
+        initComponents();
+        this.frmResepcion = frm;
+        this.idCliente = idCliente;
+
+    cargarVehiculosCliente();
+    }
+    
+    private void cargarVehiculosCliente() {
+
+    DefaultTableModel model = new DefaultTableModel(
+        new String[]{"Vehiculo","Matricula","Precio","Desde","Hasta","Dias","Importe"}, 0
+    );
+
+    try (BufferedReader br = new BufferedReader(
+            new FileReader("src/DOCUMENTOS/reservas.txt"))) {
+
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+
+            if (linea.trim().isEmpty()) continue;
+
+            String[] datos = linea.split(";");
+
+            String cliente   = datos[1].trim();
+            String entregado = datos.length > 9 ? datos[9].trim() : "false";
+
+            // 🔥 FILTRO PRINCIPAL
+            if (cliente.equals(idCliente) && entregado.equalsIgnoreCase("false")) {
+
+                model.addRow(new Object[]{
+                    datos[2], // vehiculo
+                    datos[3], // matricula
+                    datos[4], // precio
+                    datos[5], // desde
+                    datos[6], // hasta
+                    datos[7], // dias
+                    datos[8]  // importe
+                });
+            }
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error leyendo reservas");
     }
 
+    jTable1.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +94,7 @@ public class FrmBuscarReservas extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Buscar.setText("Buscar");
 
@@ -56,6 +117,7 @@ public class FrmBuscarReservas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Recibir Todos");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,11 +146,92 @@ public class FrmBuscarReservas extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
+    int fila = jTable1.getSelectedRow();
+
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Seleccione un vehículo");
+        return;
+    }
+
+    String vehiculo  = jTable1.getValueAt(fila, 0).toString();
+    String matricula = jTable1.getValueAt(fila, 1).toString();
+    String precio    = jTable1.getValueAt(fila, 2).toString();
+    String desde     = jTable1.getValueAt(fila, 3).toString();
+    String hasta     = jTable1.getValueAt(fila, 4).toString();
+    String dias      = jTable1.getValueAt(fila, 5).toString();
+    String importe   = jTable1.getValueAt(fila, 6).toString();
+
+    // enviar a recepción
+    frmResepcion.agregarVehiculo(
+        vehiculo,
+        matricula,
+        precio,
+        desde,
+        hasta,
+        dias,
+        importe
+    );
+
+    dispose();
+        
+    /*int fila = jTable1.getSelectedRow();
+
+    String vehiculo  = jTable1.getValueAt(fila, 0).toString();
+    String matricula = jTable1.getValueAt(fila, 1).toString();
+    String precio    = jTable1.getValueAt(fila, 2).toString();
+    String desde     = jTable1.getValueAt(fila, 3).toString();
+    String hasta     = jTable1.getValueAt(fila, 4).toString();
+    String dias      = jTable1.getValueAt(fila, 5).toString();
+    String importe   = jTable1.getValueAt(fila, 6).toString();
+
+    frmResepcion.cargarVehiculo(
+        matricula, vehiculo, precio, desde, hasta, dias, importe
+    );
+
+    dispose();*/
+
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+    if (model.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No hay vehículos para agregar");
+        return;
+    }
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+
+        String vehiculo  = model.getValueAt(i, 0).toString();
+        String matricula = model.getValueAt(i, 1).toString();
+        String precio    = model.getValueAt(i, 2).toString();
+        String desde     = model.getValueAt(i, 3).toString();
+        String hasta     = model.getValueAt(i, 4).toString();
+        String dias      = model.getValueAt(i, 5).toString();
+        String importe   = model.getValueAt(i, 6).toString();
+
+        frmResepcion.agregarVehiculo(
+            vehiculo,
+            matricula,
+            precio,
+            desde,
+            hasta,
+            dias,
+            importe
+        );
+    }
+ 
+   
+    dispose();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
