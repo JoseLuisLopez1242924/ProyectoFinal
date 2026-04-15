@@ -63,7 +63,7 @@ public class FrmResepcion extends javax.swing.JFrame {
                 for (int i = 0; i < 9; i++) {
                     normalizado[i] = (i < campos.length) ? campos[i].trim() : "";
                 }
-                if (normalizado[8].isEmpty()) normalizado[8] = "false"; // campo oculto por defecto
+                if (normalizado[9].isEmpty()) normalizado[9] = "false"; // campo oculto por defecto
                 lista.add(normalizado);
             }
         } catch (IOException e) {
@@ -114,6 +114,9 @@ public class FrmResepcion extends javax.swing.JFrame {
     }*/
  
  
+    // ─────────────────────────────────────────────────────────────
+    // RECEPCIÓN — guardar y liberar vehículo
+    // ─────────────────────────────────────────────────────────────
     private void ejecutarRecepcion() {
         if (idClienteActual.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente."); return;
@@ -192,7 +195,8 @@ public class FrmResepcion extends javax.swing.JFrame {
                 "Recepción guardada correctamente.\nCódigo: " + codigoRecepcion);
         limpiarFormulario();
     }
- 
+    
+    
     private void limpiarFormulario() {
         idClienteActual = "";
         lineasClienteActual.clear();
@@ -335,7 +339,8 @@ public class FrmResepcion extends javax.swing.JFrame {
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
         ejecutarRecepcion();
-        actualizarEstadoReserva(idClienteActual, FILE_RESERVAS);
+        
+       // actualizarEstadoReserva(idClienteActual, FILE_RESERVAS);
         actualizarTotal();
     }                                         
     //Recalcula y muestra el total sumando todos los importes de la tabla
@@ -371,10 +376,21 @@ public class FrmResepcion extends javax.swing.JFrame {
 }
     
     private void actualizarEstadoReserva(String idCliente, String matricula) {
-    File inputFile = new File(FILE_RESERVAS);
+        
+    /*File inputFile = new File(FILE_RESERVAS);
     File tempFile  = new File(FILE_RESERVAS + ".tmp");
 
-    try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+    
+       try {
+                    Reserva v = new FrmReservas().buscarPorMatricula(matricula);
+                    if (v != null) {
+                        v.statusVeh = false;
+                        new VehiculoDAO().modificar(v);
+                    }
+                } catch (Exception ex) {
+                    logger.warning("Error al actualizar status vehículo: " + ex.getMessage());
+                }
+   try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
          BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
 
         boolean yaActualizado = false; // solo la primera coincidencia pendiente
@@ -385,15 +401,17 @@ public class FrmResepcion extends javax.swing.JFrame {
                 String[] datos = linea.split(";");
                 // El formato de reservas.txt es: idReserva; idCliente; vehiculo; matricula; ....; false
                 // índices (con espacios recortados): 0=idReserva, 1=idCliente, 3=matricula, 9=entregado
+                // El archivo tiene: [0]=idReserva [1]=idCliente [2]=vehiculo [3]=matricula ... [9]=estado
                 if (!yaActualizado
-                        && datos.length >= 10
+                        && datos.length > 9
                         && datos[1].trim().equals(idCliente)
                         && datos[3].trim().equalsIgnoreCase(matricula)
-                        && datos[9].trim().equalsIgnoreCase("false")) {
+                        && "false".equalsIgnoreCase(datos[9].trim())) {
 
                     datos[9] = " true";
-                    linea = String.join(";", datos);
                     yaActualizado = true;
+                    linea = String.join(";", datos[0], datos[1], datos[2], datos[3],
+                            datos[4], datos[5], datos[6], datos[7], datos[8], datos[9]);
                 }
             }
             bw.write(linea);
@@ -411,7 +429,7 @@ public class FrmResepcion extends javax.swing.JFrame {
     }
     if (!tempFile.renameTo(inputFile)) {
         logger.warning("No se pudo renombrar el archivo temporal.");
-    }
+    }*/
 }
     
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
