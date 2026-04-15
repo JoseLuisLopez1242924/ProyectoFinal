@@ -63,7 +63,7 @@ public class FrmResepcion extends javax.swing.JFrame {
                 for (int i = 0; i < 9; i++) {
                     normalizado[i] = (i < campos.length) ? campos[i].trim() : "";
                 }
-                if (normalizado[8].isEmpty()) normalizado[8] = "false"; // campo oculto por defecto
+                if (normalizado[9].isEmpty()) normalizado[9] = "false"; // campo oculto por defecto
                 lista.add(normalizado);
             }
         } catch (IOException e) {
@@ -112,7 +112,6 @@ public class FrmResepcion extends javax.swing.JFrame {
         lblInfovehiculo.setText(infoVehiculo + "  |  Matrícula: " + matricula +
                 "  |  Precio/día: $" + precio);
     }*/
- 
  
     private void ejecutarRecepcion() {
         if (idClienteActual.isEmpty()) {
@@ -192,7 +191,8 @@ public class FrmResepcion extends javax.swing.JFrame {
                 "Recepción guardada correctamente.\nCódigo: " + codigoRecepcion);
         limpiarFormulario();
     }
- 
+    
+    
     private void limpiarFormulario() {
         idClienteActual = "";
         lineasClienteActual.clear();
@@ -334,7 +334,7 @@ public class FrmResepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
-        int fila = TablaDetalle.getSelectedRow();
+   int fila = TablaDetalle.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(this, "Seleccione un vehículo de la tabla.");
         return;
@@ -396,54 +396,22 @@ public class FrmResepcion extends javax.swing.JFrame {
     // Quitar la fila recibida de la tabla
     ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
     actualizarTotal();
-    }//GEN-LAST:event_btnRecibirActionPerformed
-    
-    public void cargarVehiculosCliente(String idCliente) {
-
-    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
-    model.setRowCount(0);
-
-    try (BufferedReader br = new BufferedReader(
-            new FileReader("src/DOCUMENTOS/reservas.txt"))) {
-
-        String linea;
-
-        while ((linea = br.readLine()) != null) {
-
-            String[] datos = linea.split(";");
-
-            String idRes     = datos[0].trim();
-            String cliente   = datos[1].trim();
-            String vehiculo  = datos[2].trim();
-            String matricula = datos[3].trim();
-            String precio    = datos[4].trim();
-            String desde     = datos[5].trim();
-            String hasta     = datos[6].trim();
-            String dias      = datos[7].trim();
-            String importe   = datos[8].trim();
-            String estado    = datos[9].trim(); // false / true
-
-            // FILTRO CLAVE
-            if (cliente.equals(idCliente) && estado.equals("false")) {
-
-                model.addRow(new Object[]{
-                    idRes,
-                    vehiculo,
-                    matricula,
-                    desde,
-                    hasta,
-                    dias,
-                    importe
-                });
-            }
+    }                                         
+    //Recalcula y muestra el total sumando todos los importes de la tabla
+    private void actualizarTotal() {
+        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+        double total = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                total += Double.parseDouble(model.getValueAt(i, 6).toString());
+            } catch (Exception ignored) {}
         }
+        jLabel1.setText(String.format("%.2f", total));
+ 
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-            "Error cargando reservas: " + e.getMessage());
-    }
-}
-    
+
+    }//GEN-LAST:event_btnRecibirActionPerformed
+
     public void agregarVehiculo(String vehiculo, String matricula, String precio, String desde, String hasta, String dias, String importe) {
 
     DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
@@ -461,9 +429,8 @@ public class FrmResepcion extends javax.swing.JFrame {
     actualizarTotal();
 }
     
-  
     private void actualizarEstadoReserva(String idCliente, String matricula) {
-    File inputFile = new File(FILE_RESERVAS);
+     File inputFile = new File(FILE_RESERVAS);
     File tempFile  = new File(FILE_RESERVAS + ".tmp");
 
     try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
@@ -505,6 +472,7 @@ public class FrmResepcion extends javax.swing.JFrame {
         logger.warning("No se pudo renombrar el archivo temporal.");
     }
 }
+    
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
     FrmBuscarCliente frm = new FrmBuscarCliente(null, this);
     frm.setTitle("Buscar Cliente Resepcion");
@@ -515,7 +483,7 @@ public class FrmResepcion extends javax.swing.JFrame {
     actualizarTotal();
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
     
-    private void actualizarTotal() {
+    private void actualizarTotal1() {
 
     DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
     double total = 0;
