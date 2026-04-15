@@ -334,22 +334,68 @@ public class FrmResepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
-    int fila = TablaDetalle.getSelectedRow();
+        int fila = TablaDetalle.getSelectedRow();
     if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "Seleccione un vehículo");
+        JOptionPane.showMessageDialog(this, "Seleccione un vehículo de la tabla.");
         return;
     }
 
-    String idReserva = TablaDetalle.getValueAt(fila, 0).toString();
-    String matricula = TablaDetalle.getValueAt(fila, 2).toString();
+    // Columnas: 0=Vehiculo, 1=Matricula, 2=Precio, 3=Desde, 4=Hasta, 5=CantDias, 6=Importe
+    String vehiculo  = TablaDetalle.getValueAt(fila, 0).toString();
+    String matricula = TablaDetalle.getValueAt(fila, 1).toString();
+    String precio    = TablaDetalle.getValueAt(fila, 2).toString();
+    String desde     = TablaDetalle.getValueAt(fila, 3).toString();
+    String hasta     = TablaDetalle.getValueAt(fila, 4).toString();
+    String dias      = TablaDetalle.getValueAt(fila, 5).toString();
+    String importe   = TablaDetalle.getValueAt(fila, 6).toString();
 
-    actualizarEstadoReserva(idReserva, matricula);
+    int resp = JOptionPane.showConfirmDialog(this,
+        "¿Confirmar recepción del vehículo: " + matricula + "?",
+        "Confirmar Recepción", JOptionPane.YES_NO_OPTION);
+    if (resp != JOptionPane.YES_OPTION) return;
 
-    generarCodigoRecepcion(); // V00001 etc
+    String fechaRecepcion  = LocalDate.now().format(FMT);
+    String codigoRecepcion = generarCodigoRecepcion();
 
-    JOptionPane.showMessageDialog(this, "Recepción guardada");
+    // Guardar en recepciones.txt
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_RECEPCIONES, true))) {
+        String linea = codigoRecepcion + "; "
+            + idClienteActual + "; "
+            + vehiculo + "; "
+            + matricula + "; "
+            + precio + "; "
+            + desde + "; "
+            + hasta + "; "
+            + dias + "; "
+            + importe + "; "
+            + fechaRecepcion;
+        bw.write(linea);
+        bw.newLine();
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar recepción: " + e.getMessage());
+        return;
+    }
 
-    cargarVehiculosCliente(idClienteSeleccionado);
+    // Marcar entregado=true en reservas.txt
+    actualizarEstadoReserva(idClienteActual, matricula);
+
+    // Liberar el vehículo (statusVeh = true)
+    try {
+        Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
+        if (v != null) {
+            v.statusVeh = true;
+            new VehiculoDAO().modificar(v);
+        }
+    } catch (Exception e) {
+        logger.warning("Error liberando vehículo: " + e.getMessage());
+    }
+
+    JOptionPane.showMessageDialog(this,
+        "Recepción guardada correctamente.\nCódigo: " + codigoRecepcion);
+
+    // Quitar la fila recibida de la tabla
+    ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
+    actualizarTotal();
     }//GEN-LAST:event_btnRecibirActionPerformed
     
     public void cargarVehiculosCliente(String idCliente) {
@@ -415,45 +461,50 @@ public class FrmResepcion extends javax.swing.JFrame {
     actualizarTotal();
 }
     
-    private void actualizarEstadoReserva(String idReserva, String matricula) {
-
-    File inputFile = new File("src/DOCUMENTOS/reservas.txt");
-    File tempFile = new File("src/DOCUMENTOS/temp.txt");
+  
+    private void actualizarEstadoReserva(String idCliente, String matricula) {
+    File inputFile = new File(FILE_RESERVAS);
+    File tempFile  = new File(FILE_RESERVAS + ".tmp");
 
     try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
          BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
 
+        boolean yaActualizado = false; // solo la primera coincidencia pendiente
         String linea;
 
         while ((linea = br.readLine()) != null) {
+            if (!linea.trim().isEmpty()) {
+                String[] datos = linea.split(";");
+                // El formato de reservas.txt es: idReserva; idCliente; vehiculo; matricula; ....; false
+                // índices (con espacios recortados): 0=idReserva, 1=idCliente, 3=matricula, 9=entregado
+                if (!yaActualizado
+                        && datos.length >= 10
+                        && datos[1].trim().equals(idCliente)
+                        && datos[3].trim().equalsIgnoreCase(matricula)
+                        && datos[9].trim().equalsIgnoreCase("false")) {
 
-            String[] datos = linea.split(";");
-
-            if (datos[0].trim().equals(idReserva)
-                && datos[3].trim().equals(matricula)) {
-
-                // cambiar false → true
-                datos[9] = " true";
-
-                linea = String.join(";",
-                        datos[0], datos[1], datos[2], datos[3],
-                        datos[4], datos[5], datos[6], datos[7],
-                        datos[8], datos[9]
-                );
+                    datos[9] = " true";
+                    linea = String.join(";", datos);
+                    yaActualizado = true;
+                }
             }
-
             bw.write(linea);
             bw.newLine();
         }
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error actualizando reserva: " + e.getMessage());
+        return;
     }
 
-    inputFile.delete();
-    tempFile.renameTo(inputFile);
+    if (!inputFile.delete()) {
+        logger.warning("No se pudo eliminar el archivo original de reservas.");
+        return;
+    }
+    if (!tempFile.renameTo(inputFile)) {
+        logger.warning("No se pudo renombrar el archivo temporal.");
+    }
 }
-    
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
     FrmBuscarCliente frm = new FrmBuscarCliente(null, this);
     frm.setTitle("Buscar Cliente Resepcion");
