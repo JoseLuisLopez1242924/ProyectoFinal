@@ -46,7 +46,6 @@ public class FrmReservas extends javax.swing.JFrame {
  
     // MÉTODOS PÚBLICOS LLAMADOS DESDE LOS FORMULARIOS HIJOS
  
-
     public void cargarCliente(String idCedula, String nombre, String apellidos, String direccion, String email, String telefono) {
         idClienteSeleccionado = idCedula;
  
@@ -256,15 +255,19 @@ public class FrmReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     // BOTON DE BUSCAR LOS CLIENTES
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
-       FrmBuscarCliente frm = new FrmBuscarCliente(this);
-       frm.setVisible(true);
+        FrmBuscarCliente frm = new FrmBuscarCliente(this, null);
+        frm.setTitle("Buscar Cliente Reseva");
+        frm.setVisible(true);
        MostrarBotones();
+       
+       
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
 
-    // BOTON DE BUSCAR LOS VEHICULOS
     private void BtnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarVehiculoActionPerformed
-        FrmBuscarVehiculo frm = new FrmBuscarVehiculo(this);
+        FrmBuscarVehiculo frm = new FrmBuscarVehiculo(this, null);
+        frm.setTitle("Buscar Vehiculo Reseva");
         frm.setVisible(true); 
+        
     }//GEN-LAST:event_BtnBuscarVehiculoActionPerformed
 
     private void BtnAgregarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarVehiculoActionPerformed

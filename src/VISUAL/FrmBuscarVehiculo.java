@@ -19,7 +19,8 @@ public class FrmBuscarVehiculo extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBuscarVehiculo.class.getName());
 
-     private FrmReservas padre;
+     private FrmReservas Reservas;
+     private FrmResepcion Resepcion;
  
     /** Lista completa de vehículos disponibles */
     private List<Vehiculo> listaVehiculos;
@@ -31,9 +32,10 @@ public class FrmBuscarVehiculo extends javax.swing.JFrame {
         cargarVehiculos();
         configurarFiltro();
     }
- public FrmBuscarVehiculo(FrmReservas padre) {
+    public FrmBuscarVehiculo(FrmReservas Reservas, FrmResepcion Resepcion) {
         initComponents();
-        this.padre = padre;
+        this.Reservas = Reservas;
+        this.Resepcion = Resepcion;
         cargarVehiculos();
         configurarFiltro();
     }
@@ -55,6 +57,9 @@ public class FrmBuscarVehiculo extends javax.swing.JFrame {
         } catch (Exception e) {
             logger.warning(e.getMessage());
         }
+    }
+     private void cargarReserva() {
+      
     }
  
     /** Llena la tabla con la lista recibida */
@@ -194,7 +199,8 @@ public class FrmBuscarVehiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       int fila = jTable1.getSelectedRow();
+       if(this.getTitle().equals("Buscar Vehiculo Reseva")){
+        int fila = jTable1.getSelectedRow();
         if (fila == -1) return;
  
         String matricula    = jTable1.getValueAt(fila, 0).toString();
@@ -218,9 +224,15 @@ public class FrmBuscarVehiculo extends javax.swing.JFrame {
             logger.warning("Error al buscar gama: " + e.getMessage());
         }
  
-        if (padre != null) {
-            padre.cargarVehiculo(matricula, marca, modelo, tipoVehiculo, precioGama);
+        if (Reservas != null) {
+            Reservas.cargarVehiculo(matricula, marca, modelo, tipoVehiculo, precioGama);
             this.dispose(); // cierra al seleccionar
+        }
+        }
+       
+       if(this.getTitle().equals("Buscar Vehiculo Recepcion")){
+           
+       
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

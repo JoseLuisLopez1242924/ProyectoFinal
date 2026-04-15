@@ -6,10 +6,11 @@ public class Menu extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private int nivelAcceso = 1; // por defecto usuario normal
 
-    public Menu() {
+    public Menu() {    
         initComponents();
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
+    
     //BLOQUEO POR EL NIVEL DE ACCESO
     public void setAcceso(int acceso) {
         this.nivelAcceso = acceso;
