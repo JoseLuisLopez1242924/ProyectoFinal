@@ -430,47 +430,7 @@ public class FrmResepcion extends javax.swing.JFrame {
 }
     
     private void actualizarEstadoReserva(String idCliente, String matricula) {
-     File inputFile = new File(FILE_RESERVAS);
-    File tempFile  = new File(FILE_RESERVAS + ".tmp");
-
-    try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
-         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
-
-        boolean yaActualizado = false; // solo la primera coincidencia pendiente
-        String linea;
-
-        while ((linea = br.readLine()) != null) {
-            if (!linea.trim().isEmpty()) {
-                String[] datos = linea.split(";");
-                // El formato de reservas.txt es: idReserva; idCliente; vehiculo; matricula; ....; false
-                // índices (con espacios recortados): 0=idReserva, 1=idCliente, 3=matricula, 9=entregado
-                if (!yaActualizado
-                        && datos.length >= 10
-                        && datos[1].trim().equals(idCliente)
-                        && datos[3].trim().equalsIgnoreCase(matricula)
-                        && datos[9].trim().equalsIgnoreCase("false")) {
-
-                    datos[9] = " true";
-                    linea = String.join(";", datos);
-                    yaActualizado = true;
-                }
-            }
-            bw.write(linea);
-            bw.newLine();
-        }
-
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error actualizando reserva: " + e.getMessage());
-        return;
-    }
-
-    if (!inputFile.delete()) {
-        logger.warning("No se pudo eliminar el archivo original de reservas.");
-        return;
-    }
-    if (!tempFile.renameTo(inputFile)) {
-        logger.warning("No se pudo renombrar el archivo temporal.");
-    }
+    
 }
     
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed

@@ -11,10 +11,11 @@ public class Reserva {
     public String observacion;
     public int diaReserva;
     public double totalReservas;
+    public String estatus;
 
     public Reserva(String idMatricula, String idCedula, String idOferta,
                    String fechaReserva, String fechaSalida, String fechaEntrada,
-                   String observacion, int diaReserva, double totalReservas) {
+                   String observacion, int diaReserva, double totalReservas, String estatus) {
         this.idMatricula  = idMatricula;
         this.idCedula     = idCedula;
         this.idOferta     = idOferta;
@@ -24,12 +25,19 @@ public class Reserva {
         this.observacion  = observacion;
         this.diaReserva   = diaReserva;
         this.totalReservas = totalReservas;
+        this.estatus       = estatus;
+    }
+
+    public Reserva(String idMatricula, String idCedula, String idOferta,
+                   String fechaReserva, String fechaSalida, String fechaEntrada,
+                   String observacion, int diaReserva, double totalReservas) {
+        this(idMatricula, idCedula, idOferta, fechaReserva, fechaSalida, fechaEntrada, observacion, diaReserva, totalReservas, "P");
     }
 
     @Override
     public String toString() {
         return idMatricula + ";" + idCedula + ";" + idOferta + ";" +
                fechaReserva + ";" + fechaSalida + ";" + fechaEntrada + ";" +
-               observacion + ";" + diaReserva + ";" + totalReservas;
+               observacion + ";" + diaReserva + ";" + totalReservas + ";" + estatus;
     }
 }

@@ -34,11 +34,13 @@ public class ReservaDAO {
         while ((linea = br.readLine()) != null) {
             if (linea.trim().isEmpty()) continue;
             String[] d = linea.split(";", -1);
+            String estatus = d.length > 9 ? d[9] : "P";
             lista.add(new Reserva(
                 d[0], d[1], d[2], d[3], d[4], d[5],
                 d[6],
                 Integer.parseInt(d[7]),
-                Double.parseDouble(d[8])
+                Double.parseDouble(d[8]),
+                estatus
             ));
         }
         br.close();
