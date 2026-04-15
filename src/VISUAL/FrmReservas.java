@@ -18,10 +18,26 @@ public class FrmReservas extends javax.swing.JFrame {
     private String matriculaSeleccionada   = "";
     private double precioVehiculoSeleccionado = 0.0;
     
+    boolean StatusR = false;
+    
     public FrmReservas() {
         initComponents();
         configurarFechas();
+        OcultarBotones();
     }
+    public void OcultarBotones(){
+        BtnBuscarVehiculo.setEnabled(false);
+        BtnAgregarVehiculo.setEnabled(false);
+        txtFechaFin.setEditable(false);
+        txtFechaInicio.setEnabled(false);
+    }
+    public void MostrarBotones(){
+        BtnBuscarVehiculo.setEnabled(true);
+        BtnAgregarVehiculo.setEnabled(true);
+        txtFechaFin.setEditable(true);
+        txtFechaInicio.setEnabled(true);
+    }
+    
 
     // CONFIGURACIÓN INICIAL
     private void configurarFechas() {
@@ -32,7 +48,6 @@ public class FrmReservas extends javax.swing.JFrame {
  
     // MÉTODOS PÚBLICOS LLAMADOS DESDE LOS FORMULARIOS HIJOS
  
-
     public void cargarCliente(String idCedula, String nombre, String apellidos, String direccion, String email, String telefono) {
         idClienteSeleccionado = idCedula;
  
@@ -46,14 +61,12 @@ public class FrmReservas extends javax.swing.JFrame {
         ltDatosCliente.setModel(model);
     }
 
-    public void cargarVehiculo(String matricula, String marca, String modelo,
-                                String tipoVehiculo, double precio) {
+    public void cargarVehiculo(String matricula, String marca, String modelo, String tipoVehiculo, double precio) {
         matriculaSeleccionada          = matricula;
         precioVehiculoSeleccionado     = precio;
         lblInfovehiculo.setText(marca + " " + modelo + " | " + tipoVehiculo
                 + " | Precio/día: $" + String.format("%.2f", precio));
     }
- 
 
     // CALCULAR DÍAS E IMPORTE
     private long calcularDias() {
@@ -75,25 +88,28 @@ public class FrmReservas extends javax.swing.JFrame {
         BtnBuscarCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDetalle = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        BtnBuscarVehiculo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ltDatosCliente = new javax.swing.JList<>();
         txtFechaInicio = new javax.swing.JTextField();
         txtFechaFin = new javax.swing.JTextField();
         lblCliente1 = new javax.swing.JLabel();
         lblCliente2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BtnAgregarVehiculo = new javax.swing.JButton();
         lblInfovehiculo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnRentar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("RECEPCION");
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lblCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente.setText("Clientes");
 
+        BtnBuscarCliente.setBackground(new java.awt.Color(236, 236, 236));
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
@@ -115,15 +131,21 @@ public class FrmReservas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDetalleMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDetalle);
         if (TablaDetalle.getColumnModel().getColumnCount() > 0) {
             TablaDetalle.getColumnModel().getColumn(4).setResizable(false);
             TablaDetalle.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
-        jButton1.setText("Buscar Vehiculo");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        BtnBuscarVehiculo.setBackground(new java.awt.Color(236, 236, 236));
+        BtnBuscarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
+        BtnBuscarVehiculo.setText("Buscar Vehiculo");
+        BtnBuscarVehiculo.addActionListener(this::BtnBuscarVehiculoActionPerformed);
 
         jScrollPane2.setViewportView(ltDatosCliente);
 
@@ -135,10 +157,12 @@ public class FrmReservas extends javax.swing.JFrame {
         lblCliente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente2.setText("Hasta");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
-        jButton2.setText("Agregar");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        BtnAgregarVehiculo.setBackground(new java.awt.Color(236, 236, 236));
+        BtnAgregarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
+        BtnAgregarVehiculo.setText("Agregar");
+        BtnAgregarVehiculo.addActionListener(this::BtnAgregarVehiculoActionPerformed);
 
+        lblInfovehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblInfovehiculo.setText("InfoVehiculo");
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -148,6 +172,9 @@ public class FrmReservas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("TOTAL:");
 
+        btnRentar.setBackground(new java.awt.Color(236, 236, 236));
+        btnRentar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save.png"))); // NOI18N
         btnRentar.setText("Rentar");
         btnRentar.addActionListener(this::btnRentarActionPerformed);
 
@@ -157,103 +184,131 @@ public class FrmReservas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(BtnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRentar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblInfovehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
-                .addGap(0, 23, Short.MAX_VALUE))
+                                    .addComponent(lblInfovehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnAgregarVehiculo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnRentar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblInfovehiculo)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblInfovehiculo)
+                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BtnAgregarVehiculo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
                     .addComponent(btnRentar))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    // BOTON DE BUSCAR LOS CLIENTES
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
-       FrmConsultarCliente frm = new FrmConsultarCliente(this);
-       frm.setVisible(true);
+        FrmBuscarCliente frm = new FrmBuscarCliente(this, null);
+        frm.setTitle("Buscar Cliente Reseva");
+        frm.setVisible(true);
+       MostrarBotones();
+       
+       
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FrmConsultarVehiculo frm = new FrmConsultarVehiculo(this);
-        frm.setVisible(true); 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void TablaDetalleMouseClicked(java.awt.event.MouseEvent evt) {
+        int fila = TablaDetalle.getSelectedRow();
+        if (fila != -1) {
+            int resp = JOptionPane.showConfirmDialog(this,
+                    "¿Desea quitar este vehículo de la lista?",
+                    "Quitar Vehículo",
+                    JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
+                actualizarTotal();
+            }
+        }
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarVehiculoActionPerformed
+        FrmBuscarVehiculo frm = new FrmBuscarVehiculo(this, null);
+        frm.setTitle("Buscar Vehiculo Reseva");
+        frm.setVisible(true); 
+        
+    }//GEN-LAST:event_BtnBuscarVehiculoActionPerformed
+
+    private void BtnAgregarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarVehiculoActionPerformed
     if (matriculaSeleccionada.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Primero seleccione un vehículo.");
+        JOptionPane.showMessageDialog(this, "Primero seleccione un vehículo.");
+        return;
+    }
+    if (txtFechaInicio.getText().trim().isEmpty() || txtFechaFin.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese las fechas Desde y Hasta.");
+        return;
+    }
+
+    // ── NUEVO: verificar duplicado ──────────────────────────────────────────
+    DefaultTableModel modelCheck = (DefaultTableModel) TablaDetalle.getModel();
+    for (int i = 0; i < modelCheck.getRowCount(); i++) {
+        if (matriculaSeleccionada.equals(modelCheck.getValueAt(i, 1).toString())) {
+            JOptionPane.showMessageDialog(this,
+                "El vehículo '" + matriculaSeleccionada + "' ya fue agregado.",
+                "Vehículo duplicado", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (txtFechaInicio.getText().trim().isEmpty() || txtFechaFin.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese las fechas Desde y Hasta.");
-            return;
-        }
- 
-        long dias = calcularDias();
+    }
+
+    long dias = calcularDias();
         if (dias <= 0) {
             JOptionPane.showMessageDialog(this,
                     "La fecha Hasta debe ser posterior a la fecha Desde.");
@@ -277,8 +332,9 @@ public class FrmReservas extends javax.swing.JFrame {
         });
  
         // Actualizar total
-        actualizarTotal();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        actualizarTotal();
+        lblInfovehiculo.setText("Info Vehiculo");        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAgregarVehiculoActionPerformed
 
     private void btnRentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentarActionPerformed
     if (idClienteSeleccionado.isEmpty()) {
@@ -302,7 +358,7 @@ public class FrmReservas extends javax.swing.JFrame {
         // Formato: idCliente; vehiculo; matricula; precio; desde; hasta; cantDias; importe
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter("src/DOCUMENTOS/reservas.txt", true))) {
- 
+            String idReserva = generarIdReserva();
             for (int i = 0; i < model.getRowCount(); i++) {
                 String vehiculo  = model.getValueAt(i, 0).toString();
                 String matricula = model.getValueAt(i, 1).toString();
@@ -312,15 +368,15 @@ public class FrmReservas extends javax.swing.JFrame {
                 String dias      = model.getValueAt(i, 5).toString();
                 String importe   = model.getValueAt(i, 6).toString();
  
-                String linea = idClienteSeleccionado + "; "
+                String linea = idReserva + "; " + idClienteSeleccionado + "; "
                         + vehiculo + "; "
                         + matricula + "; "
                         + precio + "; "
                         + desde + "; "
                         + hasta + "; "
                         + dias + "; "
-                        + importe;
- 
+                        + importe + "; "
+                        + StatusR ;
                 bw.write(linea);
                 bw.newLine();
  
@@ -341,6 +397,7 @@ public class FrmReservas extends javax.swing.JFrame {
  
             // Limpiar formulario
             limpiarFormulario();
+            OcultarBotones();
  
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this,
@@ -359,76 +416,40 @@ public class FrmReservas extends javax.swing.JFrame {
         }
         jLabel1.setText(String.format("%.2f", total));
     }
- 
-    /** Guarda todas las filas de la tabla en un archivo TXT */
-    private void BtnRentarActionPerformed() {
-        if (idClienteSeleccionado.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Seleccione un cliente.");
-            return;
-        }
- 
-        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No hay vehículos agregados.");
-            return;
-        }
- 
-        // Confirmar acción
-        int resp = JOptionPane.showConfirmDialog(this,
-                "¿Confirmar renta para " + lblCliente.getText() + "?",
-                "Confirmar Renta", JOptionPane.YES_NO_OPTION);
-        if (resp != JOptionPane.YES_OPTION) return;
- 
-        // Guardar en archivo TXT
-        // Formato: idCliente; vehiculo; matricula; precio; desde; hasta; cantDias; importe
-        try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter("reservas.txt", true))) {
- 
-            for (int i = 0; i < model.getRowCount(); i++) {
-                String vehiculo  = model.getValueAt(i, 0).toString();
-                String matricula = model.getValueAt(i, 1).toString();
-                String precio    = model.getValueAt(i, 2).toString();
-                String desde     = model.getValueAt(i, 3).toString();
-                String hasta     = model.getValueAt(i, 4).toString();
-                String dias      = model.getValueAt(i, 5).toString();
-                String importe   = model.getValueAt(i, 6).toString();
- 
-                String linea = idClienteSeleccionado + "; "
-                        + vehiculo + "; "
-                        + matricula + "; "
-                        + precio + "; "
-                        + desde + "; "
-                        + hasta + "; "
-                        + dias + "; "
-                        + importe;
- 
-                bw.write(linea);
-                bw.newLine();
- 
-                // Marcar el vehículo como rentado en el archivo de vehículos
-                try {
-                    Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
-                    if (v != null) {
-                        v.statusVeh = false;
-                        new VehiculoDAO().modificar(v);
-                    }
-                } catch (Exception ex) {
-                    logger.warning("Error al actualizar status vehículo: " + ex.getMessage());
+    //GENERAR ID DEL MOVIMIENTO
+    private String generarIdReserva() {
+    String ultimoId = "I00000";
+
+    File archivo = new File("src/DOCUMENTOS/reservas.txt");
+
+    if (archivo.exists()) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            String ultimaLinea = null;
+
+            while ((linea = br.readLine()) != null) {
+                if (!linea.trim().isEmpty()) {
+                    ultimaLinea = linea;
                 }
             }
- 
-            JOptionPane.showMessageDialog(this,
-                    "Renta guardada correctamente en reservas.txt");
- 
-            // Limpiar formulario
-            limpiarFormulario();
- 
+
+            if (ultimaLinea != null) {
+                String[] datos = ultimaLinea.split(";");
+                ultimoId = datos[0].trim(); // ahora el ID será el primer campo
+            }
+
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error al guardar la reserva: " + e.getMessage());
-            logger.warning(e.getMessage());
+            e.printStackTrace();
         }
     }
+
+    // Extraer número y sumar
+    int numero = Integer.parseInt(ultimoId.substring(1));
+    numero++;
+
+    return String.format("I%05d", numero);
+}
+    // BOTON DE GUARDAR TODOS LOS REGISTROS
    /** Limpia todos los campos y la tabla */
     private void limpiarFormulario() {
         idClienteSeleccionado          = "";
@@ -467,11 +488,11 @@ public class FrmReservas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgregarVehiculo;
     private javax.swing.JButton BtnBuscarCliente;
+    private javax.swing.JButton BtnBuscarVehiculo;
     private javax.swing.JTable TablaDetalle;
     private javax.swing.JButton btnRentar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

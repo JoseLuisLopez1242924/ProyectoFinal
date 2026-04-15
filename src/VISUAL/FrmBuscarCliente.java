@@ -10,24 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FrmConsultarCliente extends javax.swing.JFrame {
+public class FrmBuscarCliente extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmConsultarCliente.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBuscarCliente.class.getName());
 
+    
      //Referencia al formulario padre para devolverle los datos
-    private FrmReservas padre;
+    private FrmReservas Reservas;
+    private FrmResepcion Resepcion;
     private List<Cliente> listaClientes = new ArrayList<>();
     
      
-    public FrmConsultarCliente() {
+    public FrmBuscarCliente() {
         initComponents();
         cargarClientes();
         configurarFiltro();
     }
    
-     public FrmConsultarCliente(FrmReservas padre) {
+     public FrmBuscarCliente(FrmReservas Reservas, FrmResepcion Resepcion) {
         initComponents();
-        this.padre = padre;
+        this.Reservas = Reservas;
+        this.Resepcion = Resepcion;
         cargarClientes();
         configurarFiltro();
     }
@@ -114,6 +117,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Buscar Cliente");
 
         Buscar.setText("Buscar");
 
@@ -161,6 +165,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+     if(this.getTitle().equals("Buscar Cliente Reseva")){
         int fila = jTable1.getSelectedRow();
         if (fila == -1) return;
  
@@ -174,10 +179,32 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         String email     = jTable1.getModel().getValueAt(filaModelo, 4).toString();
         String telefono  = jTable1.getModel().getValueAt(filaModelo, 5).toString();
  
-        if (padre != null) {
-            padre.cargarCliente(idCedula, nombre, apellidos, direccion, email, telefono);
+        if (Reservas != null) {
+            Reservas.cargarCliente(idCedula, nombre, apellidos, direccion, email, telefono);
         }
         this.dispose();
+        }
+        
+    if(this.getTitle().equals("Buscar Cliente Resepcion")){
+        int fila = jTable1.getSelectedRow();
+        if (fila == -1) return;
+ 
+        // convertRowIndexToModel por si el usuario ordenó columnas
+        int filaModelo = jTable1.convertRowIndexToModel(fila);
+ 
+        String idCedula  = jTable1.getModel().getValueAt(filaModelo, 0).toString();
+        String nombre    = jTable1.getModel().getValueAt(filaModelo, 1).toString();
+        String apellidos = jTable1.getModel().getValueAt(filaModelo, 2).toString();
+        String direccion = jTable1.getModel().getValueAt(filaModelo, 3).toString();
+        String email     = jTable1.getModel().getValueAt(filaModelo, 4).toString();
+        String telefono  = jTable1.getModel().getValueAt(filaModelo, 5).toString();
+ 
+        if (Resepcion != null) {
+            Resepcion.cargarCliente(idCedula, nombre, apellidos, direccion, email, telefono);
+        }
+        this.dispose();
+        }
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     
@@ -202,7 +229,7 @@ public class FrmConsultarCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmConsultarCliente().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmBuscarCliente().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
