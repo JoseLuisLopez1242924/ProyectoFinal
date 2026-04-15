@@ -5,13 +5,19 @@
     <Menu class="javax.swing.JMenuBar" name="mb_menu">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+          <Color blue="e0" green="e0" red="e0" type="rgb"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
       </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menu_ini">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/VISUAL/MULTIMEDIA/user-key (1).png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="SESION"/>
           </Properties>
           <Events>
@@ -20,11 +26,17 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_mant">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/VISUAL/MULTIMEDIA/bolt.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="MANTENIMIENTOS"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_mant_usu">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/user.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="USUARIOS"/>
               </Properties>
               <Events>
@@ -33,6 +45,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/chart-no-axes-gantt.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="GAMAS"/>
               </Properties>
               <Events>
@@ -41,6 +56,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/car.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="VEHICULOS"/>
               </Properties>
               <Events>
@@ -49,6 +67,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/badge-dollar-sign.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="OFERTAS"/>
               </Properties>
               <Events>
@@ -57,6 +78,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnCliente">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/users.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="CLIENTE"/>
               </Properties>
               <Events>
@@ -67,11 +91,17 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_mov">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/VISUAL/MULTIMEDIA/arrow-down-up.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="MOVIMIENTOS"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/arrow-right-from-line.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="RESERVAS"/>
               </Properties>
               <Events>
@@ -80,6 +110,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/VISUAL/MULTIMEDIA/arrow-left-from-line.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="RECEPCION"/>
               </Properties>
               <Events>
@@ -90,6 +123,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_cons">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/VISUAL/MULTIMEDIA/file-text.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="CONSULTAS"/>
           </Properties>
           <SubComponents>
@@ -220,6 +256,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="panel_menu">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -229,7 +270,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="361" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="353" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -241,9 +282,6 @@
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="USUARIO"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>

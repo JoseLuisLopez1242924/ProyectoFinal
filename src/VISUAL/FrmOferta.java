@@ -99,13 +99,13 @@ public class FrmOferta extends javax.swing.JFrame {
             return false;
         }
 
-        // Requisito VII: precio no menor al 15% del precio gama
+        // Requisito VII: el descuento máximo es 15%, por lo tanto el precio oferta debe ser al menos el 85% del precio gama
         if (precioGamaActual > 0) {
-            double minimo = precioGamaActual * 0.15;
+            double minimo = precioGamaActual * 0.85;
             if (precioOferta < minimo) {
                 JOptionPane.showMessageDialog(null,
-                    String.format("El Precio Oferta no puede ser menor al 15%% del Precio Gama.\n" +
-                                  "Precio Gama: %.2f  →  Mínimo permitido: %.2f",
+                    String.format("El descuento máximo permitido es del 15%%.\n" +
+                                  "Precio Gama: %.2f  →  Precio Mínimo permitido: %.2f",
                                   precioGamaActual, minimo),
                     "Precio inválido", JOptionPane.WARNING_MESSAGE);
                 return false;
@@ -472,7 +472,7 @@ public class FrmOferta extends javax.swing.JFrame {
                     "Vehículo: " + v.marca + " " + v.modelo + "  |  " + v.matricula);
                 lblPrecioGama.setText(
                     String.format("Precio Gama: %.2f  (mín. oferta: %.2f)",
-                                  precioGama, precioGama * 0.15));
+                                  precioGama, precioGama * 0.85));
                 lblInfoVehiculo.setForeground(new java.awt.Color(0, 128, 0));
                 lblPrecioGama.setForeground(new java.awt.Color(0, 0, 180));
             } else {

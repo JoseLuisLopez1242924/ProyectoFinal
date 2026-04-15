@@ -68,6 +68,8 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
         addWindowStateListener(this::formWindowStateChanged);
 
+        panel_menu.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout panel_menuLayout = new javax.swing.GroupLayout(panel_menu);
         panel_menu.setLayout(panel_menuLayout);
         panel_menuLayout.setHorizontalGroup(
@@ -76,18 +78,19 @@ public class Menu extends javax.swing.JFrame {
         );
         panel_menuLayout.setVerticalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
 
         LblUsuario.setBackground(new java.awt.Color(204, 204, 204));
         LblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        LblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         LblUsuario.setText("USUARIO");
         LblUsuario.setToolTipText("");
 
-        mb_menu.setBackground(new java.awt.Color(204, 204, 204));
+        mb_menu.setBackground(new java.awt.Color(224, 224, 224));
         mb_menu.setToolTipText("");
+        mb_menu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        menu_ini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/user-key (1).png"))); // NOI18N
         menu_ini.setText("SESION");
         menu_ini.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -96,42 +99,52 @@ public class Menu extends javax.swing.JFrame {
         });
         mb_menu.add(menu_ini);
 
+        menu_mant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/bolt.png"))); // NOI18N
         menu_mant.setText("MANTENIMIENTOS");
 
+        menu_mant_usu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/user.png"))); // NOI18N
         menu_mant_usu.setText("USUARIOS");
         menu_mant_usu.addActionListener(this::menu_mant_usuActionPerformed);
         menu_mant.add(menu_mant_usu);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/chart-no-axes-gantt.png"))); // NOI18N
         jMenuItem1.setText("GAMAS");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         menu_mant.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/car.png"))); // NOI18N
         jMenuItem2.setText("VEHICULOS");
         jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
         menu_mant.add(jMenuItem2);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/badge-dollar-sign.png"))); // NOI18N
         jMenuItem4.setText("OFERTAS");
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
         menu_mant.add(jMenuItem4);
 
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/users.png"))); // NOI18N
         btnCliente.setText("CLIENTE");
         btnCliente.addActionListener(this::btnClienteActionPerformed);
         menu_mant.add(btnCliente);
 
         mb_menu.add(menu_mant);
 
+        menu_mov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-down-up.png"))); // NOI18N
         menu_mov.setText("MOVIMIENTOS");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-right-from-line.png"))); // NOI18N
         jMenuItem5.setText("RESERVAS");
         jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
         menu_mov.add(jMenuItem5);
 
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-left-from-line.png"))); // NOI18N
         jMenuItem6.setText("RECEPCION");
         jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
         menu_mov.add(jMenuItem6);
 
         mb_menu.add(menu_mov);
 
+        menu_cons.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/file-text.png"))); // NOI18N
         menu_cons.setText("CONSULTAS");
 
         jMenuItem7.setText("CLIENTES");

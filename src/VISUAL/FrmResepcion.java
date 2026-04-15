@@ -217,11 +217,13 @@ public class FrmResepcion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Recepcion");
+        setTitle("RECEPCION");
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("TOTAL:");
 
+        btnBuscarVehiculo.setBackground(new java.awt.Color(239, 239, 239));
         btnBuscarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         btnBuscarVehiculo.setText("Buscar Vehiculo");
         btnBuscarVehiculo.addActionListener(this::btnBuscarVehiculoActionPerformed);
@@ -237,6 +239,7 @@ public class FrmResepcion extends javax.swing.JFrame {
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente.setText("Clientes");
 
+        BtnBuscarCliente.setBackground(new java.awt.Color(239, 239, 239));
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
