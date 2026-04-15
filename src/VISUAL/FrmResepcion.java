@@ -334,116 +334,25 @@ public class FrmResepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
-        int fila = TablaDetalle.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "Seleccione un vehículo de la tabla.");
-        return;
-    }
-
-    // Columnas: 0=Vehiculo, 1=Matricula, 2=Precio, 3=Desde, 4=Hasta, 5=CantDias, 6=Importe
-    String vehiculo  = TablaDetalle.getValueAt(fila, 0).toString();
-    String matricula = TablaDetalle.getValueAt(fila, 1).toString();
-    String precio    = TablaDetalle.getValueAt(fila, 2).toString();
-    String desde     = TablaDetalle.getValueAt(fila, 3).toString();
-    String hasta     = TablaDetalle.getValueAt(fila, 4).toString();
-    String dias      = TablaDetalle.getValueAt(fila, 5).toString();
-    String importe   = TablaDetalle.getValueAt(fila, 6).toString();
-
-    int resp = JOptionPane.showConfirmDialog(this,
-        "¿Confirmar recepción del vehículo: " + matricula + "?",
-        "Confirmar Recepción", JOptionPane.YES_NO_OPTION);
-    if (resp != JOptionPane.YES_OPTION) return;
-
-    String fechaRecepcion  = LocalDate.now().format(FMT);
-    String codigoRecepcion = generarCodigoRecepcion();
-
-    // Guardar en recepciones.txt
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_RECEPCIONES, true))) {
-        String linea = codigoRecepcion + "; "
-            + idClienteActual + "; "
-            + vehiculo + "; "
-            + matricula + "; "
-            + precio + "; "
-            + desde + "; "
-            + hasta + "; "
-            + dias + "; "
-            + importe + "; "
-            + fechaRecepcion;
-        bw.write(linea);
-        bw.newLine();
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar recepción: " + e.getMessage());
-        return;
-    }
-
-    // Marcar entregado=true en reservas.txt
-    actualizarEstadoReserva(idClienteActual, matricula);
-
-    // Liberar el vehículo (statusVeh = true)
-    try {
-        Vehiculo v = new VehiculoDAO().buscarPorMatricula(matricula);
-        if (v != null) {
-            v.statusVeh = true;
-            new VehiculoDAO().modificar(v);
+        ejecutarRecepcion();
+        actualizarEstadoReserva(idClienteActual, FILE_RESERVAS);
+        actualizarTotal();
+    }                                         
+    //Recalcula y muestra el total sumando todos los importes de la tabla
+    private void actualizarTotal() {
+        DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
+        double total = 0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                total += Double.parseDouble(model.getValueAt(i, 6).toString());
+            } catch (Exception ignored) {}
         }
-    } catch (Exception e) {
-        logger.warning("Error liberando vehículo: " + e.getMessage());
-    }
+        jLabel1.setText(String.format("%.2f", total));
+ 
 
-    JOptionPane.showMessageDialog(this,
-        "Recepción guardada correctamente.\nCódigo: " + codigoRecepcion);
 
-    // Quitar la fila recibida de la tabla
-    ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
-    actualizarTotal();
     }//GEN-LAST:event_btnRecibirActionPerformed
-    
-    public void cargarVehiculosCliente(String idCliente) {
 
-    DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
-    model.setRowCount(0);
-
-    try (BufferedReader br = new BufferedReader(
-            new FileReader("src/DOCUMENTOS/reservas.txt"))) {
-
-        String linea;
-
-        while ((linea = br.readLine()) != null) {
-
-            String[] datos = linea.split(";");
-
-            String idRes     = datos[0].trim();
-            String cliente   = datos[1].trim();
-            String vehiculo  = datos[2].trim();
-            String matricula = datos[3].trim();
-            String precio    = datos[4].trim();
-            String desde     = datos[5].trim();
-            String hasta     = datos[6].trim();
-            String dias      = datos[7].trim();
-            String importe   = datos[8].trim();
-            String estado    = datos[9].trim(); // false / true
-
-            // FILTRO CLAVE
-            if (cliente.equals(idCliente) && estado.equals("false")) {
-
-                model.addRow(new Object[]{
-                    idRes,
-                    vehiculo,
-                    matricula,
-                    desde,
-                    hasta,
-                    dias,
-                    importe
-                });
-            }
-        }
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-            "Error cargando reservas: " + e.getMessage());
-    }
-}
-    
     public void agregarVehiculo(String vehiculo, String matricula, String precio, String desde, String hasta, String dias, String importe) {
 
     DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
@@ -461,7 +370,6 @@ public class FrmResepcion extends javax.swing.JFrame {
     actualizarTotal();
 }
     
-  
     private void actualizarEstadoReserva(String idCliente, String matricula) {
     File inputFile = new File(FILE_RESERVAS);
     File tempFile  = new File(FILE_RESERVAS + ".tmp");
@@ -505,6 +413,7 @@ public class FrmResepcion extends javax.swing.JFrame {
         logger.warning("No se pudo renombrar el archivo temporal.");
     }
 }
+    
     private void BtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarClienteActionPerformed
     FrmBuscarCliente frm = new FrmBuscarCliente(null, this);
     frm.setTitle("Buscar Cliente Resepcion");
@@ -515,7 +424,7 @@ public class FrmResepcion extends javax.swing.JFrame {
     actualizarTotal();
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
     
-    private void actualizarTotal() {
+    private void actualizarTotal1() {
 
     DefaultTableModel model = (DefaultTableModel) TablaDetalle.getModel();
     double total = 0;
