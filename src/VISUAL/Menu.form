@@ -151,6 +151,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="VEHICULOS"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MI_VehiculosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MI_Matricula">
               <Properties>

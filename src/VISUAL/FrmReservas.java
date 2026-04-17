@@ -25,6 +25,10 @@ public class FrmReservas extends javax.swing.JFrame {
         configurarFechas();
         OcultarBotones();
     }
+
+    FrmReservas(int nivelAcceso) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public void OcultarBotones(){
         BtnBuscarVehiculo.setEnabled(false);
         BtnAgregarVehiculo.setEnabled(false);

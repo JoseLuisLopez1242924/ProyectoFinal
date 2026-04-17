@@ -159,6 +159,7 @@ public class Menu extends javax.swing.JFrame {
         menu_cons.add(MI_Rango);
 
         MI_Vehiculos.setText("VEHICULOS");
+        MI_Vehiculos.addActionListener(this::MI_VehiculosActionPerformed);
         menu_cons.add(MI_Vehiculos);
 
         MI_Matricula.setText("MATRICULA");
@@ -234,7 +235,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        new FrmReserva(nivelAcceso).setVisible(true);
+        new FrmReservas().setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
@@ -289,6 +290,14 @@ public class Menu extends javax.swing.JFrame {
     private void MI_GamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_GamaActionPerformed
         new FrmConsultaGama().setVisible(true);
     }//GEN-LAST:event_MI_GamaActionPerformed
+
+    private void MI_VehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_VehiculosActionPerformed
+        new FrmConsultaVehiculos().setVisible(true);
+    }//GEN-LAST:event_MI_VehiculosActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new FrmResepcion().setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         new FrmConsultaMatricula().setVisible(true);
@@ -345,7 +354,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel panel_menu;
     // End of variables declaration//GEN-END:variables
 
-    private void jMenuItem6ActionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
