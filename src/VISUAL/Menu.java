@@ -160,21 +160,27 @@ public class Menu extends javax.swing.JFrame {
         menu_cons.add(jMenuItem10);
 
         jMenuItem11.setText("MATRICULA");
+        jMenuItem11.addActionListener(this::jMenuItem11ActionPerformed);
         menu_cons.add(jMenuItem11);
 
         jMenuItem12.setText("DISPONIBLES");
+        jMenuItem12.addActionListener(this::jMenuItem12ActionPerformed);
         menu_cons.add(jMenuItem12);
 
         jMenuItem13.setText("RENTADOS");
+        jMenuItem13.addActionListener(this::jMenuItem13ActionPerformed);
         menu_cons.add(jMenuItem13);
 
         jMenuItem14.setText("MARCA");
+        jMenuItem14.addActionListener(this::jMenuItem14ActionPerformed);
         menu_cons.add(jMenuItem14);
 
         jMenuItem15.setText("GAMA");
+        jMenuItem15.addActionListener(this::jMenuItem15ActionPerformed);
         menu_cons.add(jMenuItem15);
 
         jMenuItem16.setText("OFERTAS");
+        jMenuItem16.addActionListener(this::jMenuItem16ActionPerformed);
         menu_cons.add(jMenuItem16);
 
         jMenuItem17.setText("PRECIO");
@@ -264,6 +270,30 @@ public class Menu extends javax.swing.JFrame {
     FrmResepcion frm= new FrmResepcion();
     frm.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        new FrmConsultaMatricula().setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        new FrmConsultaDisponibles().setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        new FrmConsultaRentados().setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        new FrmConsultaMarca().setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        new FrmConsultaGama().setVisible(true);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));

@@ -9,3 +9,5 @@ I00005; 003-9876543-2; Nissan Altima | Normal | Precio/día: $0.00; STU901; 0.00
 I00006; 003-9876543-2; Kia Sportage | Turístico | Precio/día: $5000.00; VWX234; 5000.00; 15/04/2026; 16/04/2026; 1; 5000.00
 I00007; 001-1234567-8; Toyota Corolla | Turístico | Precio/día: $5000.00; ABC123; 5000.00; 15/04/2026; 30/04/2026; 15; 75000.00; true
 I00008; 002-7654321-9; Honda Civic | Normal | Precio/día: $0.00; DEF456; 0.00; 15/04/2026; 30/04/2026; 15; 0.00; true
+I00009; 001-1234567-8; BMW 320i | Normal | Precio/día: $8500,00; JKL012; 8500,00; 15/04/2026; 16/04/2026; 1; 8500,00; true
+I00010; 001-1234567-8; Toyota Corolla | Turístico | Precio/día: $15000,00; ABC123; 15000,00; 15/04/2026; 17/04/2026; 2; 30000,00; true
