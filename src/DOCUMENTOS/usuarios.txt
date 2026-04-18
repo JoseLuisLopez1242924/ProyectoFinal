@@ -2,3 +2,4 @@
 admin;admin;Juan;Sosa;juansosa@gmail.com;0
 casosa;1234;Carlos;Sosa;csosa@gmail.com;1
 fmj;1234;Fausto;martinez Jimenez;fmj@gmail.com;0
+jl;admin;Jose Luis;Lopez;jlld200312@gmail.com;0

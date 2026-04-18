@@ -110,7 +110,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         BtnGuardar.setBackground(new java.awt.Color(153, 255, 153));
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save-all.png"))); // NOI18N
         BtnGuardar.setToolTipText("");
-        BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BtnGuardar.setFocusPainted(false);
         BtnGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
@@ -181,7 +181,7 @@ public class FrmUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "user", "admin", " " }));
+        CbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "user", "admin" }));
         CbxAcceso.addActionListener(this::CbxAccesoActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

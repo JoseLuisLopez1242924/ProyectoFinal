@@ -23,6 +23,10 @@ public class FrmReservas extends javax.swing.JFrame {
         configurarFechas();
         OcultarBotones();
     }
+
+    FrmReservas(int nivelAcceso) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public void OcultarBotones(){
         BtnBuscarVehiculo.setEnabled(false);
         BtnAgregarVehiculo.setEnabled(false);
@@ -100,13 +104,14 @@ public class FrmReservas extends javax.swing.JFrame {
         btnRentar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("RECEPCION");
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lblCliente.setBackground(new java.awt.Color(102, 102, 102));
         lblCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente.setText("Clientes");
 
-        BtnBuscarCliente.setBackground(new java.awt.Color(255, 255, 255));
-        BtnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
+        BtnBuscarCliente.setBackground(new java.awt.Color(236, 236, 236));
         BtnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarCliente.setText("Buscar Cliente");
         BtnBuscarCliente.setPreferredSize(new java.awt.Dimension(34, 20));
@@ -128,14 +133,18 @@ public class FrmReservas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDetalleMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDetalle);
         if (TablaDetalle.getColumnModel().getColumnCount() > 0) {
             TablaDetalle.getColumnModel().getColumn(4).setResizable(false);
             TablaDetalle.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        BtnBuscarVehiculo.setBackground(new java.awt.Color(255, 255, 255));
-        BtnBuscarVehiculo.setForeground(new java.awt.Color(0, 0, 0));
+        BtnBuscarVehiculo.setBackground(new java.awt.Color(236, 236, 236));
         BtnBuscarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/search.png"))); // NOI18N
         BtnBuscarVehiculo.setText("Buscar Vehiculo");
         BtnBuscarVehiculo.addActionListener(this::BtnBuscarVehiculoActionPerformed);
@@ -150,14 +159,12 @@ public class FrmReservas extends javax.swing.JFrame {
         lblCliente2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCliente2.setText("Hasta");
 
-        BtnAgregarVehiculo.setBackground(new java.awt.Color(255, 255, 255));
-        BtnAgregarVehiculo.setForeground(new java.awt.Color(0, 0, 0));
+        BtnAgregarVehiculo.setBackground(new java.awt.Color(236, 236, 236));
         BtnAgregarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/plus.png"))); // NOI18N
         BtnAgregarVehiculo.setText("Agregar");
         BtnAgregarVehiculo.addActionListener(this::BtnAgregarVehiculoActionPerformed);
 
         lblInfovehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblInfovehiculo.setForeground(new java.awt.Color(0, 0, 0));
         lblInfovehiculo.setText("InfoVehiculo");
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -167,9 +174,8 @@ public class FrmReservas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("TOTAL:");
 
-        btnRentar.setBackground(new java.awt.Color(255, 255, 255));
+        btnRentar.setBackground(new java.awt.Color(236, 236, 236));
         btnRentar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRentar.setForeground(new java.awt.Color(0, 0, 0));
         btnRentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/save.png"))); // NOI18N
         btnRentar.setText("Rentar");
         btnRentar.addActionListener(this::btnRentarActionPerformed);
@@ -213,8 +219,8 @@ public class FrmReservas extends javax.swing.JFrame {
                                         .addComponent(btnRentar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -242,11 +248,10 @@ public class FrmReservas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRentar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(btnRentar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -262,6 +267,20 @@ public class FrmReservas extends javax.swing.JFrame {
        
        
     }//GEN-LAST:event_BtnBuscarClienteActionPerformed
+
+    private void TablaDetalleMouseClicked(java.awt.event.MouseEvent evt) {
+        int fila = TablaDetalle.getSelectedRow();
+        if (fila != -1) {
+            int resp = JOptionPane.showConfirmDialog(this,
+                    "¿Desea quitar este vehículo de la lista?",
+                    "Quitar Vehículo",
+                    JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                ((DefaultTableModel) TablaDetalle.getModel()).removeRow(fila);
+                actualizarTotal();
+            }
+        }
+    }
 
     private void BtnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarVehiculoActionPerformed
         FrmBuscarVehiculo frm = new FrmBuscarVehiculo(this, null);
