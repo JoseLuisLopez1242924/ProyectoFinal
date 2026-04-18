@@ -1,11 +1,7 @@
 package VISUAL;
 
-import java.awt.event.ActionEvent;
-
-
 public class Menu extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private int nivelAcceso = 1; // por defecto usuario normal
 
     public Menu() {
@@ -16,10 +12,10 @@ public class Menu extends javax.swing.JFrame {
     public void setAcceso(int acceso) {
         this.nivelAcceso = acceso;
         if (acceso != 0) {
-            menu_mant_usu.setEnabled(false);
-            jMenuItem1.setEnabled(false); // GAMAS
-            jMenuItem2.setEnabled(false); // VEHICULOS
-            jMenuItem4.setEnabled(false); // OFERTAS
+            MI_Mant_usu.setEnabled(false);
+            MI_Mant_Gamas.setEnabled(false); // GAMAS
+            MI_Mant_Vehiculos.setEnabled(false); // VEHICULOS
+            Ofertas.setEnabled(false); // OFERTAS
             // CLIENTES (jMenuItem3) queda visible
             //menu_mov.setVisible(false);
             //menu_cons.setVisible(false);
@@ -39,14 +35,14 @@ public class Menu extends javax.swing.JFrame {
         mb_menu = new javax.swing.JMenuBar();
         menu_ini = new javax.swing.JMenu();
         menu_mant = new javax.swing.JMenu();
-        menu_mant_usu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        btnCliente = new javax.swing.JMenuItem();
+        MI_Mant_usu = new javax.swing.JMenuItem();
+        MI_Mant_Gamas = new javax.swing.JMenuItem();
+        MI_Mant_Vehiculos = new javax.swing.JMenuItem();
+        Ofertas = new javax.swing.JMenuItem();
+        MI_Mant_Cliente = new javax.swing.JMenuItem();
         menu_mov = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        MI_Reservas = new javax.swing.JMenuItem();
+        MI_Recepcion = new javax.swing.JMenuItem();
         menu_cons = new javax.swing.JMenu();
         MI_Cliente = new javax.swing.JMenuItem();
         MI_ID_Cliente = new javax.swing.JMenuItem();
@@ -103,45 +99,45 @@ public class Menu extends javax.swing.JFrame {
         menu_mant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/bolt.png"))); // NOI18N
         menu_mant.setText("MANTENIMIENTOS");
 
-        menu_mant_usu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/user.png"))); // NOI18N
-        menu_mant_usu.setText("USUARIOS");
-        menu_mant_usu.addActionListener(this::menu_mant_usuActionPerformed);
-        menu_mant.add(menu_mant_usu);
+        MI_Mant_usu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/user.png"))); // NOI18N
+        MI_Mant_usu.setText("USUARIOS");
+        MI_Mant_usu.addActionListener(this::MI_Mant_usuActionPerformed);
+        menu_mant.add(MI_Mant_usu);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/chart-no-axes-gantt.png"))); // NOI18N
-        jMenuItem1.setText("GAMAS");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        menu_mant.add(jMenuItem1);
+        MI_Mant_Gamas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/chart-no-axes-gantt.png"))); // NOI18N
+        MI_Mant_Gamas.setText("GAMAS");
+        MI_Mant_Gamas.addActionListener(this::MI_Mant_GamasActionPerformed);
+        menu_mant.add(MI_Mant_Gamas);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/car.png"))); // NOI18N
-        jMenuItem2.setText("VEHICULOS");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        menu_mant.add(jMenuItem2);
+        MI_Mant_Vehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/car.png"))); // NOI18N
+        MI_Mant_Vehiculos.setText("VEHICULOS");
+        MI_Mant_Vehiculos.addActionListener(this::MI_Mant_VehiculosActionPerformed);
+        menu_mant.add(MI_Mant_Vehiculos);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/badge-dollar-sign.png"))); // NOI18N
-        jMenuItem4.setText("OFERTAS");
-        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
-        menu_mant.add(jMenuItem4);
+        Ofertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/badge-dollar-sign.png"))); // NOI18N
+        Ofertas.setText("OFERTAS");
+        Ofertas.addActionListener(this::OfertasActionPerformed);
+        menu_mant.add(Ofertas);
 
-        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/users.png"))); // NOI18N
-        btnCliente.setText("CLIENTE");
-        btnCliente.addActionListener(this::btnClienteActionPerformed);
-        menu_mant.add(btnCliente);
+        MI_Mant_Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/users.png"))); // NOI18N
+        MI_Mant_Cliente.setText("CLIENTE");
+        MI_Mant_Cliente.addActionListener(this::MI_Mant_ClienteActionPerformed);
+        menu_mant.add(MI_Mant_Cliente);
 
         mb_menu.add(menu_mant);
 
         menu_mov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-down-up.png"))); // NOI18N
         menu_mov.setText("MOVIMIENTOS");
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-right-from-line.png"))); // NOI18N
-        jMenuItem5.setText("RESERVAS");
-        jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
-        menu_mov.add(jMenuItem5);
+        MI_Reservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-right-from-line.png"))); // NOI18N
+        MI_Reservas.setText("RESERVAS");
+        MI_Reservas.addActionListener(this::MI_ReservasActionPerformed);
+        menu_mov.add(MI_Reservas);
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-left-from-line.png"))); // NOI18N
-        jMenuItem6.setText("RECEPCION");
-        jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
-        menu_mov.add(jMenuItem6);
+        MI_Recepcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/arrow-left-from-line.png"))); // NOI18N
+        MI_Recepcion.setText("RECEPCION");
+        MI_Recepcion.addActionListener(this::MI_RecepcionActionPerformed);
+        menu_mov.add(MI_Recepcion);
 
         mb_menu.add(menu_mov);
 
@@ -225,32 +221,32 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menu_mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_mant_usuActionPerformed
+    private void MI_Mant_usuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_Mant_usuActionPerformed
     FrmUsuarios frm = new FrmUsuarios();
     frm.setVisible(true);
-    }//GEN-LAST:event_menu_mant_usuActionPerformed
+    }//GEN-LAST:event_MI_Mant_usuActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MI_Mant_GamasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_Mant_GamasActionPerformed
         java.awt.EventQueue.invokeLater(() -> new FrmGama(nivelAcceso).setVisible(true));
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_MI_Mant_GamasActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void MI_ReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_ReservasActionPerformed
         new FrmReservas().setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_MI_ReservasActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         
     }//GEN-LAST:event_formWindowStateChanged
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MI_Mant_VehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_Mant_VehiculosActionPerformed
     FrmVehiculos frm = new FrmVehiculos();
     frm.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MI_Mant_VehiculosActionPerformed
 
-    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+    private void MI_Mant_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_Mant_ClienteActionPerformed
         FrmClientes frm = new FrmClientes();
         frm.setVisible(true);
-    }//GEN-LAST:event_btnClienteActionPerformed
+    }//GEN-LAST:event_MI_Mant_ClienteActionPerformed
 
     private void menu_iniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_iniMouseClicked
      Login login = new Login();
@@ -259,9 +255,9 @@ public class Menu extends javax.swing.JFrame {
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_menu_iniMouseClicked
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void OfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OfertasActionPerformed
         new FrmOferta().setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_OfertasActionPerformed
 
     private void MI_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_ClienteActionPerformed
         // TODO add your handling code here:
@@ -295,9 +291,9 @@ public class Menu extends javax.swing.JFrame {
         new FrmConsultaVehiculos().setVisible(true);
     }//GEN-LAST:event_MI_VehiculosActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void MI_RecepcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_RecepcionActionPerformed
         new FrmResepcion().setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_MI_RecepcionActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         new FrmConsultaMatricula().setVisible(true);
@@ -329,27 +325,27 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MI_Dispo;
     private javax.swing.JMenuItem MI_Gama;
     private javax.swing.JMenuItem MI_ID_Cliente;
+    private javax.swing.JMenuItem MI_Mant_Cliente;
+    private javax.swing.JMenuItem MI_Mant_Gamas;
+    private javax.swing.JMenuItem MI_Mant_Vehiculos;
+    private javax.swing.JMenuItem MI_Mant_usu;
     private javax.swing.JMenuItem MI_Marca;
     private javax.swing.JMenuItem MI_Matricula;
     private javax.swing.JMenuItem MI_Ofertas;
     private javax.swing.JMenuItem MI_Precio;
     private javax.swing.JMenuItem MI_Rango;
     private javax.swing.JMenuItem MI_Recep_Fecha;
+    private javax.swing.JMenuItem MI_Recepcion;
     private javax.swing.JMenuItem MI_Rent;
     private javax.swing.JMenuItem MI_Reser_Dias;
     private javax.swing.JMenuItem MI_Reser_Fecha;
+    private javax.swing.JMenuItem MI_Reservas;
     private javax.swing.JMenuItem MI_Vehiculos;
-    private javax.swing.JMenuItem btnCliente;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem Ofertas;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu menu_cons;
     private javax.swing.JMenu menu_ini;
     private javax.swing.JMenu menu_mant;
-    private javax.swing.JMenuItem menu_mant_usu;
     private javax.swing.JMenu menu_mov;
     private javax.swing.JPanel panel_menu;
     // End of variables declaration//GEN-END:variables
