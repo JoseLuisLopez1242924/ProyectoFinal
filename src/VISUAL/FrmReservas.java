@@ -18,8 +18,6 @@ public class FrmReservas extends javax.swing.JFrame {
     private String matriculaSeleccionada   = "";
     private double precioVehiculoSeleccionado = 0.0;
     
-    boolean StatusR = false;
-    
     public FrmReservas() {
         initComponents();
         configurarFechas();
@@ -360,8 +358,8 @@ public class FrmReservas extends javax.swing.JFrame {
                         + desde + "; "
                         + hasta + "; "
                         + dias + "; "
-                        + importe + "; "
-                        + StatusR ;
+                        + importe + "; false";
+ 
                 bw.write(linea);
                 bw.newLine();
  
