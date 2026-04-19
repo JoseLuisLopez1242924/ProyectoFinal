@@ -5,7 +5,7 @@ import java.util.*;
 
 public class UsuarioDAO {
 
-    private final String ruta = "src/DOCUMENTOS/usuarios.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/usuarios.txt";
      // VALIDAR USUARIO
     public Usuario validarUsuario(String usuario, String clave) {
     try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {

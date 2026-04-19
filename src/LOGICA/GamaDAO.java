@@ -5,7 +5,7 @@ import java.util.*;
 
 public class GamaDAO {
 
-    private final String ruta = "src/DOCUMENTOS/gamas.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/gamas.txt";
 
     // BUSCAR POR ID
     public Gama buscarPorId(int id) throws IOException {

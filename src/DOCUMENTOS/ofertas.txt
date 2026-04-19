@@ -1,5 +1,5 @@
-1;ABC123;Descuento verano 15%;4300.0
-2;DEF456;Promocion fin de semana;975.0
-3;GHI789;Oferta corporativa BMW;675.0
-4;JKL012;Especial cliente frecuente;1300.0
-5;MNO345;Descuento por poco movimiento;1000.0
+1;ABC123;Descuento verano 15%;850.0
+2;DEF456;Promocion fin de semana;1700.0
+3;GHI789;Oferta corporativa BMW;850.0
+4;JKL012;Especial cliente frecuente;2600.0
+5;MNO345;Descuento por poco movimiento;1800.0

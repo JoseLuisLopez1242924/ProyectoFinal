@@ -5,7 +5,7 @@ import java.util.*;
 
 public class ClienteDAO {
 
-    private final String ruta = "src/DOCUMENTOS/clientes.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/clientes.txt";
 
     // BUSCAR POR CEDULA
     public Cliente buscarPorId(String idCedula) throws IOException {

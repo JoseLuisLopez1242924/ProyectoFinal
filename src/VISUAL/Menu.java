@@ -1,5 +1,10 @@
 package VISUAL;
 
+import LOGICA.VehiculoDAO;
+import LOGICA.ClienteDAO;
+import javax.swing.*;
+import java.awt.*;
+
 public class Menu extends javax.swing.JFrame {
     
     private int nivelAcceso = 1; // por defecto usuario normal
@@ -7,6 +12,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
+        aplicarEstiloCards();
+        cargarDashboard();
     }
     //BLOQUEO POR EL NIVEL DE ACCESO
     public void setAcceso(int acceso) {
@@ -26,11 +33,53 @@ public class Menu extends javax.swing.JFrame {
     LblUsuario.setText("Bienvenido " + nombre + "!!");
     }
 
+    // ── DASHBOARD ────────────────────────────────────────────────────────────
+    private void aplicarEstiloCards() {
+        estilizarCard(lblVehiculos,   "🚗 Total Vehículos", "...", new Color(52, 152, 219));
+        estilizarCard(lblDisponibles, "✅ Disponibles",      "...", new Color(39, 174, 96));
+        estilizarCard(lblClientes,    "👤 Clientes",         "...", new Color(155, 89, 182));
+    }
+
+    private void estilizarCard(JLabel lbl, String titulo, String valor, Color color) {
+        lbl.setOpaque(true);
+        lbl.setBackground(color);
+        lbl.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(color.darker(), 2, true),
+            BorderFactory.createEmptyBorder(8, 16, 8, 16)
+        ));
+        lbl.setText("<html><div style='text-align:center;color:white;'>"
+            + "<div style='font-size:10px;'>" + titulo + "</div>"
+            + "<div style='font-size:20px; font-weight:bold; margin-top:2px;'>" + valor + "</div>"
+            + "</div></html>");
+        lbl.setHorizontalAlignment(SwingConstants.CENTER);
+        lbl.setPreferredSize(new Dimension(110, 65));
+    }
+
+    private void cargarDashboard() {
+        try {
+            VehiculoDAO vDao = new VehiculoDAO();
+            int total        = vDao.listar().size();
+            int disponibles  = vDao.listarDisponibles().size();
+            int clientes     = new ClienteDAO().listar().size();
+
+            estilizarCard(lblVehiculos,   "🚗 Total Vehículos", String.valueOf(total),      new Color(52, 152, 219));
+            estilizarCard(lblDisponibles, "✅ Disponibles",      String.valueOf(disponibles), new Color(39, 174, 96));
+            estilizarCard(lblClientes,    "👤 Clientes",         String.valueOf(clientes),    new Color(155, 89, 182));
+        } catch (Exception e) {
+            // si falla la carga, los cards quedan con "..."
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panel_menu = new javax.swing.JPanel();
+        lblVehiculos = new javax.swing.JLabel();
+        lblClientes = new javax.swing.JLabel();
+        lblDisponibles = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         LblUsuario = new javax.swing.JLabel();
         mb_menu = new javax.swing.JMenuBar();
         menu_ini = new javax.swing.JMenu();
@@ -65,18 +114,37 @@ public class Menu extends javax.swing.JFrame {
         setResizable(false);
         addWindowStateListener(this::formWindowStateChanged);
 
-        panel_menu.setBackground(new java.awt.Color(255, 255, 255));
+        panel_menu.setBackground(new java.awt.Color(245, 247, 250));
 
-        javax.swing.GroupLayout panel_menuLayout = new javax.swing.GroupLayout(panel_menu);
-        panel_menu.setLayout(panel_menuLayout);
-        panel_menuLayout.setHorizontalGroup(
-            panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panel_menuLayout.setVerticalGroup(
-            panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
-        );
+        lblVehiculos.setText("VEHICULOS");
+        lblClientes.setText("CLIENTES");
+        lblDisponibles.setText("DISPONIBLES");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISUAL/MULTIMEDIA/images.png"))); // NOI18N
+
+        // Panel central que se centra siempre, sin importar el tamaño de ventana
+        panel_menu.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.JPanel pnlCentro = new javax.swing.JPanel(new java.awt.GridBagLayout());
+        pnlCentro.setOpaque(false);
+        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+
+        // Logo
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.insets = new java.awt.Insets(0, 0, 40, 0);
+        gbc.anchor = java.awt.GridBagConstraints.CENTER;
+        pnlCentro.add(jLabel1, gbc);
+
+        // Cards
+        gbc.gridwidth = 1;
+        gbc.gridy = 1;
+        gbc.insets = new java.awt.Insets(0, 20, 0, 20);
+        gbc.gridx = 0; pnlCentro.add(lblVehiculos,   gbc);
+        gbc.gridx = 1; pnlCentro.add(lblDisponibles, gbc);
+        gbc.gridx = 2; pnlCentro.add(lblClientes,    gbc);
+
+        panel_menu.add(pnlCentro, java.awt.BorderLayout.CENTER);
 
         LblUsuario.setBackground(new java.awt.Color(204, 204, 204));
         LblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -198,24 +266,16 @@ public class Menu extends javax.swing.JFrame {
 
         setJMenuBar(mb_menu);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 252, Short.MAX_VALUE))
-            .addComponent(panel_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblUsuario)
-                .addGap(11, 11, 11))
-        );
+        // ContentPane con BorderLayout para que panel_menu ocupe todo y se centre
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().setBackground(new java.awt.Color(245, 247, 250));
+        getContentPane().add(panel_menu, java.awt.BorderLayout.CENTER);
+
+        // LblUsuario abajo a la izquierda
+        javax.swing.JPanel pnlSur = new javax.swing.JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnlSur.setBackground(new java.awt.Color(224, 224, 224));
+        pnlSur.add(LblUsuario);
+        getContentPane().add(pnlSur, java.awt.BorderLayout.SOUTH);
 
         pack();
         setLocationRelativeTo(null);
@@ -342,6 +402,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MI_Reservas;
     private javax.swing.JMenuItem MI_Vehiculos;
     private javax.swing.JMenuItem Ofertas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblClientes;
+    private javax.swing.JLabel lblDisponibles;
+    private javax.swing.JLabel lblVehiculos;
     private javax.swing.JMenuBar mb_menu;
     private javax.swing.JMenu menu_cons;
     private javax.swing.JMenu menu_ini;

@@ -3,18 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmReservas.java</file>
             <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmResepcion.java</file>
-            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmBuscarReservas.java</file>
-            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmReserva.java</file>
             <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmBuscarCliente.java</file>
-=======
-            <file>file:/C:/Users/jlld2/OneDrive/Documentos/NetBeansProjects/ProyectoFinal_2/ProyectoFinal/src/VISUAL/Menu.java</file>
-            <file>file:/C:/Users/jlld2/OneDrive/Documentos/NetBeansProjects/ProyectoFinal_2/ProyectoFinal/src/VISUAL/FrmResepcion.java</file>
-            <file>file:/C:/Users/jlld2/OneDrive/Documentos/NetBeansProjects/ProyectoFinal_2/ProyectoFinal/src/VISUAL/FrmBuscarReservas.java</file>
-            <file>file:/C:/Users/jlld2/OneDrive/Documentos/NetBeansProjects/ProyectoFinal_2/ProyectoFinal/src/VISUAL/FrmReserva.java</file>
->>>>>>> 77e479665ae0b791c463708bf0e871e3a68a174a
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmBuscarVehiculo.java</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/DOCUMENTOS/vehiculos.txt</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/DOCUMENTOS/usuarios.txt</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/DOCUMENTOS/recepciones.txt</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/DOCUMENTOS/ofertas.txt</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/DOCUMENTOS/clientes.txt</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/FrmGama.java</file>
+            <file>file:/C:/Users/jsosa/Documents/GitHub/ProyectoFinal/src/VISUAL/Menu.java</file>
         </group>
     </open-files>
 </project-private>

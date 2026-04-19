@@ -10,12 +10,20 @@ import java.util.*;
  * @author User
  */
 public class OfertaDAO {
-    private final String ruta = "src/DOCUMENTOS/ofertas.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/ofertas.txt";
 
     // BUSCAR POR ID
     public Oferta buscarPorId(int id) throws IOException {
         for (Oferta o : listar()) {
             if (o.idOferta == id) return o;
+        }
+        return null;
+    }
+
+    // BUSCAR POR MATRICULA
+    public Oferta buscarPorMatricula(String matricula) throws IOException {
+        for (Oferta o : listar()) {
+            if (o.idMatricula.equalsIgnoreCase(matricula.trim())) return o;
         }
         return null;
     }

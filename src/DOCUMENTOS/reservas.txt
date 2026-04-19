@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 I00001; 002-7654321-9; Toyota Corolla | Turístico | Precio/día: $5000.00; ABC123; 5000.00; 14/04/2026; 30/04/2026; 16; 80000.00; false
 I00001; 002-7654321-9; Hyundai Tucson | Turístico | Precio/día: $0.00; MNO345; 0.00; 14/04/2026; 30/04/2026; 16; 0.00; false
 I00001; 002-7654321-9; Honda Civic | Normal | Precio/día: $0.00; DEF456; 0.00; 14/04/2026; 30/04/2026; 16; 0.00; false
@@ -7,7 +5,6 @@ I00001; 002-7654321-9; Chevrolet Silverado | Turístico | Precio/día: $5000.00;
 I00002; 003-9876543-2; BMW 320i | Normal | Precio/día: $8500.00; JKL012; 8500.00; 14/04/2026; 18/04/2026; 4; 34000.00; false
 I00003; 00.1-1234567-8; Ford Explorer | Turístico | Precio/día: $5000.00; GHI789; 5000.00; 14/04/2026; 15/04/2026; 1; 5000.00; false
 I00004; 001-1234567-8; Kia K5 | Turístico | Precio/día: $5000.00; BPA725; 5000.00; 14/04/2026; 16/04/2026; 2; 10000.00; false
-=======
 I00001; 002-7654321-9; Toyota Corolla | Turístico | Precio/día: $5000.00; ABC123; 5000.00; 14/04/2026; 30/04/2026; 16; 80000.00; true
 I00001; 002-7654321-9; Hyundai Tucson | Turístico | Precio/día: $0.00; MNO345; 0.00; 14/04/2026; 30/04/2026; 16; 0.00; true
 I00001; 002-7654321-9; Honda Civic | Normal | Precio/día: $0.00; DEF456; 0.00; 14/04/2026; 30/04/2026; 16; 0.00; true
@@ -23,4 +20,3 @@ I00009; 001-1234567-8; BMW 320i | Normal | Precio/día: $8500,00; JKL012; 8500,0
 I00010; 001-1234567-8; Toyota Corolla | Turístico | Precio/día: $15000,00; ABC123; 15000,00; 15/04/2026; 17/04/2026; 2; 30000,00; true
 I00011; 001-1234567-8; Toyota Corolla | Turístico | Precio/día: $15000,00; ABC123; 15000,00; 16/04/2026; 17/04/2026; 1; 15000,00; true
 I00011; 001-1234567-8; BMW 320i | Normal | Precio/día: $8500,00; JKL012; 8500,00; 16/04/2026; 17/04/2026; 1; 8500,00; true
->>>>>>> 77e479665ae0b791c463708bf0e871e3a68a174a

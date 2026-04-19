@@ -403,7 +403,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
                     v.tipoMotor == 0 ? "Diésel" : "Gasolina",
                     v.idGama,
                     v.colorVeh,
-                    v.statusVeh ? "Disponiblen" : "Rentado"
+                    v.statusVeh ? "Disponible" : "Rentado"
                 });
             }
         } catch (Exception e) {

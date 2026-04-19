@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
  
 public class VehiculoDAO {
-    private final String ruta = "src/DOCUMENTOS/vehiculos.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/vehiculos.txt";
  
     // BUSCAR POR MATRICULA
     public Vehiculo buscarPorMatricula(String matricula) throws IOException {

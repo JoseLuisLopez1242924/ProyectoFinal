@@ -5,7 +5,7 @@ import java.util.*;
 
 public class ReservaDAO {
 
-    private final String ruta = "src/DOCUMENTOS/reservas.txt";
+    private final String ruta = System.getProperty("user.dir").replace("\\", "/") + "/src/DOCUMENTOS/reservas.txt";
 
     // BUSCAR POR MATRICULA
     public Reserva buscarPorMatricula(String idMatricula) throws IOException {
