@@ -250,6 +250,7 @@ public class Menu extends javax.swing.JFrame {
         menu_cons.add(MI_Ofertas);
 
         MI_Precio.setText("PRECIO");
+        MI_Precio.addActionListener(this::MI_PrecioActionPerformed);
         menu_cons.add(MI_Precio);
 
         MI_Reser_Fecha.setText("RESERVA FECHAS");
@@ -328,7 +329,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_MI_Reser_FechaActionPerformed
 
     private void MI_MatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_MatriculaActionPerformed
-        new FrmConsultaGama().setVisible(true);
+        new FrmConsultaMatricula().setVisible(true);
     }//GEN-LAST:event_MI_MatriculaActionPerformed
 
     private void MI_DispoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_DispoActionPerformed
@@ -350,6 +351,12 @@ public class Menu extends javax.swing.JFrame {
     private void MI_VehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_VehiculosActionPerformed
         new FrmConsultaVehiculos().setVisible(true);
     }//GEN-LAST:event_MI_VehiculosActionPerformed
+
+    private void MI_PrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_PrecioActionPerformed
+        FrmConsultaVehiculos frm = new FrmConsultaVehiculos();
+        frm.seleccionarPestana(5);
+        frm.setVisible(true);
+    }//GEN-LAST:event_MI_PrecioActionPerformed
 
     private void MI_RecepcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_RecepcionActionPerformed
         new FrmResepcion().setVisible(true);

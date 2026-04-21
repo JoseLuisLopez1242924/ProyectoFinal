@@ -128,4 +128,17 @@ public class VehiculoDAO {
         }
         return resultado;
     }
+
+    // BUSCAR POR RANGO DE PRECIO (precio de gama)
+    public List<Vehiculo> buscarPorPrecio(double precioMin, double precioMax) throws IOException {
+        List<Vehiculo> resultado = new ArrayList<>();
+        GamaDAO gamaDAO = new GamaDAO();
+        for (Vehiculo v : listar()) {
+            Gama g = gamaDAO.buscarPorId(v.idGama);
+            if (g != null && g.precioGama >= precioMin && g.precioGama <= precioMax) {
+                resultado.add(v);
+            }
+        }
+        return resultado;
+    }
 }
